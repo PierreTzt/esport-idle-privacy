@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Esport Tycoon — Roadmap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#070819; --blue:#4d7cff; --blue-bright:#7fb0ff; --cyan:#46e0ff;
+    --gold:#ffc24b; --gold-soft:#ffd98a;
+    --green:#3fd99b; --amber:#ffb22e; --red:#ff5d6c;
+    --text:#eaedff; --muted:#9298c4; --faint:#5b5f86;
+    --card:rgba(255,255,255,.045); --card-bd:rgba(255,255,255,.09);
+    --display:'Chakra Petch',sans-serif; --body:'Sora',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--body);color:var(--text);background:var(--navy);line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  body::before{
+    content:"";position:fixed;inset:0;z-index:-2;
+    background:
+      radial-gradient(1100px 700px at 12% -5%,rgba(77,124,255,.28),transparent 60%),
+      radial-gradient(900px 800px at 95% 8%,rgba(120,60,220,.26),transparent 55%),
+      radial-gradient(1000px 900px at 70% 110%,rgba(255,194,75,.10),transparent 55%),
+      linear-gradient(160deg,#070819 0%,#0c0d28 45%,#120b30 100%);
+  }
+  body::after{
+    content:"";position:fixed;inset:0;z-index:-1;opacity:.5;pointer-events:none;
+    background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+    background-size:54px 54px;
+    -webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 30%,#000 30%,transparent 85%);
+            mask-image:radial-gradient(ellipse 80% 70% at 50% 30%,#000 30%,transparent 85%);
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+
+  header.hero{padding:74px 0 26px;position:relative}
+  .eyebrow{font-family:var(--display);font-weight:600;letter-spacing:.42em;font-size:12px;color:var(--gold);text-transform:uppercase;display:flex;align-items:center;gap:12px;margin-bottom:16px}
+  .eyebrow::before{content:"";width:34px;height:2px;background:linear-gradient(90deg,var(--gold),transparent)}
+  h1{font-family:var(--display);font-weight:700;line-height:.96;letter-spacing:-.01em;font-size:clamp(44px,8vw,92px);text-transform:uppercase;
+     background:linear-gradient(180deg,#fff 30%,#aebbff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 6px 40px rgba(77,124,255,.35))}
+  h1 .accent{background:linear-gradient(180deg,var(--gold-soft),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lede{max-width:620px;margin-top:18px;color:var(--muted);font-size:17px;font-weight:300}
+  .lede b{color:var(--text);font-weight:500}
+  .statusbar{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+  .pill{font-family:var(--display);font-size:12.5px;font-weight:600;letter-spacing:.04em;padding:8px 14px;border-radius:999px;border:1px solid var(--card-bd);background:var(--card);backdrop-filter:blur(8px);display:flex;align-items:center;gap:8px}
+  .pill .dot{width:8px;height:8px;border-radius:50%}
+  .pill.live .dot{background:var(--green);box-shadow:0 0 12px var(--green);animation:pulse 1.8s infinite}
+  @keyframes pulse{50%{opacity:.4}}
+
+  .controls{position:sticky;top:0;z-index:30;margin-top:42px;padding:14px 0;background:linear-gradient(180deg,rgba(7,8,25,.92),rgba(7,8,25,.55));backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.06)}
+  .controls-inner{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px}
+  .ctl-label{font-family:var(--display);font-size:11px;letter-spacing:.2em;color:var(--faint);text-transform:uppercase}
+  .chips{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{cursor:pointer;font-family:var(--display);font-weight:600;font-size:12.5px;letter-spacing:.03em;padding:7px 14px;border-radius:999px;border:1px solid var(--card-bd);background:var(--card);color:var(--muted);transition:.18s;user-select:none;display:flex;align-items:center;gap:7px}
+  .chip:hover{color:var(--text);border-color:rgba(255,255,255,.22)}
+  .chip.active{background:rgba(77,124,255,.16);border-color:var(--blue);color:#fff;box-shadow:0 0 18px rgba(77,124,255,.25)}
+  .chip .sw{width:9px;height:9px;border-radius:2px}
+  .sw.low{background:var(--green)} .sw.med{background:var(--amber)} .sw.high{background:var(--red)}
+
+  main{padding:30px 0 90px;position:relative}
+  .phase{position:relative;padding:42px 0 8px 0}
+  .phase-head{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:26px;position:relative}
+  .phase-tag{font-family:var(--display);font-weight:700;font-size:clamp(26px,4vw,40px);letter-spacing:-.01em;color:#fff;position:relative;padding-left:26px}
+  .phase-tag::before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);width:13px;height:13px;border-radius:50%;background:var(--blue);box-shadow:0 0 0 5px rgba(77,124,255,.15),0 0 22px var(--blue)}
+  .phase.crit .phase-tag::before{background:var(--gold);box-shadow:0 0 0 5px rgba(255,194,75,.16),0 0 22px var(--gold)}
+  .phase.done .phase-tag::before{background:var(--green);box-shadow:0 0 0 5px rgba(63,217,155,.16),0 0 22px var(--green)}
+  .phase.late .phase-tag::before{background:var(--faint);box-shadow:0 0 0 5px rgba(91,95,134,.18)}
+  .phase-focus{font-family:var(--display);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:600}
+  .phase-sub{color:var(--muted);font-size:14px;font-weight:300;width:100%;margin-top:-14px;padding-left:26px}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:16px}
+
+  .card{position:relative;border-radius:16px;border:1px solid var(--card-bd);background:var(--card);backdrop-filter:blur(9px);padding:20px 20px 18px 24px;overflow:hidden;transition:transform .22s cubic-bezier(.2,.7,.3,1),border-color .22s,box-shadow .22s}
+  .card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--barclr,var(--blue));box-shadow:0 0 16px var(--barclr,var(--blue))}
+  .card[data-effort=low]{--barclr:var(--green)}
+  .card[data-effort=med]{--barclr:var(--amber)}
+  .card[data-effort=high]{--barclr:var(--red)}
+  .card[data-effort=done]{--barclr:var(--green)}
+  .card:hover{transform:translateY(-5px);border-color:rgba(255,255,255,.2);box-shadow:0 18px 50px rgba(0,0,0,.45)}
+  .card-top{display:flex;align-items:flex-start;gap:13px;margin-bottom:9px}
+  .num{flex:none;width:38px;height:38px;border-radius:11px;display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:16px;color:#cdd6ff;background:linear-gradient(160deg,rgba(77,124,255,.22),rgba(77,124,255,.04));border:1px solid rgba(127,176,255,.25)}
+  .num.star{color:var(--navy);background:linear-gradient(160deg,var(--gold-soft),var(--gold));border-color:var(--gold)}
+  .num.check{color:var(--green);background:rgba(63,217,155,.12);border-color:rgba(63,217,155,.3)}
+  .card h3{font-family:var(--display);font-weight:600;font-size:16.5px;line-height:1.18;letter-spacing:.005em}
+  .badges{display:flex;gap:7px;flex-wrap:wrap;margin:4px 0 11px}
+  .badge{font-family:var(--display);font-size:10.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:3.5px 9px;border-radius:6px;display:flex;align-items:center;gap:5px}
+  .b-eff{border:1px solid transparent}
+  .b-eff.low{background:rgba(63,217,155,.12);color:var(--green);border-color:rgba(63,217,155,.28)}
+  .b-eff.med{background:rgba(255,178,46,.12);color:var(--amber);border-color:rgba(255,178,46,.28)}
+  .b-eff.high{background:rgba(255,93,108,.12);color:var(--red);border-color:rgba(255,93,108,.28)}
+  .b-eff.done{background:rgba(63,217,155,.12);color:var(--green);border-color:rgba(63,217,155,.28)}
+  .b-eff .swd{width:7px;height:7px;border-radius:2px;background:currentColor;display:inline-block}
+  .b-pr{background:rgba(255,255,255,.05);color:var(--muted);border:1px solid var(--card-bd)}
+  .b-pr.crit{background:rgba(255,194,75,.13);color:var(--gold);border-color:rgba(255,194,75,.3)}
+  .card p{color:var(--muted);font-size:13.5px;font-weight:300;line-height:1.5}
+  .src{margin-top:13px;display:inline-flex;align-items:center;gap:6px;font-family:var(--display);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+  .src::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan)}
+
+  .done-strip{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:6px}
+  .done-chip{font-size:13px;font-weight:400;color:var(--text);padding:9px 15px;border-radius:11px;background:rgba(63,217,155,.07);border:1px solid rgba(63,217,155,.22);display:flex;align-items:center;gap:9px}
+  .done-chip .ck{color:var(--green);font-weight:700}
+
+  .group-label{font-family:var(--display);font-weight:600;letter-spacing:.22em;text-transform:uppercase;font-size:12px;color:var(--faint);margin:54px 0 18px;display:flex;align-items:center;gap:14px}
+  .group-label::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(255,255,255,.14),transparent)}
+
+  .note{color:var(--muted);font-size:13.5px;font-weight:300;background:var(--card);border:1px solid var(--card-bd);border-left:3px solid var(--gold);border-radius:0 12px 12px 0;padding:14px 18px;margin:20px 0}
+  .note b{color:var(--gold-soft);font-weight:600}
+
+  footer{padding:46px 0 60px;border-top:1px solid rgba(255,255,255,.06);color:var(--faint);font-size:13px}
+  footer .ft-title{font-family:var(--display);color:var(--muted);letter-spacing:.04em;margin-bottom:6px;font-weight:600}
+  code{font-family:var(--display);color:var(--blue-bright)}
+
+  .reveal{opacity:0;transform:translateY(18px);animation:rise .6s cubic-bezier(.2,.7,.3,1) forwards}
+  @keyframes rise{to{opacity:1;transform:none}}
+  .is-hidden{display:none!important}
+  @media(prefers-reduced-motion:reduce){.reveal{animation:none;opacity:1;transform:none}}
+  @media(max-width:600px){header.hero{padding:50px 0 18px}.controls{position:static}.phase-sub{padding-left:0}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow reveal" style="animation-delay:.05s">Plan post-lancement · Mai 2026</div>
+    <h1 class="reveal" style="animation-delay:.12s">Esport&nbsp;Tycoon<br><span class="accent">Roadmap</span></h1>
+    <p class="lede reveal" style="animation-delay:.2s">
+      Plan d'attaque issu de l'analyse de <b>8 jeux concurrents</b> (AdVenture Capitalist, Egg Inc, Sport Star, Idle Mafia, Hustle Castle, Esports Life Tycoon, eSports Manager, ESMO). Séquencé selon les <b>dépendances</b> — la valeur d'abord, les fondations au bon moment.
+    </p>
+    <div class="statusbar reveal" style="animation-delay:.28s">
+      <span class="pill live"><span class="dot"></span>v1.0.1 build 4 — prêt pour TestFlight</span>
+      <span class="pill"><span class="dot" style="background:var(--gold)"></span>23 chantiers identifiés</span>
+      <span class="pill"><span class="dot" style="background:var(--blue)"></span>4 phases</span>
+    </div>
+  </div>
+</header>
+
+<div class="controls">
+  <div class="wrap controls-inner">
+    <span class="ctl-label">Filtrer&nbsp;par&nbsp;effort</span>
+    <div class="chips" id="filters">
+      <span class="chip active" data-f="all">Tout</span>
+      <span class="chip" data-f="low"><span class="sw low"></span>Faible</span>
+      <span class="chip" data-f="med"><span class="sw med"></span>Moyen</span>
+      <span class="chip" data-f="high"><span class="sw high"></span>Élevé</span>
+    </div>
+  </div>
+</div>
+
+<main>
+  <div class="wrap">
+    <div id="timeline"></div>
+    <div class="group-label">Pool d'idées — à prioriser plus tard</div>
+    <div class="grid" id="pool"></div>
+    <div class="note" style="margin-top:34px">
+      <b>Vision long terme (PRD)</b> — au-delà de la roadmap : couche <b>streaming / hype</b> (2e source de revenus), <b>Académie des jeunes</b> (former ses joueurs vs gacha pur), méta de jeu évolutive (patchs fictifs), extension des jeux esport &amp; tiers de gaming house. Idées, pas engagements.
+    </div>
+  </div>
+  <div class="wrap">
+    <footer>
+      <div class="ft-title">Esport Tycoon — document de pilotage</div>
+      Source : <code>ROADMAP.md</code> · Légende effort : <span style="color:var(--green)">● faible</span> · <span style="color:var(--amber)">● moyen</span> · <span style="color:var(--red)">● élevé</span> · <span style="color:var(--gold)">★ priorité critique</span>. Dépendance clé : <b style="color:var(--text)">#2 Comptes</b> débloque la monétisation (#7, #19) et l'anti-triche.
+    </footer>
+  </div>
+</main>
+
+<script>
+const PHASES=[
+ {tag:"v1.0.0",cls:"done",focus:"Livré",sub:"Lancement public + rebrand — déjà en review.",done:[
+   "Rebrand Esport Idle → Esport Tycoon","Icône capitaine + écran de lancement",
+   "Fiche App Store FR (desc, mots-clés, captures)","Politique de confidentialité en ligne",
+   "App Privacy + classification 9+","iPhone-only · gratuit · AdMob"]},
+ {tag:"v1.0.1",cls:"done",focus:"Livré (build 4)",sub:"Quick wins post-lancement — codés, prêts pour TestFlight (reste pod install + Archive).",done:[
+   "#1 Probas gacha affichées (conformité Apple 3.1.1)","#21 Pity gacha (garanti après N tirages)",
+   "#3 Gains offline ×2 (pub récompensée)","#18 Notifications granulaires (toggle par type)",
+   "#4 Notation + soft-ask (expo-store-review)","Game Mode iOS"]},
+ {tag:"v1.1",cls:"",focus:"Fondations + engagement",sub:"#2 est la fondation ; le battle pass amorce la boucle de rétention.",items:[
+   {n:2,title:"Comptes + sauvegarde cloud",eff:"high",pr:"med",src:"Hustle Castle",desc:"Sign in with Apple → cloud save, multi-appareils, anti-triche, suppression de compte. LA fondation."},
+   {n:5,title:"Consentement pubs + panneau data",eff:"med",pr:"med",src:"Multi-jeux",desc:"UMP (RGPD) + ATT (iOS) → débloque les pubs perso (revenus↑). Panneau data granulaire."},
+   {n:20,title:"Battle pass + missions",eff:"high",pr:"crit",src:"Sport Star",desc:"Missions quotidiennes/hebdo + passe Gratuit/Premium. Le plus gros levier rétention + revenu."},
+   {n:8,title:"Hub « Aide & Social »",eff:"med",pr:"med",src:"AdVenture Cap.",desc:"Support, version + ID joueur, consentement, liens réseaux (follow-for-gems)."}]},
+ {tag:"v1.2",cls:"",focus:"Monétisation + profondeur",sub:"Tout ceci dépend des comptes (#2) → vient après.",items:[
+   {n:7,title:"Monétisation : IAP + abonnement",eff:"high",pr:"high",src:"Egg Inc · ESMO",desc:"Gems, abo « soutiens le dev » cosmétique, offres no-ads/×2/×3. + Restore Purchases."},
+   {n:16,title:"Prestige / reset des joueurs",eff:"high",pr:"high",src:"Egg Inc",desc:"Reset complet sauf bonus % permanent. Le levier de rétention long terme (triple-confirmé)."},
+   {n:17,title:"Gating des boosts par trophées",eff:"med",pr:"high",src:"Egg Inc",desc:"Verrouiller les upgrades derrière des paliers de trophées — contrôle le pacing."},
+   {n:19,title:"Codes cadeaux",eff:"med",pr:"med",src:"Idle Mafia",desc:"Codes échangeables : influenceurs, compensations, promos. Dépend des comptes."},
+   {n:22,title:"Équipement (gear)",eff:"med",pr:"med",src:"Sport Star",desc:"2e couche de collection à raretés qui boost les joueurs."},
+   {n:6,title:"Succès Game Center",eff:"high",pr:"med",src:"AdVenture Cap.",desc:"Mapper la piste de trophées / objectifs sur des achievements natifs."},
+   {n:23,title:"Courrier / boîte de réception",eff:"med",pr:"med",src:"Sport Star",desc:"Livrer des récompenses + annoncer les giveaways Discord dans l'app."}]},
+ {tag:"Plus tard",cls:"late",focus:"Chantiers lourds",sub:"Plateformes & expansion.",items:[
+   {n:10,title:"Sortie Android",eff:"high",pr:"med",src:"Discord",desc:"Finaliser le build + icône adaptative/splash + unité AdMob rewarded Android."},
+   {n:11,title:"Localisation anglaise",eff:"med",pr:"low",src:"—",desc:"Contenu EN déjà rédigé en réserve. Pour viser l'international."}]}
+];
+const POOL=[
+ {n:12,title:"Boosts : Moral + Tactiques",eff:"med",src:"Esports Life T.",desc:"Nouveaux leviers d'équipe (Analyse/Entraînement déjà couverts par Analyste/Bootcamp)."},
+ {n:13,title:"Employés : RP + Psychologue",eff:"med",src:"Esports Life T.",desc:"Étend ton staff (Coach + Analyste). Le Psy gère la jauge de Moral."},
+ {n:14,title:"Noms & notoriété des ligues",eff:"low",src:"Esports Life T.",desc:"Bronze→Pro, notoriété Locale→Universelle. Polish, donne du palier."},
+ {n:15,title:"Présentation des classements",eff:"low",src:"Esports Life T.",desc:"S'inspirer de la mise en forme (paliers, mise en avant de ta position)."},
+ {n:9,title:"Onglet « Actus » in-app",eff:"med",src:"Idle Mafia",desc:"À débattre : revirement de la décision Discord-only de la 0.9.0."},
+ {n:"+",title:"Pistes eSports Manager",eff:"med",src:"eSMT",desc:"Web TV/streaming, Boutique de fans, Académie des jeunes. À creuser (alignées PRD)."}
+];
+const prLabel={crit:"★ Critique",high:"Haute",med:"Moyenne",low:"Basse",done:"Fait"};
+const effLabel={low:"Faible",med:"Moyen",high:"Élevé",done:"Corrigé"};
+
+function el(tag,cls,txt){const e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e;}
+
+function buildCard(it,i){
+  const card=el("div","card reveal");
+  card.dataset.effort=it.eff;
+  card.style.animationDelay=(0.04*i+0.05)+"s";
+
+  const top=el("div","card-top");
+  const num=el("div","num"+(it.pr==="crit"?" star":(it.eff==="done"?" check":"")),String(it.n));
+  top.append(num,el("h3",null,it.title));
+  card.append(top);
+
+  const badges=el("div","badges");
+  const be=el("span","badge b-eff "+it.eff);
+  be.append(el("span","swd"),document.createTextNode(effLabel[it.eff]));
+  badges.append(be);
+  if(it.pr && it.pr!=="done"){
+    badges.append(el("span","badge b-pr"+(it.pr==="crit"?" crit":""),prLabel[it.pr]));
+  }
+  card.append(badges);
+  card.append(el("p",null,it.desc));
+  card.append(el("span","src",it.src));
+  return card;
+}
+
+const tl=document.getElementById("timeline");
+PHASES.forEach(ph=>{
+  const sec=el("section","phase "+ph.cls);
+  const head=el("div","phase-head");
+  head.append(el("span","phase-tag",ph.tag),el("span","phase-focus",ph.focus),el("span","phase-sub",ph.sub));
+  sec.append(head);
+  if(ph.done){
+    const strip=el("div","done-strip");
+    ph.done.forEach(d=>{const c=el("span","done-chip");c.append(el("span","ck","✓"),document.createTextNode(d));strip.append(c);});
+    sec.append(strip);
+  }
+  if(ph.items){
+    const grid=el("div","grid");
+    ph.items.forEach((it,i)=>grid.append(buildCard(it,i)));
+    sec.append(grid);
+  }
+  tl.append(sec);
+});
+const pool=document.getElementById("pool");
+POOL.forEach((it,i)=>pool.append(buildCard(it,i)));
+
+const filters=document.getElementById("filters");
+filters.addEventListener("click",e=>{
+  const chip=e.target.closest(".chip"); if(!chip) return;
+  [...filters.children].forEach(c=>c.classList.toggle("active",c===chip));
+  const f=chip.dataset.f;
+  document.querySelectorAll(".card").forEach(c=>{
+    const eff=c.dataset.effort;
+    const show = f==="all" || eff===f || (f==="low" && eff==="done");
+    c.classList.toggle("is-hidden",!show);
+  });
+});
+</script>
+</body>
+</html>

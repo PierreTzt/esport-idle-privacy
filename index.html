@@ -1,152 +1,206 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Politique de confidentialité — Esport Tycoon</title>
-  <meta name="description" content="Politique de confidentialité du jeu mobile Esport Tycoon — Privacy Policy." />
-  <style>
-    :root {
-      --bg: #0f1117;
-      --card: #171a23;
-      --text: #e6e8ee;
-      --muted: #9aa0ad;
-      --accent: #5b8cff;
-      --border: #262a36;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.65;
-    }
-    .wrap { max-width: 760px; margin: 0 auto; padding: 48px 20px 80px; }
-    header { text-align: center; margin-bottom: 40px; }
-    h1 { font-size: 1.9rem; margin: 0 0 6px; }
-    .sub { color: var(--muted); font-size: 0.95rem; }
-    .lang-nav { text-align: center; margin-bottom: 32px; }
-    .lang-nav a {
-      display: inline-block; margin: 0 6px; padding: 6px 16px;
-      border: 1px solid var(--border); border-radius: 999px;
-      color: var(--accent); text-decoration: none; font-size: 0.9rem;
-    }
-    section {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 16px; padding: 28px 28px 8px; margin-bottom: 28px;
-    }
-    h2 { font-size: 1.35rem; margin-top: 0; }
-    h3 { font-size: 1.05rem; margin-top: 28px; color: var(--accent); }
-    p, li { color: var(--text); }
-    ul { padding-left: 20px; }
-    li { margin-bottom: 10px; }
-    a { color: var(--accent); }
-    code { background: #20242f; padding: 2px 6px; border-radius: 6px; font-size: 0.9em; }
-    footer { text-align: center; color: var(--muted); font-size: 0.85rem; margin-top: 40px; }
-    .updated { color: var(--muted); font-size: 0.9rem; font-style: italic; }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Esport Tycoon — Politique de confidentialité / Privacy Policy</title>
+<meta name="description" content="Politique de confidentialité du jeu mobile Esport Tycoon — Privacy Policy (FR/EN)." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#070819; --blue:#4d7cff; --blue-bright:#7fb0ff; --cyan:#46e0ff;
+    --gold:#ffc24b; --gold-soft:#ffd98a;
+    --green:#3fd99b; --amber:#ffb22e; --red:#ff5d6c;
+    --text:#eaedff; --muted:#9298c4; --faint:#5b5f86;
+    --card:rgba(255,255,255,.045); --card-bd:rgba(255,255,255,.09);
+    --display:'Chakra Petch',sans-serif; --body:'Sora',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--body);color:var(--text);background:var(--navy);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  body::before{
+    content:"";position:fixed;inset:0;z-index:-2;
+    background:
+      radial-gradient(1100px 700px at 12% -5%,rgba(77,124,255,.28),transparent 60%),
+      radial-gradient(900px 800px at 95% 8%,rgba(120,60,220,.26),transparent 55%),
+      radial-gradient(1000px 900px at 70% 110%,rgba(255,194,75,.10),transparent 55%),
+      linear-gradient(160deg,#070819 0%,#0c0d28 45%,#120b30 100%);
+  }
+  body::after{
+    content:"";position:fixed;inset:0;z-index:-1;opacity:.5;pointer-events:none;
+    background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+    background-size:54px 54px;
+    -webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 30%,#000 30%,transparent 85%);
+            mask-image:radial-gradient(ellipse 80% 70% at 50% 30%,#000 30%,transparent 85%);
+  }
+  .wrap{max-width:820px;margin:0 auto;padding:0 24px}
+
+  header.hero{padding:74px 0 18px;position:relative}
+  .eyebrow{font-family:var(--display);font-weight:600;letter-spacing:.42em;font-size:12px;color:var(--gold);text-transform:uppercase;display:flex;align-items:center;gap:12px;margin-bottom:16px}
+  .eyebrow::before{content:"";width:34px;height:2px;background:linear-gradient(90deg,var(--gold),transparent)}
+  h1{font-family:var(--display);font-weight:700;line-height:.98;letter-spacing:-.01em;font-size:clamp(34px,6vw,62px);text-transform:uppercase;
+     background:linear-gradient(180deg,#fff 30%,#aebbff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 6px 40px rgba(77,124,255,.35))}
+  .lede{max-width:620px;margin-top:16px;color:var(--muted);font-size:16px;font-weight:300}
+  .lede b{color:var(--text);font-weight:500}
+  .updated{margin-top:14px;font-family:var(--display);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+
+  /* language toggle — same chip language as roadmap.html */
+  .langbar{display:flex;gap:8px;margin-top:26px}
+  .chip{cursor:pointer;font-family:var(--display);font-weight:600;font-size:12.5px;letter-spacing:.06em;padding:8px 18px;border-radius:999px;border:1px solid var(--card-bd);background:var(--card);color:var(--muted);transition:.18s;user-select:none;backdrop-filter:blur(8px)}
+  .chip:hover{color:var(--text);border-color:rgba(255,255,255,.22)}
+  .chip.active{background:rgba(77,124,255,.16);border-color:var(--blue);color:#fff;box-shadow:0 0 18px rgba(77,124,255,.25)}
+
+  main{padding:38px 0 90px}
+  .lang{display:none}
+  .lang.active{display:block}
+
+  section.block{position:relative;border-radius:16px;border:1px solid var(--card-bd);background:var(--card);backdrop-filter:blur(9px);padding:22px 24px 20px;margin-bottom:16px;overflow:hidden;transition:border-color .22s,box-shadow .22s,transform .22s cubic-bezier(.2,.7,.3,1)}
+  section.block::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--blue);box-shadow:0 0 16px var(--blue)}
+  section.block:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.2);box-shadow:0 18px 50px rgba(0,0,0,.4)}
+  section.block.gold::before{background:var(--gold);box-shadow:0 0 16px var(--gold)}
+  section.block.green::before{background:var(--green);box-shadow:0 0 16px var(--green)}
+
+  h2{font-family:var(--display);font-weight:600;font-size:18px;letter-spacing:.01em;color:#fff;display:flex;align-items:center;gap:11px;margin-bottom:11px}
+  h2 .ic{flex:none;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-size:15px;background:linear-gradient(160deg,rgba(77,124,255,.22),rgba(77,124,255,.04));border:1px solid rgba(127,176,255,.25)}
+  p{color:var(--muted);font-size:14.5px;font-weight:300;margin-bottom:10px}
+  p:last-child{margin-bottom:0}
+  p b,li b{color:var(--text);font-weight:500}
+  a{color:var(--blue-bright);text-decoration:none;border-bottom:1px solid rgba(127,176,255,.3)}
+  a:hover{color:var(--cyan);border-color:var(--cyan)}
+  ul{list-style:none;margin:6px 0 10px}
+  li{position:relative;padding-left:20px;color:var(--muted);font-size:14.5px;font-weight:300;margin-bottom:9px}
+  li::before{content:"";position:absolute;left:0;top:9px;width:7px;height:7px;border-radius:2px;background:var(--cyan);box-shadow:0 0 8px var(--cyan)}
+  .pill-no{display:inline-flex;align-items:center;gap:6px;font-family:var(--display);font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--red);background:rgba(255,93,108,.1);border:1px solid rgba(255,93,108,.28);padding:3px 9px;border-radius:6px}
+
+  .note{color:var(--muted);font-size:14px;font-weight:300;background:var(--card);border:1px solid var(--card-bd);border-left:3px solid var(--gold);border-radius:0 12px 12px 0;padding:14px 18px;margin-bottom:16px}
+  .note b{color:var(--gold-soft);font-weight:600}
+
+  footer{padding:34px 0 60px;border-top:1px solid rgba(255,255,255,.06);color:var(--faint);font-size:13px}
+  footer .ft-title{font-family:var(--display);color:var(--muted);letter-spacing:.04em;margin-bottom:6px;font-weight:600}
+  code{font-family:var(--display);color:var(--blue-bright)}
+
+  .reveal{opacity:0;transform:translateY(16px);animation:rise .55s cubic-bezier(.2,.7,.3,1) forwards}
+  @keyframes rise{to{opacity:1;transform:none}}
+  @media(prefers-reduced-motion:reduce){.reveal{animation:none;opacity:1;transform:none}}
+  @media(max-width:600px){header.hero{padding:50px 0 14px}}
+</style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <h1>Politique de confidentialité — Esport Tycoon</h1>
-      <p class="sub">Privacy Policy</p>
-      <p class="updated">Dernière mise à jour : 24 mai 2026 — Last updated: May 24, 2026</p>
-    </header>
-
-    <nav class="lang-nav">
-      <a href="#fr">🇫🇷 Français</a>
-      <a href="#en">🇬🇧 English</a>
-    </nav>
-
-    <section id="fr">
-      <h2>🇫🇷 Français</h2>
-
-      <h3>Qui sommes-nous</h3>
-      <p>Esport Tycoon est un jeu mobile édité par Pierre Touzet. Cette politique explique quelles
-      données l'application traite et pourquoi.</p>
-
-      <h3>Données que nous traitons</h3>
-      <p>L'application ne demande <strong>pas</strong> de création de compte, de nom, d'email ni de
-      numéro de téléphone. Les données suivantes peuvent toutefois être traitées :</p>
-      <ul>
-        <li><strong>Données de jeu (score de classement, progression de saison)</strong> : envoyées
-        de façon <strong>anonyme</strong> à notre prestataire de base de données (Supabase) pour
-        afficher les classements en ligne. Aucune information permettant de vous identifier n'y est associée.</li>
-        <li><strong>Identifiant publicitaire &amp; données d'usage</strong> : notre régie publicitaire
-        Google AdMob peut accéder à l'identifiant publicitaire de l'appareil et à des données
-        d'interaction afin d'afficher des publicités et d'en mesurer la performance.</li>
-        <li><strong>Jeton de notification push</strong> : si vous acceptez les notifications, un jeton
-        technique est généré (via Expo) pour vous envoyer des rappels de jeu. Aucune autre donnée n'y est liée.</li>
-      </ul>
-      <p>Nous ne collectons <strong>pas</strong> : localisation, contacts, photos, données de santé,
-      données financières, ni aucune donnée d'identité.</p>
-
-      <h3>Publicité et suivi</h3>
-      <p>Des publicités sont fournies par <strong>Google AdMob</strong>. Selon vos réglages iOS
-      (App Tracking Transparency), AdMob peut utiliser l'identifiant publicitaire pour personnaliser
-      les annonces. Vous pouvez refuser le suivi à tout moment dans Réglages iOS → Confidentialité.
-      Politique de Google : <a href="https://policies.google.com/privacy">policies.google.com/privacy</a></p>
-
-      <h3>Conservation et partage</h3>
-      <p>Les données de jeu anonymes sont conservées le temps nécessaire au fonctionnement des
-      classements. Nous ne vendons aucune donnée. Les seuls tiers concernés sont nos prestataires
-      techniques (Google AdMob, Supabase, Expo).</p>
-
-      <h3>Enfants</h3>
-      <p>L'application ne s'adresse pas spécifiquement aux enfants de moins de 13 ans et ne collecte
-      pas sciemment leurs données personnelles.</p>
-
-      <h3>Vos droits</h3>
-      <p>Comme aucune donnée d'identité n'est collectée, nous ne pouvons pas relier les données de
-      jeu à une personne. Pour toute question : <a href="mailto:touzet.pierre@gmail.com">touzet.pierre@gmail.com</a></p>
-    </section>
-
-    <section id="en">
-      <h2>🇬🇧 English</h2>
-
-      <h3>Who we are</h3>
-      <p>Esport Tycoon is a mobile game published by Pierre Touzet. This policy explains what data the
-      app processes and why.</p>
-
-      <h3>Data we process</h3>
-      <p>The app does <strong>not</strong> require an account, name, email or phone number. The
-      following data may be processed:</p>
-      <ul>
-        <li><strong>Game data (leaderboard score, season progress)</strong>: sent <strong>anonymously</strong>
-        to our database provider (Supabase) to display online leaderboards. No personally identifying
-        information is attached.</li>
-        <li><strong>Advertising identifier &amp; usage data</strong>: our ad provider Google AdMob may
-        access the device advertising identifier and interaction data to serve ads and measure performance.</li>
-        <li><strong>Push notification token</strong>: if you allow notifications, a technical token is
-        generated (via Expo) to send game reminders. No other data is linked to it.</li>
-      </ul>
-      <p>We do <strong>not</strong> collect: location, contacts, photos, health data, financial data,
-      or any identity data.</p>
-
-      <h3>Advertising and tracking</h3>
-      <p>Ads are provided by <strong>Google AdMob</strong>. Depending on your iOS settings (App Tracking
-      Transparency), AdMob may use the advertising identifier to personalize ads. You can opt out of
-      tracking at any time in iOS Settings → Privacy. Google's policy:
-      <a href="https://policies.google.com/privacy">policies.google.com/privacy</a></p>
-
-      <h3>Retention and sharing</h3>
-      <p>Anonymous game data is retained as long as needed to operate the leaderboards. We do not sell
-      any data. The only third parties involved are our technical providers (Google AdMob, Supabase, Expo).</p>
-
-      <h3>Children</h3>
-      <p>The app is not specifically directed at children under 13 and does not knowingly collect their
-      personal data.</p>
-
-      <h3>Your rights</h3>
-      <p>Since no identity data is collected, we cannot link game data to an individual. For any question:
-      <a href="mailto:touzet.pierre@gmail.com">touzet.pierre@gmail.com</a></p>
-    </section>
-
-    <footer>
-      © 2026 Pierre Touzet — Esport Tycoon
-    </footer>
+<header class="hero wrap">
+  <div class="eyebrow">Esport Tycoon</div>
+  <h1>Privacy<br>Policy</h1>
+  <p class="lede" data-fr><b>Politique de confidentialité.</b> Ce que l'application traite, et pourquoi — en toute transparence.</p>
+  <p class="lede" data-en style="display:none"><b>Privacy policy.</b> What the app processes, and why — in full transparency.</p>
+  <div class="updated"><span data-fr>Dernière mise à jour : 24 mai 2026</span><span data-en style="display:none">Last updated: May 24, 2026</span></div>
+  <div class="langbar">
+    <div class="chip active" data-lang="fr">FR · Français</div>
+    <div class="chip" data-lang="en">EN · English</div>
   </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ───────────── FR ───────────── -->
+  <div class="lang active" id="fr">
+    <section class="block reveal">
+      <h2><span class="ic">👤</span> Qui sommes-nous</h2>
+      <p>Esport Tycoon est un jeu mobile édité par <b>Pierre Touzet</b>. Cette politique explique quelles données l'application traite et pourquoi.</p>
+    </section>
+
+    <section class="block reveal">
+      <h2><span class="ic">🗂️</span> Données que nous traitons</h2>
+      <p>L'application ne demande <b>pas</b> de création de compte, de nom, d'email ni de numéro de téléphone. Les données suivantes peuvent toutefois être traitées :</p>
+      <ul>
+        <li><b>Données de jeu</b> (score de classement, progression de saison) : envoyées de façon <b>anonyme</b> à notre prestataire de base de données (Supabase) pour afficher les classements en ligne. Aucune information permettant de vous identifier n'y est associée.</li>
+        <li><b>Identifiant publicitaire &amp; données d'usage</b> : notre régie publicitaire Google AdMob peut accéder à l'identifiant publicitaire de l'appareil et à des données d'interaction afin d'afficher des publicités et d'en mesurer la performance.</li>
+        <li><b>Jeton de notification push</b> : si vous acceptez les notifications, un jeton technique est généré (via Expo) pour vous envoyer des rappels de jeu. Aucune autre donnée n'y est liée.</li>
+      </ul>
+      <p><span class="pill-no">Jamais collecté</span> &nbsp;localisation, contacts, photos, données de santé, données financières, ni aucune donnée d'identité.</p>
+    </section>
+
+    <section class="block reveal">
+      <h2><span class="ic">📣</span> Publicité et suivi</h2>
+      <p>Des publicités sont fournies par <b>Google AdMob</b>. Selon vos réglages iOS (App Tracking Transparency), AdMob peut utiliser l'identifiant publicitaire pour personnaliser les annonces. Vous pouvez refuser le suivi à tout moment dans <b>Réglages iOS → Confidentialité</b>.</p>
+      <p>Politique de Google : <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></p>
+    </section>
+
+    <section class="block reveal">
+      <h2><span class="ic">🔄</span> Conservation et partage</h2>
+      <p>Les données de jeu anonymes sont conservées le temps nécessaire au fonctionnement des classements. <b>Nous ne vendons aucune donnée.</b> Les seuls tiers concernés sont nos prestataires techniques (Google AdMob, Supabase, Expo).</p>
+    </section>
+
+    <section class="block reveal green">
+      <h2><span class="ic">🧒</span> Enfants</h2>
+      <p>L'application ne s'adresse pas spécifiquement aux enfants de moins de 13 ans et ne collecte pas sciemment leurs données personnelles.</p>
+    </section>
+
+    <section class="block reveal gold">
+      <h2><span class="ic">⚖️</span> Vos droits</h2>
+      <p>Comme aucune donnée d'identité n'est collectée, nous ne pouvons pas relier les données de jeu à une personne. Pour toute question : <a href="mailto:touzet.pierre@gmail.com">touzet.pierre@gmail.com</a></p>
+    </section>
+  </div>
+
+  <!-- ───────────── EN ───────────── -->
+  <div class="lang" id="en">
+    <section class="block reveal">
+      <h2><span class="ic">👤</span> Who we are</h2>
+      <p>Esport Tycoon is a mobile game published by <b>Pierre Touzet</b>. This policy explains what data the app processes and why.</p>
+    </section>
+
+    <section class="block reveal">
+      <h2><span class="ic">🗂️</span> Data we process</h2>
+      <p>The app does <b>not</b> require an account, name, email or phone number. The following data may be processed:</p>
+      <ul>
+        <li><b>Game data</b> (leaderboard score, season progress): sent <b>anonymously</b> to our database provider (Supabase) to display online leaderboards. No personally identifying information is attached.</li>
+        <li><b>Advertising identifier &amp; usage data</b>: our ad provider Google AdMob may access the device advertising identifier and interaction data to serve ads and measure performance.</li>
+        <li><b>Push notification token</b>: if you allow notifications, a technical token is generated (via Expo) to send game reminders. No other data is linked to it.</li>
+      </ul>
+      <p><span class="pill-no">Never collected</span> &nbsp;location, contacts, photos, health data, financial data, or any identity data.</p>
+    </section>
+
+    <section class="block reveal">
+      <h2><span class="ic">📣</span> Advertising and tracking</h2>
+      <p>Ads are provided by <b>Google AdMob</b>. Depending on your iOS settings (App Tracking Transparency), AdMob may use the advertising identifier to personalize ads. You can opt out of tracking at any time in <b>iOS Settings → Privacy</b>.</p>
+      <p>Google's policy: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></p>
+    </section>
+
+    <section class="block reveal">
+      <h2><span class="ic">🔄</span> Retention and sharing</h2>
+      <p>Anonymous game data is retained as long as needed to operate the leaderboards. <b>We do not sell any data.</b> The only third parties involved are our technical providers (Google AdMob, Supabase, Expo).</p>
+    </section>
+
+    <section class="block reveal green">
+      <h2><span class="ic">🧒</span> Children</h2>
+      <p>The app is not specifically directed at children under 13 and does not knowingly collect their personal data.</p>
+    </section>
+
+    <section class="block reveal gold">
+      <h2><span class="ic">⚖️</span> Your rights</h2>
+      <p>Since no identity data is collected, we cannot link game data to an individual. For any question: <a href="mailto:touzet.pierre@gmail.com">touzet.pierre@gmail.com</a></p>
+    </section>
+  </div>
+
+</main>
+
+<footer class="wrap">
+  <div class="ft-title">Esport Tycoon</div>
+  <div data-fr>Édité par Pierre Touzet · Contact : <a href="mailto:touzet.pierre@gmail.com">touzet.pierre@gmail.com</a></div>
+  <div data-en style="display:none">Published by Pierre Touzet · Contact: <a href="mailto:touzet.pierre@gmail.com">touzet.pierre@gmail.com</a></div>
+</footer>
+
+<script>
+  const chips = document.querySelectorAll('.chip[data-lang]');
+  const panels = { fr: document.getElementById('fr'), en: document.getElementById('en') };
+  function setLang(lang){
+    chips.forEach(c => c.classList.toggle('active', c.dataset.lang === lang));
+    Object.entries(panels).forEach(([k, el]) => el.classList.toggle('active', k === lang));
+    document.querySelectorAll('[data-fr]').forEach(el => el.style.display = lang === 'fr' ? '' : 'none');
+    document.querySelectorAll('[data-en]').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+    document.documentElement.lang = lang;
+  }
+  chips.forEach(c => c.addEventListener('click', () => setLang(c.dataset.lang)));
+</script>
 </body>
 </html>
