@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ESPORT TYCOON — Deviens une légende</title>
+<meta name="description" content="De la chambre au mondial. Recrute, manage et écrase la concurrence. Le jeu de gestion idle esport le plus addictif arrive sur iOS & Android." />
+<meta property="og:title" content="ESPORT TYCOON — Deviens une légende" />
+<meta property="og:description" content="De la chambre au mondial. Le tycoon esport le plus addictif. Bientôt sur iOS & Android." />
+<meta property="og:image" content="assets/icon.png" />
+<meta property="og:type" content="website" />
+<link rel="icon" href="assets/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Chakra+Petch:wght@500;600;700&family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#04050e; --bg2:#0a0b1f;
+    --ink:#eef1ff; --muted:#949fc9; --faint:#5b5f86;
+    --blue:#4d7cff; --blue-hot:#7fb0ff; --cyan:#35e8ff;
+    --gold:#ffc24b; --gold-hot:#ffe1a0;
+    --magenta:#ff3d7f; --violet:#8b5cff;
+    --card:rgba(255,255,255,.045); --card-bd:rgba(255,255,255,.09);
+    --display:'Anton',sans-serif; --ui:'Chakra Petch',sans-serif; --body:'Sora',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--body);color:var(--ink);background:var(--bg);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+  /* ── atmospheric background ── */
+  .bg{position:fixed;inset:0;z-index:-3;overflow:hidden}
+  .bg .aurora{position:absolute;inset:-20%;
+    background:
+      radial-gradient(40% 50% at 15% 10%,rgba(77,124,255,.45),transparent 60%),
+      radial-gradient(45% 55% at 85% 15%,rgba(139,92,255,.38),transparent 60%),
+      radial-gradient(50% 60% at 70% 95%,rgba(255,194,75,.16),transparent 60%),
+      radial-gradient(40% 50% at 25% 90%,rgba(53,232,255,.22),transparent 60%);
+    filter:blur(20px);animation:drift 22s ease-in-out infinite alternate}
+  @keyframes drift{0%{transform:translate3d(-3%,-2%,0) scale(1.05) rotate(-2deg)}100%{transform:translate3d(4%,3%,0) scale(1.15) rotate(3deg)}}
+  .bg::before{content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(4,5,14,.55),rgba(4,5,14,.85) 60%,#04050e)}
+  .grid-bg{position:fixed;inset:0;z-index:-2;pointer-events:none;opacity:.5;
+    background-image:linear-gradient(rgba(127,176,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(127,176,255,.05) 1px,transparent 1px);
+    background-size:60px 60px;
+    -webkit-mask-image:radial-gradient(ellipse 90% 80% at 50% 20%,#000 30%,transparent 90%);
+            mask-image:radial-gradient(ellipse 90% 80% at 50% 20%,#000 30%,transparent 90%)}
+  .scan{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.5;
+    background:repeating-linear-gradient(180deg,rgba(255,255,255,.025) 0 1px,transparent 1px 4px);mix-blend-mode:overlay}
+  .grain{position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.06;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  /* hero spotlight following cursor */
+  .spotlight{position:fixed;inset:0;z-index:-1;pointer-events:none;transition:opacity .4s;opacity:0;
+    background:radial-gradient(420px 420px at var(--mx,50%) var(--my,30%),rgba(127,176,255,.14),transparent 70%)}
+
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+
+  /* ── nav ── */
+  nav{position:fixed;top:0;left:0;right:0;z-index:50;backdrop-filter:blur(12px);
+    background:linear-gradient(180deg,rgba(4,5,14,.85),rgba(4,5,14,.2));border-bottom:1px solid rgba(127,176,255,.08);
+    transform:translateY(-100%);transition:transform .4s cubic-bezier(.2,.7,.3,1)}
+  nav.show{transform:none}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 24px;max-width:1180px;margin:0 auto}
+  .brand{display:flex;align-items:center;gap:11px;font-family:var(--ui);font-weight:700;letter-spacing:.04em;font-size:15px}
+  .brand img{width:30px;height:30px;border-radius:9px;border:1px solid rgba(127,176,255,.35)}
+  .nav-r{display:flex;align-items:center;gap:10px}
+  .lang{display:flex;gap:6px}
+  .chip{cursor:pointer;font-family:var(--ui);font-weight:600;font-size:12px;letter-spacing:.06em;padding:6px 12px;border-radius:999px;border:1px solid var(--card-bd);background:var(--card);color:var(--muted);transition:.18s;user-select:none}
+  .chip:hover{color:var(--ink)}
+  .chip.active{background:rgba(77,124,255,.18);border-color:var(--blue);color:#fff}
+
+  .btn{font-family:var(--ui);font-weight:700;font-size:13.5px;letter-spacing:.06em;text-transform:uppercase;padding:12px 22px;border-radius:11px;border:1px solid var(--card-bd);background:var(--card);color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;gap:9px;transition:.2s;cursor:pointer;white-space:nowrap}
+  .btn:hover{transform:translateY(-2px);border-color:rgba(127,176,255,.4)}
+  .btn.primary{background:linear-gradient(120deg,var(--blue),var(--violet));border-color:transparent;color:#fff;box-shadow:0 10px 30px rgba(77,124,255,.45),inset 0 0 0 1px rgba(255,255,255,.12)}
+  .btn.primary:hover{box-shadow:0 16px 46px rgba(123,80,255,.6)}
+  .btn.gold{background:linear-gradient(120deg,var(--gold),#ff9d2e);border-color:transparent;color:#1a1304;box-shadow:0 10px 30px rgba(255,194,75,.4)}
+
+  /* ── hero ── */
+  header{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:90px 24px 40px}
+  .eyebrow{font-family:var(--ui);font-weight:600;letter-spacing:.5em;font-size:12px;color:var(--gold);text-transform:uppercase;display:inline-flex;align-items:center;gap:12px;margin-bottom:24px;
+    opacity:0;animation:fadeUp .8s .1s forwards}
+  .eyebrow::before,.eyebrow::after{content:"";width:30px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+  .hero-logo{width:120px;height:120px;border-radius:28px;border:1px solid rgba(127,176,255,.4);margin-bottom:26px;position:relative;
+    box-shadow:0 0 0 6px rgba(77,124,255,.07),0 24px 70px rgba(77,124,255,.5);
+    opacity:0;animation:popIn .9s .15s cubic-bezier(.2,1.3,.4,1) forwards;will-change:transform}
+  .hero-logo-wrap{position:relative;animation:float 5s ease-in-out infinite}
+  .hero-logo-wrap::after{content:"";position:absolute;inset:-26px;z-index:-1;border-radius:50%;
+    background:radial-gradient(circle,rgba(123,80,255,.5),transparent 65%);filter:blur(8px)}
+  @keyframes float{50%{transform:translateY(-12px)}}
+
+  h1.title{font-family:var(--display);font-weight:400;line-height:.82;letter-spacing:.01em;
+    font-size:clamp(64px,15vw,200px);text-transform:uppercase;color:#fff;position:relative;
+    text-shadow:0 0 50px rgba(77,124,255,.45);opacity:0;animation:fadeUp .8s .25s forwards}
+  h1.title .l2{display:block;background:linear-gradient(180deg,var(--gold-hot),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 50px rgba(255,194,75,.35)}
+  /* glitch chromatic split */
+  .glitch{position:relative;display:inline-block}
+  .glitch::before,.glitch::after{content:attr(data-text);position:absolute;left:0;top:0;width:100%;height:100%;background:var(--bg);clip-path:inset(0 0 0 0)}
+  .glitch::before{color:var(--magenta);transform:translate(-3px,0);mix-blend-mode:screen;animation:glitchA 4s infinite steps(2)}
+  .glitch::after{color:var(--cyan);transform:translate(3px,0);mix-blend-mode:screen;animation:glitchB 4.6s infinite steps(2)}
+  @keyframes glitchA{0%,92%,100%{opacity:0;transform:translate(-3px,0)}93%{opacity:.9;clip-path:inset(20% 0 55% 0)}96%{opacity:.9;clip-path:inset(65% 0 8% 0);transform:translate(3px,0)}}
+  @keyframes glitchB{0%,90%,100%{opacity:0;transform:translate(3px,0)}94%{opacity:.9;clip-path:inset(10% 0 70% 0)}98%{opacity:.9;clip-path:inset(50% 0 20% 0);transform:translate(-3px,0)}}
+
+  .sub{max-width:660px;margin:26px auto 0;color:var(--muted);font-size:clamp(15px,2.2vw,19px);font-weight:300;opacity:0;animation:fadeUp .8s .4s forwards}
+  .sub b{color:var(--ink);font-weight:500}
+  .hero-cta{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:34px;opacity:0;animation:fadeUp .8s .55s forwards}
+  .hero-pills{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:26px;opacity:0;animation:fadeUp .8s .7s forwards}
+  .pill{font-family:var(--ui);font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:8px 15px;border-radius:999px;border:1px solid var(--card-bd);background:var(--card);color:var(--muted);display:flex;align-items:center;gap:8px}
+  .pill .dot{width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold);animation:blink 1.6s infinite}
+  @keyframes blink{50%{opacity:.35}}
+
+  .scrollcue{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);font-family:var(--ui);font-size:10.5px;letter-spacing:.35em;text-transform:uppercase;color:var(--faint);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeUp .8s 1s forwards}
+  .scrollcue .bar{width:1px;height:38px;background:linear-gradient(var(--blue),transparent);position:relative;overflow:hidden}
+  .scrollcue .bar::after{content:"";position:absolute;top:0;left:0;width:100%;height:40%;background:var(--cyan);animation:cue 1.8s infinite}
+  @keyframes cue{0%{transform:translateY(-100%)}100%{transform:translateY(250%)}}
+
+  /* ── marquee ── */
+  .marquee{border-top:1px solid rgba(127,176,255,.12);border-bottom:1px solid rgba(127,176,255,.12);overflow:hidden;white-space:nowrap;padding:18px 0;background:rgba(8,9,24,.5);backdrop-filter:blur(6px)}
+  .marquee .track{display:inline-flex;gap:38px;animation:scrollx 28s linear infinite;will-change:transform}
+  .marquee:hover .track{animation-play-state:paused}
+  .marquee span{font-family:var(--display);font-size:clamp(22px,3.2vw,34px);text-transform:uppercase;letter-spacing:.02em;color:transparent;-webkit-text-stroke:1px rgba(127,176,255,.55)}
+  .marquee span.fill{color:var(--gold);-webkit-text-stroke:0}
+  .marquee .star{color:var(--cyan);-webkit-text-stroke:0;font-family:var(--body)}
+  @keyframes scrollx{to{transform:translateX(-50%)}}
+
+  /* ── stats ── */
+  section{position:relative}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(127,176,255,.1);border:1px solid rgba(127,176,255,.1);border-radius:20px;overflow:hidden;margin:80px 0}
+  .stat{background:rgba(8,9,24,.65);padding:38px 22px;text-align:center;backdrop-filter:blur(4px)}
+  .stat .n{font-family:var(--display);font-size:clamp(40px,6vw,72px);line-height:1;color:#fff;text-shadow:0 0 30px rgba(77,124,255,.4)}
+  .stat .n.g{background:linear-gradient(180deg,var(--gold-hot),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .stat .n.c{color:var(--cyan)}
+  .stat .lab{font-family:var(--ui);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:12px}
+
+  /* ── section heads ── */
+  .shead{text-align:center;max-width:720px;margin:0 auto 56px}
+  .kicker{font-family:var(--ui);font-weight:600;letter-spacing:.34em;text-transform:uppercase;font-size:12px;color:var(--cyan);margin-bottom:14px}
+  .shead h2{font-family:var(--display);font-weight:400;font-size:clamp(36px,6.5vw,76px);line-height:.92;text-transform:uppercase;color:#fff;text-shadow:0 0 40px rgba(77,124,255,.3)}
+  .shead h2 em{font-style:normal;background:linear-gradient(180deg,var(--gold-hot),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .shead p{margin-top:16px;color:var(--muted);font-weight:300;font-size:16px}
+
+  .band{padding:90px 0}
+
+  /* ── feature rows ── */
+  .frow{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;margin-bottom:120px}
+  .frow:nth-child(even) .ftxt{order:2}
+  .fnum{font-family:var(--display);font-size:clamp(70px,11vw,150px);line-height:.8;color:transparent;-webkit-text-stroke:1.5px rgba(127,176,255,.4);margin-bottom:6px}
+  .frow:nth-child(even) .fnum{-webkit-text-stroke-color:rgba(255,194,75,.45)}
+  .ftxt h3{font-family:var(--display);font-weight:400;font-size:clamp(30px,4.5vw,52px);line-height:.95;text-transform:uppercase;color:#fff;margin-bottom:16px}
+  .ftxt p{color:var(--muted);font-size:16px;font-weight:300;max-width:440px;margin-bottom:18px}
+  .ftag{display:inline-flex;align-items:center;gap:8px;font-family:var(--ui);font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);background:rgba(255,194,75,.1);border:1px solid rgba(255,194,75,.25);padding:6px 13px;border-radius:8px}
+
+  .phone{perspective:1400px;display:flex;justify-content:center}
+  .phone .frame{width:min(280px,72vw);border-radius:26px;overflow:hidden;border:1px solid rgba(127,176,255,.25);
+    box-shadow:0 40px 90px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.04);transform:rotateY(-14deg) rotateX(5deg);transition:transform .4s cubic-bezier(.2,.7,.3,1);will-change:transform}
+  .frow:nth-child(even) .frame{transform:rotateY(14deg) rotateX(5deg)}
+  .phone .frame img{display:block;width:100%}
+  .phone .frame::after{content:"";position:absolute}
+
+  /* ── pitch ── */
+  .pitch{text-align:center;max-width:900px;margin:0 auto;padding:60px 0}
+  .pitch p{font-family:var(--display);font-weight:400;font-size:clamp(28px,5vw,60px);line-height:1.02;text-transform:uppercase;color:var(--ink)}
+  .pitch .hl{background:linear-gradient(180deg,var(--cyan),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .pitch .hl2{background:linear-gradient(180deg,var(--gold-hot),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+  /* ── final cta ── */
+  .final{position:relative;text-align:center;border-radius:28px;overflow:hidden;padding:90px 28px;margin:40px 0 0;
+    border:1px solid rgba(127,176,255,.2);background:linear-gradient(160deg,rgba(77,124,255,.16),rgba(139,92,255,.12))}
+  .final::before{content:"";position:absolute;inset:0;z-index:0;
+    background:radial-gradient(700px 340px at 50% -10%,rgba(255,194,75,.22),transparent 60%)}
+  .final>*{position:relative;z-index:1}
+  .final h2{font-family:var(--display);font-weight:400;font-size:clamp(40px,8vw,96px);line-height:.88;text-transform:uppercase;color:#fff;text-shadow:0 0 50px rgba(123,80,255,.5)}
+  .final h2 em{font-style:normal;background:linear-gradient(180deg,var(--gold-hot),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .final p{color:var(--muted);max-width:520px;margin:18px auto 30px;font-weight:300;font-size:16px}
+  .final .cta{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+
+  footer{padding:50px 0 70px;text-align:center;color:var(--faint);font-size:13px;border-top:1px solid rgba(127,176,255,.08);margin-top:80px}
+  footer .fl{margin-bottom:14px}
+  footer a{color:var(--muted);text-decoration:none;margin:0 9px;border-bottom:1px solid rgba(255,255,255,.12)}
+  footer a:hover{color:var(--blue-hot);border-color:var(--blue-hot)}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(34px);transition:opacity .7s cubic-bezier(.2,.7,.3,1),transform .7s cubic-bezier(.2,.7,.3,1)}
+  .reveal.in{opacity:1;transform:none}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+  @keyframes popIn{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:scale(1)}}
+
+  @media(max-width:860px){
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .frow{grid-template-columns:1fr;gap:26px;margin-bottom:80px}
+    .frow:nth-child(even) .ftxt{order:0}
+    .phone .frame,.frow:nth-child(even) .frame{transform:none}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important}
+    .reveal{opacity:1;transform:none}
+    .hero-logo,.eyebrow,h1.title,.sub,.hero-cta,.hero-pills,.scrollcue{opacity:1}
+  }
+</style>
+</head>
+<body>
+<div class="bg"><div class="aurora"></div></div>
+<div class="grid-bg"></div>
+<div class="scan"></div>
+<div class="spotlight" id="spot"></div>
+<div class="grain"></div>
+
+<nav id="nav">
+  <div class="nav-inner">
+    <div class="brand"><img src="assets/icon.png" alt="Esport Tycoon" /> ESPORT TYCOON</div>
+    <div class="nav-r">
+      <div class="lang">
+        <div class="chip active" data-lang="fr">FR</div>
+        <div class="chip" data-lang="en">EN</div>
+      </div>
+      <a class="btn primary" href="https://discord.gg/D7fR95fwBS" target="_blank" rel="noopener">Discord</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <div class="eyebrow"><span data-fr>Saison 01 · Bientôt en jeu</span><span data-en style="display:none">Season 01 · Coming soon</span></div>
+  <div class="hero-logo-wrap"><img class="hero-logo" src="assets/icon.png" alt="Esport Tycoon" /></div>
+  <h1 class="title">
+    <span class="glitch" data-text="ESPORT">ESPORT</span>
+    <span class="l2">TYCOON</span>
+  </h1>
+  <p class="sub">
+    <span data-fr><b>De la chambre au mondial.</b> Recrute des pros, monte l'équipe la plus brutale de la planète et écrase la concurrence — même quand ton téléphone dort.</span>
+    <span data-en style="display:none"><b>Bedroom to world champion.</b> Recruit pros, build the most brutal roster on the planet and crush the competition — even while your phone sleeps.</span>
+  </p>
+  <div class="hero-cta">
+    <a class="btn gold" href="https://discord.gg/D7fR95fwBS" target="_blank" rel="noopener"><span data-fr>Rejoindre l'élite</span><span data-en style="display:none">Join the elite</span></a>
+    <a class="btn" href="#features"><span data-fr>Découvrir le jeu</span><span data-en style="display:none">See the game</span></a>
+  </div>
+  <div class="hero-pills">
+    <div class="pill"><span class="dot"></span><span data-fr>Bientôt sur iOS</span><span data-en style="display:none">Soon on iOS</span></div>
+    <div class="pill"><span class="dot"></span><span data-fr>Bientôt sur Android</span><span data-en style="display:none">Soon on Android</span></div>
+    <div class="pill"><span data-fr>100% gratuit</span><span data-en style="display:none">100% free</span></div>
+  </div>
+  <div class="scrollcue"><span data-fr>Défile</span><span data-en style="display:none">Scroll</span><span class="bar"></span></div>
+</header>
+
+<div class="marquee">
+  <div class="track">
+    <span class="fill">DEVIENS UNE LÉGENDE</span><span class="star">◆</span>
+    <span>RECRUTE</span><span class="star">◆</span>
+    <span class="fill">DOMINE LA LIGUE</span><span class="star">◆</span>
+    <span>FUSIONNE</span><span class="star">◆</span>
+    <span class="fill">GAGNE LE MONDIAL</span><span class="star">◆</span>
+    <span>GRIND 24/7</span><span class="star">◆</span>
+    <span class="fill">DEVIENS UNE LÉGENDE</span><span class="star">◆</span>
+    <span>RECRUTE</span><span class="star">◆</span>
+    <span class="fill">DOMINE LA LIGUE</span><span class="star">◆</span>
+    <span>FUSIONNE</span><span class="star">◆</span>
+    <span class="fill">GAGNE LE MONDIAL</span><span class="star">◆</span>
+    <span>GRIND 24/7</span><span class="star">◆</span>
+  </div>
+</div>
+
+<section class="wrap">
+  <div class="stats reveal">
+    <div class="stat"><div class="n c" data-count="100" data-suffix="%">0</div><div class="lab"><span data-fr>Talent requis</span><span data-en style="display:none">Skill required</span></div></div>
+    <div class="stat"><div class="n">5v5</div><div class="lab"><span data-fr>Format compétitif</span><span data-en style="display:none">Competitive format</span></div></div>
+    <div class="stat"><div class="n g" data-count="30" data-suffix="+">0</div><div class="lab"><span data-fr>Objectifs à débloquer</span><span data-en style="display:none">Goals to unlock</span></div></div>
+    <div class="stat"><div class="n c">24/7</div><div class="lab"><span data-fr>Tes pros grindent</span><span data-en style="display:none">Your pros grind</span></div></div>
+  </div>
+</section>
+
+<section class="band wrap" id="features">
+  <div class="shead reveal">
+    <div class="kicker"><span data-fr>Le gameplay</span><span data-en style="display:none">The gameplay</span></div>
+    <h2><span data-fr>Tu vas devenir <em>accro</em></span><span data-en style="display:none">You'll get <em>hooked</em></span></h2>
+    <p><span data-fr>Chaque décision compte. Chaque match peut tout faire basculer.</span><span data-en style="display:none">Every decision counts. Every match can change everything.</span></p>
+  </div>
+
+  <div class="frow reveal">
+    <div class="ftxt">
+      <div class="fnum">01</div>
+      <h3><span data-fr>Bâtis ton empire</span><span data-en style="display:none">Build your empire</span></h3>
+      <p><span data-fr>De la chambre chez tes parents au QG multi-régional. Streams, revenus, sponsors : ta machine à cash tourne pendant que tu dors.</span><span data-en style="display:none">From your parents' bedroom to a multi-region HQ. Streams, revenue, sponsors: your cash machine runs while you sleep.</span></p>
+      <span class="ftag">Idle · 24/7</span>
+    </div>
+    <div class="phone"><div class="frame"><img src="assets/shot-1.png" alt="Bâtis ton empire" loading="lazy" /></div></div>
+  </div>
+
+  <div class="frow reveal">
+    <div class="ftxt">
+      <div class="fnum">02</div>
+      <h3><span data-fr>Domine la ligue</span><span data-en style="display:none">Dominate the league</span></h3>
+      <p><span data-fr>Chaque lundi, nouvelle saison. Promotion, relégation, classement mondial remis à zéro. Marque un max avant la clôture et grimpe au sommet.</span><span data-en style="display:none">Every Monday, a new season. Promotion, relegation, worldwide leaderboard reset to zero. Score big before it closes and climb to the top.</span></p>
+      <span class="ftag">Ligue hebdo · PvP</span>
+    </div>
+    <div class="phone"><div class="frame"><img src="assets/shot-2.png" alt="Domine la ligue" loading="lazy" /></div></div>
+  </div>
+
+  <div class="frow reveal">
+    <div class="ftxt">
+      <div class="fnum">03</div>
+      <h3><span data-fr>Recrute &amp; fusionne</span><span data-en style="display:none">Recruit &amp; fuse</span></h3>
+      <p><span data-fr>Collectionne des joueurs de Casual à Légende. Fusionne les doublons, monte Aim, Réflexes, Stratégie. Trouve les synergies qui font exploser ta puissance.</span><span data-en style="display:none">Collect players from Casual to Legend. Fuse duplicates, level up Aim, Reflexes, Strategy. Find the synergies that blow up your power.</span></p>
+      <span class="ftag">Gacha · Fusion</span>
+    </div>
+    <div class="phone"><div class="frame"><img src="assets/shot-3.png" alt="Recrute et fusionne" loading="lazy" /></div></div>
+  </div>
+
+  <div class="frow reveal">
+    <div class="ftxt">
+      <div class="fnum">04</div>
+      <h3><span data-fr>Monte ton staff</span><span data-en style="display:none">Build your staff</span></h3>
+      <p><span data-fr>Coach, analyste, setup gaming 240Hz : chaque upgrade augmente tes chances de victoire. Optimise au pixel près et écrase l'adversaire.</span><span data-en style="display:none">Coach, analyst, 240Hz gaming setup: every upgrade boosts your win chance. Min-max to the pixel and crush the opponent.</span></p>
+      <span class="ftag">Boosts · Setup</span>
+    </div>
+    <div class="phone"><div class="frame"><img src="assets/shot-4.png" alt="Monte ton staff" loading="lazy" /></div></div>
+  </div>
+
+  <div class="frow reveal">
+    <div class="ftxt">
+      <div class="fnum">05</div>
+      <h3><span data-fr>Des dizaines d'objectifs</span><span data-en style="display:none">Dozens of goals</span></h3>
+      <p><span data-fr>Toujours un palier de plus à atteindre, une récompense à réclamer, un cap à dépasser. Impossible de poser le téléphone.</span><span data-en style="display:none">Always one more tier to reach, a reward to claim, a milestone to beat. Impossible to put the phone down.</span></p>
+      <span class="ftag">Progression · Récompenses</span>
+    </div>
+    <div class="phone"><div class="frame"><img src="assets/shot-5.png" alt="Des dizaines d'objectifs" loading="lazy" /></div></div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="pitch reveal">
+    <p data-fr>Tu commences <span class="hl">seul dans ta chambre</span>. Tu finis <span class="hl2">au sommet du monde</span>.</p>
+    <p data-en style="display:none">You start <span class="hl">alone in your room</span>. You finish <span class="hl2">on top of the world</span>.</p>
+  </div>
+</section>
+
+<section class="band wrap">
+  <div class="final reveal">
+    <h2><span data-fr>Rejoins<br>l'<em>élite</em></span><span data-en style="display:none">Join<br>the <em>elite</em></span></h2>
+    <p><span data-fr>Le jeu arrive sur iOS et Android. Entre dans le Discord pour être le premier prévenu, suivre les tournois et empocher tes 3 gems de bienvenue.</span><span data-en style="display:none">The game is coming to iOS and Android. Step into the Discord to get notified first, follow the tournaments and grab your 3 welcome gems.</span></p>
+    <div class="cta">
+      <a class="btn gold" href="https://discord.gg/D7fR95fwBS" target="_blank" rel="noopener"><span data-fr>Rejoindre le Discord</span><span data-en style="display:none">Join the Discord</span></a>
+      <a class="btn" href="roadmap.html"><span data-fr>Voir la roadmap</span><span data-en style="display:none">View the roadmap</span></a>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">
+  <div class="fl">
+    <a href="https://discord.gg/D7fR95fwBS" target="_blank" rel="noopener">Discord</a>
+    <a href="app.html"><span data-fr>Présentation</span><span data-en style="display:none">About</span></a>
+    <a href="roadmap.html">Roadmap</a>
+    <a href="index.html"><span data-fr>Confidentialité</span><span data-en style="display:none">Privacy</span></a>
+  </div>
+  <div><span data-fr>Univers esport 100% fictif. Édité par Pierre Touzet.</span><span data-en style="display:none">100% fictional esport universe. Published by Pierre Touzet.</span></div>
+</footer>
+
+<script>
+  // language toggle
+  const chips = document.querySelectorAll('.chip[data-lang]');
+  function setLang(lang){
+    chips.forEach(c => c.classList.toggle('active', c.dataset.lang === lang));
+    document.querySelectorAll('[data-fr]').forEach(el => el.style.display = lang==='fr' ? '' : 'none');
+    document.querySelectorAll('[data-en]').forEach(el => el.style.display = lang==='en' ? '' : 'none');
+    document.documentElement.lang = lang;
+  }
+  chips.forEach(c => c.addEventListener('click', () => setLang(c.dataset.lang)));
+
+  // nav reveal on scroll
+  const nav = document.getElementById('nav');
+  addEventListener('scroll', () => nav.classList.toggle('show', scrollY > 400), {passive:true});
+
+  // cursor spotlight (pointer devices only)
+  const spot = document.getElementById('spot');
+  if (matchMedia('(pointer:fine)').matches){
+    addEventListener('pointermove', e => {
+      spot.style.setProperty('--mx', e.clientX+'px');
+      spot.style.setProperty('--my', e.clientY+'px');
+      spot.style.opacity = 1;
+    }, {passive:true});
+  }
+
+  // scroll reveals + count-up
+  const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(en => {
+      if (!en.isIntersecting) return;
+      en.target.classList.add('in');
+      en.target.querySelectorAll('[data-count]').forEach(countUp);
+      io.unobserve(en.target);
+    });
+  }, {threshold:.2});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  function countUp(el){
+    const target = +el.dataset.count, suffix = el.dataset.suffix || '';
+    if (reduce){ el.textContent = target + suffix; return; }
+    const dur = 1400, t0 = performance.now();
+    (function tick(now){
+      const p = Math.min((now - t0)/dur, 1);
+      const e = 1 - Math.pow(1-p, 3);
+      el.textContent = Math.round(target*e) + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    })(t0);
+  }
+
+  // subtle phone tilt
+  if (matchMedia('(pointer:fine)').matches && !reduce){
+    document.querySelectorAll('.phone').forEach(ph => {
+      const frame = ph.querySelector('.frame');
+      const base = frame.style.transform;
+      ph.addEventListener('pointermove', e => {
+        const r = ph.getBoundingClientRect();
+        const dx = (e.clientX - r.left - r.width/2) / r.width;
+        const dy = (e.clientY - r.top - r.height/2) / r.height;
+        frame.style.transform = `rotateY(${dx*16}deg) rotateX(${-dy*12}deg)`;
+      });
+      ph.addEventListener('pointerleave', () => frame.style.transform = '');
+    });
+  }
+</script>
+</body>
+</html>
