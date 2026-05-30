@@ -93,7 +93,7 @@
   <h1>Privacy<br>Policy</h1>
   <p class="lede" data-fr><b>Politique de confidentialité.</b> Ce que l'application traite, et pourquoi — en toute transparence.</p>
   <p class="lede" data-en style="display:none"><b>Privacy policy.</b> What the app processes, and why — in full transparency.</p>
-  <div class="updated"><span data-fr>Dernière mise à jour : 24 mai 2026</span><span data-en style="display:none">Last updated: May 24, 2026</span></div>
+  <div class="updated"><span data-fr>Dernière mise à jour : 31 mai 2026</span><span data-en style="display:none">Last updated: May 31, 2026</span></div>
   <div class="langbar">
     <div class="chip active" data-lang="fr">FR · Français</div>
     <div class="chip" data-lang="en">EN · English</div>
@@ -111,13 +111,26 @@
 
     <section class="block reveal">
       <h2><span class="ic">🗂️</span> Données que nous traitons</h2>
-      <p>L'application ne demande <b>pas</b> de création de compte, de nom, d'email ni de numéro de téléphone. Les données suivantes peuvent toutefois être traitées :</p>
+      <p>Le jeu est <b>jouable sans compte</b>. Si vous créez un compte (facultatif) pour sauvegarder votre progression dans le cloud, et selon votre usage, les données suivantes peuvent être traitées :</p>
       <ul>
-        <li><b>Données de jeu</b> (score de classement, progression de saison) : envoyées de façon <b>anonyme</b> à notre prestataire de base de données (Supabase) pour afficher les classements en ligne. Aucune information permettant de vous identifier n'y est associée.</li>
-        <li><b>Identifiant publicitaire &amp; données d'usage</b> : notre régie publicitaire Google AdMob peut accéder à l'identifiant publicitaire de l'appareil et à des données d'interaction afin d'afficher des publicités et d'en mesurer la performance.</li>
-        <li><b>Jeton de notification push</b> : si vous acceptez les notifications, un jeton technique est généré (via Expo) pour vous envoyer des rappels de jeu. Aucune autre donnée n'y est liée.</li>
+        <li><b>Compte (facultatif) — Sign in with Apple / Google</b> : un <b>identifiant de compte</b> et votre <b>adresse e-mail</b> (ou l'adresse relais « Hide My Email » d'Apple) sont traités via notre prestataire d'authentification <b>Supabase</b>, pour gérer votre compte et la sauvegarde cloud.</li>
+        <li><b>Sauvegarde cloud (progression de jeu)</b> : associée à votre compte et stockée chez <b>Supabase</b> pour la restaurer sur vos appareils.</li>
+        <li><b>Classements en ligne</b> : le <b>nom d'organisation</b> que vous choisissez et un <b>identifiant d'appareil</b> sont envoyés à Supabase pour afficher les classements.</li>
+        <li><b>Identifiant publicitaire &amp; données d'usage</b> : <b>Google AdMob</b> peut accéder à l'identifiant publicitaire de l'appareil et à des données d'interaction pour afficher des publicités et en mesurer la performance (selon votre consentement / App Tracking Transparency).</li>
+        <li><b>Achats</b> : les achats intégrés et l'abonnement sont gérés via <b>RevenueCat</b> et l'App Store / Google Play (statut d'achat et d'abonnement).</li>
+        <li><b>Jeton de notification push</b> : si vous acceptez les notifications, un jeton technique est généré (via <b>Expo</b>) pour vous envoyer des rappels de jeu.</li>
       </ul>
-      <p><span class="pill-no">Jamais collecté</span> &nbsp;localisation, contacts, photos, données de santé, données financières, ni aucune donnée d'identité.</p>
+      <p><span class="pill-no">Jamais collecté</span> &nbsp;localisation précise, contacts, photos, données de santé.</p>
+    </section>
+
+    <section class="block reveal gold">
+      <h2><span class="ic">🗑️</span> Suppression de compte et de données</h2>
+      <p>Vous pouvez supprimer votre compte <b>Esport Tycoon</b> et toutes les données associées à tout moment :</p>
+      <ul>
+        <li><b>Dans l'application</b> : Réglages ⚙️ → Compte → <b>Supprimer le compte</b>.</li>
+        <li><b>Par e-mail</b> : écrivez à <a href="mailto:contact@distil.academy">contact@distil.academy</a> depuis l'adresse e-mail de votre compte (objet « Suppression de compte »).</li>
+      </ul>
+      <p>La suppression efface définitivement votre <b>compte</b>, votre <b>adresse e-mail</b>, votre <b>sauvegarde cloud (progression)</b> et vos <b>entrées de classement</b>, sous <b>30 jours</b>. Des données <b>agrégées et anonymes</b> (sans lien avec vous) peuvent être conservées. Les enregistrements de transactions d'achat peuvent être conservés lorsque la loi l'exige.</p>
     </section>
 
     <section class="block reveal">
@@ -128,7 +141,7 @@
 
     <section class="block reveal">
       <h2><span class="ic">🔄</span> Conservation et partage</h2>
-      <p>Les données de jeu anonymes sont conservées le temps nécessaire au fonctionnement des classements. <b>Nous ne vendons aucune donnée.</b> Les seuls tiers concernés sont nos prestataires techniques (Google AdMob, Supabase, Expo).</p>
+      <p><b>Nous ne vendons aucune donnée.</b> Les seuls tiers concernés sont nos prestataires techniques : <b>Supabase</b> (compte, sauvegarde, classements), <b>Google AdMob</b> (publicité), <b>RevenueCat</b> (achats) et <b>Expo</b> (notifications). Les données sont chiffrées en transit.</p>
     </section>
 
     <section class="block reveal green">
@@ -138,7 +151,7 @@
 
     <section class="block reveal gold">
       <h2><span class="ic">⚖️</span> Vos droits</h2>
-      <p>Comme aucune donnée d'identité n'est collectée, nous ne pouvons pas relier les données de jeu à une personne. Pour toute question : <a href="mailto:touzet.pierre@gmail.com">touzet.pierre@gmail.com</a></p>
+      <p>Vous pouvez demander l'accès, la rectification ou la suppression de vos données à tout moment : <a href="mailto:contact@distil.academy">contact@distil.academy</a></p>
     </section>
   </div>
 
@@ -151,13 +164,26 @@
 
     <section class="block reveal">
       <h2><span class="ic">🗂️</span> Data we process</h2>
-      <p>The app does <b>not</b> require an account, name, email or phone number. The following data may be processed:</p>
+      <p>The game is <b>playable without an account</b>. If you create an account (optional) to save your progress to the cloud, and depending on your usage, the following data may be processed:</p>
       <ul>
-        <li><b>Game data</b> (leaderboard score, season progress): sent <b>anonymously</b> to our database provider (Supabase) to display online leaderboards. No personally identifying information is attached.</li>
-        <li><b>Advertising identifier &amp; usage data</b>: our ad provider Google AdMob may access the device advertising identifier and interaction data to serve ads and measure performance.</li>
-        <li><b>Push notification token</b>: if you allow notifications, a technical token is generated (via Expo) to send game reminders. No other data is linked to it.</li>
+        <li><b>Account (optional) — Sign in with Apple / Google</b>: an <b>account identifier</b> and your <b>email address</b> (or Apple's "Hide My Email" relay address) are processed via our authentication provider <b>Supabase</b>, to manage your account and cloud save.</li>
+        <li><b>Cloud save (game progress)</b>: linked to your account and stored on <b>Supabase</b> to restore it across your devices.</li>
+        <li><b>Online leaderboards</b>: the <b>organisation name</b> you choose and a <b>device identifier</b> are sent to Supabase to display leaderboards.</li>
+        <li><b>Advertising identifier &amp; usage data</b>: <b>Google AdMob</b> may access the device advertising identifier and interaction data to serve ads and measure performance, subject to your consent (App Tracking Transparency).</li>
+        <li><b>Purchases</b>: in-app purchases and the subscription are handled via <b>RevenueCat</b> and the App Store / Google Play (purchase and subscription status).</li>
+        <li><b>Push notification token</b>: if you allow notifications, a technical token is generated (via <b>Expo</b>) to send game reminders.</li>
       </ul>
-      <p><span class="pill-no">Never collected</span> &nbsp;location, contacts, photos, health data, financial data, or any identity data.</p>
+      <p><span class="pill-no">Never collected</span> &nbsp;precise location, contacts, photos, or health data.</p>
+    </section>
+
+    <section class="block reveal gold">
+      <h2><span class="ic">🗑️</span> Account &amp; data deletion</h2>
+      <p>You can delete your <b>Esport Tycoon</b> account and all associated data at any time:</p>
+      <ul>
+        <li><b>In the app</b>: Settings ⚙️ → Account → <b>Delete account</b>.</li>
+        <li><b>By email</b>: write to <a href="mailto:contact@distil.academy">contact@distil.academy</a> from your account's email address (subject "Account deletion").</li>
+      </ul>
+      <p>Deletion permanently removes your <b>account</b>, your <b>email address</b>, your <b>cloud-saved progress</b> and your <b>leaderboard entries</b>, within <b>30 days</b>. <b>Anonymous, aggregated</b> data (not linked to you) may be retained. Purchase transaction records may be retained where required by law.</p>
     </section>
 
     <section class="block reveal">
@@ -168,7 +194,7 @@
 
     <section class="block reveal">
       <h2><span class="ic">🔄</span> Retention and sharing</h2>
-      <p>Anonymous game data is retained as long as needed to operate the leaderboards. <b>We do not sell any data.</b> The only third parties involved are our technical providers (Google AdMob, Supabase, Expo).</p>
+      <p><b>We do not sell any data.</b> The only third parties involved are our technical providers: <b>Supabase</b> (account, save, leaderboards), <b>Google AdMob</b> (advertising), <b>RevenueCat</b> (purchases) and <b>Expo</b> (notifications). Data is encrypted in transit.</p>
     </section>
 
     <section class="block reveal green">
@@ -178,7 +204,7 @@
 
     <section class="block reveal gold">
       <h2><span class="ic">⚖️</span> Your rights</h2>
-      <p>Since no identity data is collected, we cannot link game data to an individual. For any question: <a href="mailto:touzet.pierre@gmail.com">touzet.pierre@gmail.com</a></p>
+      <p>You can request access, correction or deletion of your data at any time: <a href="mailto:contact@distil.academy">contact@distil.academy</a></p>
     </section>
   </div>
 
@@ -186,8 +212,8 @@
 
 <footer class="wrap">
   <div class="ft-title">Esport Tycoon</div>
-  <div data-fr>Édité par Pierre Touzet · Contact : <a href="mailto:touzet.pierre@gmail.com">touzet.pierre@gmail.com</a></div>
-  <div data-en style="display:none">Published by Pierre Touzet · Contact: <a href="mailto:touzet.pierre@gmail.com">touzet.pierre@gmail.com</a></div>
+  <div data-fr>Édité par Pierre Touzet · Contact : <a href="mailto:contact@distil.academy">contact@distil.academy</a></div>
+  <div data-en style="display:none">Published by Pierre Touzet · Contact: <a href="mailto:contact@distil.academy">contact@distil.academy</a></div>
 </footer>
 
 <script>
