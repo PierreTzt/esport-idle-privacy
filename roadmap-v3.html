@@ -70,6 +70,7 @@
   .phase.late .phase-tag::before{background:var(--faint);box-shadow:0 0 0 5px rgba(91,95,134,.18)}
   .phase.viv .phase-tag::before{background:var(--violet);box-shadow:0 0 0 5px rgba(176,124,255,.16),0 0 22px var(--violet)}
   .phase.regie .phase-tag::before{background:var(--cyan);box-shadow:0 0 0 5px rgba(70,224,255,.16),0 0 22px var(--cyan)}
+  .phase.money .phase-tag::before{background:var(--green);box-shadow:0 0 0 5px rgba(63,217,155,.16),0 0 22px var(--green)}
   .phase-focus{font-family:var(--display);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:600}
   .phase-sub{color:var(--muted);font-size:14px;font-weight:300;width:100%;margin-top:-14px;padding-left:26px}
 
@@ -133,7 +134,7 @@
     </p>
     <div class="statusbar reveal" style="animation-delay:.28s">
       <span class="pill live"><span class="dot"></span>v2.1.0 live — Android en test fermé</span>
-      <span class="pill"><span class="dot" style="background:var(--gold)"></span>36 idées gameplay + 37 idées design</span>
+      <span class="pill"><span class="dot" style="background:var(--gold)"></span>36 gameplay · 37 design · 25 monétisation</span>
       <span class="pill"><span class="dot" style="background:var(--cyan)"></span>Identité retenue : La Régie 📺</span>
       <span class="pill"><span class="dot" style="background:var(--violet)"></span>3 versions majeures + horizon</span>
     </div>
@@ -171,7 +172,7 @@
   <div class="wrap">
     <footer>
       <div class="ft-title">Esport Tycoon — document de pilotage V3+</div>
-      Sources : <code>BRAINSTORM_V3_PLUS.md</code> (gameplay #1-36) · <code>DESIGN_REGIE.md</code> (design D1-D37) · Légende effort : <span style="color:var(--green)">● faible</span> · <span style="color:var(--amber)">● moyen</span> · <span style="color:var(--red)">● élevé</span> · <span style="color:var(--violet)">● chantier pluri-mois</span> · <span style="color:var(--gold)">★ clé de voûte</span>. Fil rouge : <b style="color:var(--text)">«&nbsp;le monde d'Esport Tycoon a maintenant une mémoire&nbsp;»</b>.
+      Sources : <code>BRAINSTORM_V3_PLUS.md</code> (gameplay #1-36) · <code>DESIGN_REGIE.md</code> (design D1-D37) · <code>MONETISATION.md</code> (M1-M25) · Légende effort : <span style="color:var(--green)">● faible</span> · <span style="color:var(--amber)">● moyen</span> · <span style="color:var(--red)">● élevé</span> · <span style="color:var(--violet)">● chantier pluri-mois</span> · <span style="color:var(--gold)">★ clé de voûte</span>. Fil rouge : <b style="color:var(--text)">«&nbsp;le monde d'Esport Tycoon a maintenant une mémoire&nbsp;»</b>.
     </footer>
   </div>
 </main>
@@ -195,6 +196,17 @@ const PHASES=[
    {n:"D21",title:"Clip highlight partageable",eff:"high",pr:"med",src:"Acquisition",desc:"Après un moment fort, le jeu monte le highlight (replay + habillage broadcast) en vidéo partageable Discord/TikTok. Chaque joueur devient un canal d'acquisition."},
    {n:"D33",title:"Prestige = dernière émission",eff:"med",pr:"med",src:"Cérémonie",desc:"Revendre l'orga devient un épisode final généré : meilleurs moments, palmarès, l'écran se coupe… et tu redémarres sur une petite chaîne locale. Un moment, plus un bouton."},
    {n:"D29",title:"Habillage sonore d'antenne",eff:"med",pr:"med",src:"Audio IA",desc:"Jingles, stinger de breaking, génériques par émission — générés par IA. Aucun idle mobile n'a une identité sonore broadcast. Toujours mute-friendly."}]},
+ {tag:"Monétisation",cls:"money",focus:"€ — transversal",sub:"Diagnostic : 4 fuites corrigées, puis un étage contextuel, puis les modèles structurels (détail : MONETISATION.md). Phase ① = mesurer avant tout.",items:[
+   {n:"M7",title:"Analytics produit",eff:"med",pr:"crit",src:"Prérequis",desc:"PostHog/Amplitude : événements achat, pub, funnel boutique. 4 KPIs : conversion D7 (1-2 %), ARPDAU (0,05-0,15 €), pubs/DAU (3-6), attach pass (5-10 %). Sans mesure, tout le reste est du pilotage à l'aveugle."},
+   {n:"M6",title:"Médiation pub",eff:"low",pr:"high",src:"Quick win",desc:"AdMob direct → médiation avec bidding : +20-50 % d'eCPM sur le même trafic, ~1 jour de travail. Le meilleur euro/heure de tout le plan."},
+   {n:"M3",title:"Starter pack",eff:"low",pr:"crit",src:"Conversion",desc:"2,99 €, one-time, 48 h après la 1ʳᵉ promotion de ligue : 300 gems + pack Légende + 24 h boost (valeur ~10 €). Le SKU de conversion du F2P — le 1er achat est LA bataille, et il manque."},
+   {n:"M1",title:"Rework Pass Premium",eff:"med",pr:"high",src:"Fuite F1",desc:"Aujourd'hui : ~210 gems pour 5,99 € = 3× moins rentable que les gems bruts. Rework : carte exclusive de saison (jamais re-disponible) + cosmétiques + gems d'appoint. Un pass vend de l'exclusif, pas de la monnaie."},
+   {n:"M2",title:"Rework Ultra",eff:"med",pr:"high",src:"Fuite F2",desc:"L'abonnement cannibalise no-ads et ×2 (achetables à vie). Rework : Pass Premium inclus chaque mois + badge au classement + file cosmétique. « Ultra = le pass + zéro pub + des gems »."},
+   {n:"M8",title:"Le Téléachat",eff:"med",pr:"high",src:"Régie",desc:"Offres contextuelles en émissions spéciales (« plus que 24 h à l'antenne ») : post-promotion, post-prestige, pity proche, retour d'absence. Les offres déclenchées convertissent 5-10× mieux que la vitrine."},
+   {n:"M9",title:"Cagnotte d'antenne",eff:"med",pr:"med",src:"Régie",desc:"Piggy bank : les victoires remplissent une cagnotte de gems verrouillée (cap ~150), 2,99 € pour l'encaisser. Conversion redoutable, ressenti juste — « c'est MES gems »."},
+   {n:"M5",title:"« Directeur de nuit »",eff:"low",pr:"med",src:"QoL",desc:"SKU permanent 6,99 € : cap offline 2 h → 8 h. Confort pur, non-P2W — « l'antenne continue la nuit »."},
+   {n:"M17",title:"Taxe de marché",eff:"epic",pr:"crit",src:"Modèle V4",desc:"Le marché des transferts (#12) taxé 5-10 % en gems (modèle FUT) : la demande de gems devient endogène et sans fin. On ne vend plus de puissance — on prélève le péage. Le modèle plateforme, antifragile."},
+   {n:"M22",title:"Enchères d'attention",eff:"high",pr:"med",src:"Modèle V4",desc:"Enchères hebdo en gems : naming du tournoi, espace pub sur la chaîne du #1, segment des awards. Prix fixé par la rivalité entre whales → puits auto-régulé, statut sans pay-to-win."}]},
  {tag:"V3",cls:"crit",focus:"La mémoire",sub:"Le monde gagne une mémoire. Zéro dépendance serveur lourde → livrable vite, fort impact émotionnel.",items:[
    {n:14,title:"Cartes à biographie",eff:"med",pr:"crit",src:"Fournée 4",desc:"Chaque carte tirée est unique au monde : biographie gravée (tirages, victoires, propriétaires, titres). Rareté historique en plus de la rareté statistique — la valeur s'apprécie sans produire de contenu."},
    {n:20,title:"L'Histoire / almanach",eff:"high",pr:"high",src:"Fournée 3",desc:"Archives permanentes : hall of fame gravé à vie, joueurs qui vieillissent → retraite → coachs, dynasties, époques nommées. La rétention par l'héritage."},
@@ -232,7 +244,11 @@ const POOL=[
  {n:"D17",title:"Talk-show + chaîne rivale",eff:"high",src:"Design × #17-19",desc:"Des pundits NPC débattent de TES résultats ; ton némésis a SA chaîne qui te descend. La guerre médiatique comme PvP-light."},
  {n:"D36",title:"Droits de diffusion (clans)",eff:"high",src:"Design × #9",desc:"Le territorial re-thématisé : ton clan détient les droits de diffusion d'une région. Bouquets de chaînes, guerre des parts d'audience."},
  {n:"D37",title:"Pub inter-joueurs",eff:"high",src:"Design × #12",desc:"Acheter un espace pub sur la chaîne d'un autre joueur — ton logo diffusé pendant les matchs du #1 mondial. Flex + puits à gems."},
- {n:"D23",title:"AirPlay TV + télécommande",eff:"med",src:"Hors-app",desc:"Le match diffusé sur la TV du salon pendant que tu manages sur le téléphone ; widget iOS = télécommande de la chaîne."}
+ {n:"D23",title:"AirPlay TV + télécommande",eff:"med",src:"Hors-app",desc:"Le match diffusé sur la TV du salon pendant que tu manages sur le téléphone ; widget iOS = télécommande de la chaîne."},
+ {n:"M16",title:"Boutique web",eff:"high",src:"Monétisation",desc:"Stripe + comptes Supabase, +20 % de gems bonus sur le web (pattern Supercell) : 15-30 % de commission économisée. À dégainer quand le couloir whale existe."},
+ {n:"M20",title:"Season ticket + commémorative",eff:"high",src:"Monétisation × #24",desc:"Royaume gratuit, ticket cosmétique payant ; chaque saison ré-arme tout le catalogue. En fin de royaume : carte gravée à ton nom et ton rang (2,99 €)."},
+ {n:"M18",title:"« Producteur exécutif »",eff:"med",src:"Mécénat",desc:"9,99 € : ton pseudo au générique de fin de saison (awards, almanach), badge, rôle Discord. Zéro puissance — monétise ceux qui aiment le dev. + Founder's Pack au lancement V3."},
+ {n:"M15",title:"Programme créateurs",eff:"med",src:"Monétisation",desc:"Sur l'infra codes cadeaux existante : code créateur = gems pour le joueur + récompenses pour le créateur. Acquisition + monétisation fusionnées, coût quasi nul."}
 ];
 const prLabel={crit:"★ Clé de voûte",high:"Haute",med:"Moyenne",low:"Basse"};
 const effLabel={low:"Faible",med:"Moyen",high:"Élevé",epic:"Chantier"};
