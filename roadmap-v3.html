@@ -133,13 +133,13 @@
     <div class="eyebrow reveal" style="animation-delay:.05s">Vision V3 · V4 · V5 — Juin 2026</div>
     <h1 class="reveal" style="animation-delay:.12s">Esport&nbsp;Tycoon<br><span class="accent">Vision&nbsp;V3+</span></h1>
     <p class="lede reveal" style="animation-delay:.2s">
-      Le dossier V3 complet (gameplay, design, monétisation, growth, FTUE) <b>réorganisé en ordre d'exécution</b> : une étape pendant le test Android, deux releases intermédiaires, puis les trois versions majeures. Chaque carte se lit seule : <b>quoi, pourquoi, concrètement</b>.
+      Le dossier V3 complet (gameplay, design, monétisation, growth, FTUE) <b>réorganisé en ordre d'exécution</b> : une étape pendant le test Android, deux releases intermédiaires, puis les versions majeures jusqu'à l'horizon plateforme (V6+). Chaque carte se lit seule : <b>quoi, pourquoi, concrètement</b>.
     </p>
     <div class="statusbar reveal" style="animation-delay:.28s">
       <span class="pill live"><span class="dot"></span>v2.1.0 live — Android en test fermé</span>
       <span class="pill"><span class="dot" style="background:var(--gold)"></span>36 gameplay · 37 design · 25 monétisation · 22 growth</span>
       <span class="pill"><span class="dot" style="background:var(--cyan)"></span>Identité retenue : La Régie 📺</span>
-      <span class="pill"><span class="dot" style="background:var(--violet)"></span>Ordre d'exécution : Étape 0 → V5</span>
+      <span class="pill"><span class="dot" style="background:var(--violet)"></span>Ordre d'exécution : Étape 0 → V6+</span>
     </div>
   </div>
 </header>
@@ -163,13 +163,6 @@
 
     <div class="note">
       <b>Comment lire l'ordre</b> — chaque étape prépare la suivante : l'Étape 0 mesure (M7) ce que l'Étape 1 corrige (FTUE), l'Étape 2 pose la grammaire et la pipeline que la V3 consomme (cartes, portraits, ticker), la V3 fait grossir la base que la V4 connecte (simulation, marché), et la V5 anime ce que la V4 a construit. Les architectures lourdes s'écrivent toujours une version en avance.
-    </div>
-
-    <div class="group-label">Horizon — plateforme &amp; paris fous (après masse critique)</div>
-    <div class="grid" id="pool"></div>
-
-    <div class="note" style="margin-top:34px">
-      <b>Règle d'or de l'horizon</b> — ces idées transforment le jeu en plateforme (ligues UGC, rôles asymétriques, studio endgame). Sans masse critique de joueurs, c'est vide&nbsp;: <b>toujours en dernier</b>, jamais avant que les V3-V5 aient fait grossir la base.
     </div>
   </div>
   <div class="wrap">
@@ -311,7 +304,15 @@ const PHASES=[
    {n:"G16",title:"Le lancement-événement",eff:"med",pr:"high",src:"G16-G19 + G8",
     desc:"Le re-lancement orchestré : press kit (pitch 3 lignes, GIFs, l'histoire du solo dev), ~10 YouTubers idle contactés avec build anticipé + code exclusif, candidatures featuring (App Store, Indie corner Play, Indie Games Festival), win-back email des anciens joueurs, Show HN côté tech.",
     why:"La V3 est une actu complète (nouvelle identité, mémoire, Founder's) : un lancement se prépare à J-30, pas le jour du push store. Et chaque canal aura été semé à l'Étape 0.",
-    how:"Cadence : J-30 press kit + contacts → crescendo devlog → jour J : post Reddit + vidéos créateurs + événement de fiche + Founder's Pack."}]},
+    how:"Cadence : J-30 press kit + contacts → crescendo devlog → jour J : post Reddit + vidéos créateurs + événement de fiche + Founder's Pack."},
+   {n:25,title:"Live Activities / widgets",eff:"med",pr:"med",src:"D22 + D31",
+    desc:"Le match de ligue en direct sur l'écran verrouillé (Dynamic Island), comme un score de foot, et un widget « télécommande de la chaîne » : encaisser, lancer le match, voir le score.",
+    why:"Pour un idle, être présent hors de l'app est exactement la bonne arme — et un score live sur l'écran verrouillé pour un match simulé, personne ne l'a jamais fait. Parfaitement dans le theming broadcast posé aux étapes précédentes.",
+    how:"ActivityKit iOS + un widget. S'appuie sur les horaires de matchs existants, aucune dépendance serveur nouvelle."},
+   {n:"G22",title:"Paid UA (si la LTV le permet)",eff:"med",pr:"low",src:"Growth",
+    desc:"De l'acquisition payante pour amplifier le lancement : Apple Search Ads sur ses propres mots-clés d'abord (intention forte, CPI faible), campagnes plus larges ensuite.",
+    why:"La règle est arithmétique : on n'achète du trafic que si LTV > CPI — et après l'Étape 0 (analytics) et le lancement, la LTV est enfin connue. Le paid amplifie des boucles qui marchent, il ne les remplace jamais.",
+    how:"Budget test limité, mesuré par cohortes (M7). Arrêt immédiat si CPI > LTV."}]},
 
  {tag:"V4",cls:"",focus:"Le monde partagé",sub:"Toutes les orgas coexistent réellement. L'investissement structurant — la simulation perpétuelle — s'architecture pendant la V3 et se construit ici. C'est aussi la version où le modèle économique bascule.",items:[
    {n:16,title:"Simulation perpétuelle",eff:"epic",pr:"crit",src:"Clé de voûte",
@@ -345,7 +346,19 @@ const PHASES=[
    {n:"M16",title:"Le web : boutique + démo",eff:"high",pr:"med",src:"M16 + G21",
     desc:"La boutique web (Stripe + comptes Supabase, +20 % de gems bonus sur le web) qui économise les 15-30 % de commission stores, et une tranche du jeu jouable en navigateur (la 1ʳᵉ ligue) pour la communauté incremental.",
     why:"Les gros payeurs font l'effort du web pour 20 % de bonus (pattern Supercell) — pertinent maintenant que le couloir whale existe. Et r/incremental_games sur-récompense le jouable en un clic : la démo est l'arme du post Reddit.",
-    how:"Le cadre légal a bougé (anti-steering US, DMA EU — modalités par région). Export web Expo + Skia web pour la démo, avec « continue ton empire sur mobile » en fin de tranche."}]},
+    how:"Le cadre légal a bougé (anti-steering US, DMA EU — modalités par région). Export web Expo + Skia web pour la démo, avec « continue ton empire sur mobile » en fin de tranche."},
+   {n:15,title:"Paris du spectateur",eff:"med",pr:"med",src:"Fournée 3",
+    desc:"Parier (en monnaie douce) sur les matchs du top ladder et les finales de tournois : pronostics, cotes, salle de visionnage.",
+    why:"Transforme les 95 % de joueurs qui ne seront jamais top 10 en public engagé du top 10 — chacun nourrit l'autre. Prototypé gratuitement en pronostics Discord dès l'Étape 0. ⚠️ Vérifier l'impact sur la classification d'âge (jeu d'argent simulé).",
+    how:"S'appuie sur la simulation perpétuelle (des matchs à heure fixe = des événements à parier). Monnaie douce uniquement, jamais de gems."},
+   {n:26,title:"Bot Discord = 2ᵉ client",eff:"med",pr:"med",src:"Fournée 3",
+    desc:"Consulter son orga, encaisser ses gains, suivre les résultats et le marché — directement depuis Discord.",
+    why:"Le Discord est déjà le métagame (Étape 0) : en faire un client léger prolonge le bot de contenu et garde le jeu présent là où vit la communauté.",
+    how:"Bot + l'API Supabase existante (comptes, RPC). Lecture seule d'abord, actions simples ensuite."},
+   {n:10,title:"Orga co-gérée",eff:"high",pr:"low",src:"Fournée 4",
+    desc:"Une organisation gérée à plusieurs vrais joueurs, chacun son département : recrutement, finances, académie.",
+    why:"Le jeu « en couple / entre potes » que le genre ignore complètement — et le prolongement naturel des écuries.",
+    how:"Permissions par département sur une orga partagée (RLS Supabase). À lancer une fois les clans stabilisés."}]},
 
  {tag:"V5",cls:"viv",focus:"Le monde vivant",sub:"Le jeu change sans nouvelle feature : du contenu que le système fabrique tout seul. Tout s'appuie sur la simulation perpétuelle et la grammaire broadcast posées avant.",items:[
    {n:17,title:"Feed narratif + talk-show",eff:"high",pr:"high",src:"#17 + D17",
@@ -371,23 +384,43 @@ const PHASES=[
    {n:"D34",title:"Cérémonie des awards",eff:"high",pr:"med",src:"Design × #20",
     desc:"Une fois par saison, la soirée des trophées du monde entier, diffusée à l'antenne : orga de l'année, comeback, carte MVP de l'année — de vrais joueurs gagnent les catégories, et l'événement s'auto-génère depuis les données du serveur.",
     why:"L'almanach + le spectacle + le monde partagé fusionnés en un rendez-vous regardable. Le segment sponsor de la cérémonie est un emplacement d'enchères (M22), et le générique porte les « Producteurs exécutifs » (M19).",
-    how:"Agrégats de saison + cérémonie templatée + habillage broadcast. À ce stade, quasi tout existe déjà — c'est un assemblage."}]}
+    how:"Agrégats de saison + cérémonie templatée + habillage broadcast. À ce stade, quasi tout existe déjà — c'est un assemblage."},
+   {n:13,title:"Bourse des orgas",eff:"high",pr:"med",src:"Fournée 3",
+    desc:"Investir dans les orgas des autres joueurs : acheter des parts du top 10, toucher des dividendes sur leurs victoires, revendre avant la chute.",
+    why:"Le classement cesse d'être un tableau qu'on regarde : il devient un marché qu'on trade. Les petits joueurs gagnent un intérêt direct au destin des gros — du spectateur engagé.",
+    how:"S'appuie sur l'économie inter-joueurs du marché V4 (déjà régulée) et la simulation. Les dividendes sont un flux à équilibrer comme une monnaie."},
+   {n:23,title:"Gouvernance du monde",eff:"med",pr:"med",src:"Fournée 3",
+    desc:"Vote communautaire de fin de saison : prochaine discipline, patch de méta, règles de ligue — pondéré par les trophées.",
+    why:"Le pouvoir politique devient une récompense de jeu, et chaque vote est une campagne Discord qui s'anime toute seule. Ton live-ops devient un événement démocratique.",
+    how:"Prototypé en sondages Discord dès l'Étape 0 ; la version in-game branche le résultat sur les patchs de méta et les Ères."},
+   {n:"D23",title:"AirPlay TV",eff:"med",pr:"low",src:"Hors-app",
+    desc:"Le match diffusé sur la TV du salon pendant que tu manages sur le téléphone.",
+    why:"« Le jeu mobile qui se regarde comme un vrai match » — une story de presse à lui tout seul, et la continuité logique de la chaîne auto-diffusée.",
+    how:"AirPlay/Chromecast sur le rendu broadcast déjà construit pour la chaîne (#28)."}]},
+
+ {tag:"V6+",cls:"late",focus:"La plateforme — après masse critique",sub:"Le jeu cesse d'être un jeu SUR l'esport pour devenir un esport lui-même. Règle d'or : ces chantiers transforment le jeu en plateforme — sans une grande base de joueurs, ils sont vides. C'est leur place dans l'ordre, pas une annexe.",items:[
+   {n:32,title:"Ligues créées par les joueurs",eff:"epic",pr:"med",src:"Plateforme",
+    desc:"Créer sa propre ligue — format, règles, cagnotte, accès — et inviter d'autres orgas à y jouer.",
+    why:"L'escalade thématique ultime : manager → propriétaire d'orga → propriétaire de ligue → fédération. La communauté produit la compétition à ta place.",
+    how:"Outillage de création + modération. N'a de sens qu'avec des milliers d'actifs — d'où sa place en dernier."},
+   {n:34,title:"Studio endgame",eff:"epic",pr:"med",src:"Plateforme",
+    desc:"Le prestige ultime : au sommet, ton orga crée son propre jeu esport fictif (genre, méta, identité) — qui devient une vraie discipline jouable par les autres utilisateurs.",
+    why:"Le multi-discipline (V3) cesse d'être du contenu que TU produis : la communauté le génère. Game Dev Tycoon fusionné dans Esport Tycoon.",
+    how:"S'appuie sur le moteur multi-discipline + un éditeur contraint (templates) + curation par la gouvernance (V5)."},
+   {n:35,title:"Écosystème asymétrique",eff:"epic",pr:"low",src:"Fournée 3",
+    desc:"D'autres rôles jouables dans la même économie : agents de joueurs (commission sur les transferts), organisateurs de tournois, sponsors.",
+    why:"Chaque rôle est un gameplay idle différent, interdépendant des autres — l'agent gagne quand le manager recrute. Personne ne fait ça sur mobile.",
+    how:"Se construit par-dessus le marché (V4) et les ligues UGC. Un rôle à la fois — l'agent d'abord."},
+   {n:36,title:"Jeu miroir",eff:"epic",pr:"low",src:"Fournée 3",
+    desc:"Une 2ᵉ app où tu incarnes un joueur pro… recrutable par les managers d'Esport Tycoon : une partie des cartes du gacha sont de vraies personnes.",
+    why:"Le jour où un manager te dit « je t'ai recruté », c'est un autre humain. Le marché biface — l'idée à licorne du dossier.",
+    how:"Un second jeu complet : ne se lance que si l'écosystème (marché, simulation, masse critique) est prouvé."},
+   {n:31,title:"Sponsors réels (marques)",eff:"epic",pr:"low",src:"Fournée 4",
+    desc:"De vraies marques (périphériques gaming, energy drinks) comme sponsors in-game du monde fictif, logo sur les maillots des orgas.",
+    why:"Le placement produit que le sport réel pratique depuis un siècle, jamais transposé à un tycoon mobile. Un revenu direct négocié, hors commission stores.",
+    how:"Exige une audience démontrable (les chiffres M7 + la chaîne diffusée) — c'est de la régie publicitaire au sens propre."}]}
 ];
-const POOL=[
- {n:13,title:"Bourse des orgas",eff:"high",src:"Fournée 3",desc:"Investir dans les orgas des autres joueurs : parts du top 10, dividendes sur leurs victoires, revente avant la chute. Le classement devient un marché à trader, et les petits joueurs deviennent le public engagé des gros."},
- {n:15,title:"Paris du spectateur",eff:"med",src:"Fournée 3",desc:"Parier (monnaie douce) sur les matchs du top ladder et les finales. Transforme les non-top-10 en public. ⚠️ Vérifier l'impact sur la classification d'âge (jeu d'argent simulé). Commence en pronostics Discord dès l'Étape 0."},
- {n:23,title:"Gouvernance du monde",eff:"med",src:"Fournée 3",desc:"Vote communautaire de fin de saison (prochaine discipline, patch de méta, règles de ligue), pondéré par les trophées — le pouvoir politique devient une récompense de jeu. Prototype gratuit : les sondages Discord."},
- {n:25,title:"Live Activities / widgets",eff:"med",src:"D22 + D31",desc:"Le match de ligue en direct sur l'écran verrouillé (Dynamic Island) comme un score de foot, et le widget « télécommande de la chaîne ». Jamais vu sur un match simulé — et parfaitement Régie."},
- {n:26,title:"Bot Discord = 2ᵉ client",eff:"med",src:"Fournée 3",desc:"Consulter son orga, encaisser ses gains, voir les résultats — directement depuis Discord. Le prolongement naturel du bot de contenu de l'Étape 0."},
- {n:"D23",title:"AirPlay TV",eff:"med",src:"Hors-app",desc:"Le match diffusé sur la TV du salon pendant que tu manages sur le téléphone. « Le jeu mobile qui se regarde comme un vrai match » — une story de presse à lui tout seul."},
- {n:32,title:"Ligues créées par les joueurs",eff:"epic",src:"Plateforme",desc:"Créer sa propre ligue (format, règles, cagnotte, accès) et inviter d'autres orgas. L'escalade thématique : manager → propriétaire d'orga → propriétaire de ligue → fédération. Exige une masse critique de joueurs."},
- {n:34,title:"Studio endgame",eff:"epic",src:"Plateforme",desc:"Le prestige ultime : créer son propre jeu esport fictif (genre, méta, identité), qui devient une vraie discipline jouable par les autres. La communauté génère le contenu multi-discipline à ta place."},
- {n:35,title:"Écosystème asymétrique",eff:"epic",src:"Fournée 3",desc:"D'autres rôles jouables dans la même économie : agents de joueurs (commission sur les transferts), organisateurs de tournois, sponsors. Chaque rôle = un gameplay idle différent, interdépendant des autres."},
- {n:36,title:"Jeu miroir",eff:"epic",src:"Fournée 3",desc:"Une 2ᵉ app où tu incarnes un joueur pro… recrutable par les managers d'Esport Tycoon : une partie des cartes du gacha sont de vraies personnes. Marché biface — l'idée à licorne du dossier."},
- {n:31,title:"Sponsors réels (marques)",eff:"epic",src:"Fournée 4",desc:"De vraies marques (périphériques, energy drinks) comme sponsors in-game du monde fictif, logo sur les maillots. Le placement produit du sport réel transposé au tycoon mobile. Après traction uniquement."},
- {n:10,title:"Orga co-gérée",eff:"high",src:"Fournée 4",desc:"Une organisation gérée à plusieurs vrais joueurs, chacun son département (recrutement, finances, académie). Le jeu « en couple / entre potes » que le genre ignore complètement."},
- {n:"G22",title:"Paid UA",eff:"med",src:"Growth",desc:"De l'acquisition payante seulement quand LTV > CPI — mesurable grâce à M7. Commencer par Apple Search Ads sur ses propres mots-clés (intention forte, CPI faible). Un amplificateur de boucles qui marchent, jamais un substitut."}
-];
+const POOL=[];
 const prLabel={crit:"★ Critique",high:"Haute",med:"Moyenne",low:"Basse"};
 const effLabel={low:"Faible",med:"Moyen",high:"Élevé",epic:"Chantier"};
 
