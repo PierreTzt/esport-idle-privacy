@@ -100,6 +100,8 @@
   .b-pr.crit{background:rgba(255,194,75,.13);color:var(--gold);border-color:rgba(255,194,75,.3)}
   .b-dep{background:rgba(70,224,255,.08);color:var(--cyan);border:1px solid rgba(70,224,255,.25)}
   .card p{color:var(--muted);font-size:13.5px;font-weight:300;line-height:1.5}
+  .card p.det{margin-top:9px;font-size:12.5px;line-height:1.48;padding-top:8px;border-top:1px dashed rgba(255,255,255,.08)}
+  .card p.det b{display:block;color:var(--gold-soft);font-family:var(--display);font-weight:600;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:2px}
   .src{margin-top:13px;display:inline-flex;align-items:center;gap:6px;font-family:var(--display);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
   .src::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan)}
 
@@ -131,13 +133,13 @@
     <div class="eyebrow reveal" style="animation-delay:.05s">Vision V3 · V4 · V5 — Juin 2026</div>
     <h1 class="reveal" style="animation-delay:.12s">Esport&nbsp;Tycoon<br><span class="accent">Vision&nbsp;V3+</span></h1>
     <p class="lede reveal" style="animation-delay:.2s">
-      La roadmap v1 est <b>exécutée à 100&nbsp;%</b> (23 chantiers + v1.4 + v2). La suite n'est plus une liste de features&nbsp;: chaque version majeure ouvre un <b>axe structurel</b>. Fil rouge&nbsp;: <b>faire exister le temps</b> — donner au monde une mémoire, puis une vie.
+      Le dossier V3 complet (gameplay, design, monétisation, growth, FTUE) <b>réorganisé en ordre d'exécution</b> : une étape pendant le test Android, deux releases intermédiaires, puis les trois versions majeures. Chaque carte se lit seule : <b>quoi, pourquoi, concrètement</b>.
     </p>
     <div class="statusbar reveal" style="animation-delay:.28s">
       <span class="pill live"><span class="dot"></span>v2.1.0 live — Android en test fermé</span>
       <span class="pill"><span class="dot" style="background:var(--gold)"></span>36 gameplay · 37 design · 25 monétisation · 22 growth</span>
       <span class="pill"><span class="dot" style="background:var(--cyan)"></span>Identité retenue : La Régie 📺</span>
-      <span class="pill"><span class="dot" style="background:var(--violet)"></span>3 versions majeures + horizon</span>
+      <span class="pill"><span class="dot" style="background:var(--violet)"></span>Ordre d'exécution : Étape 0 → V5</span>
     </div>
   </div>
 </header>
@@ -160,7 +162,7 @@
     <div id="timeline"></div>
 
     <div class="note">
-      <b>La clé de voûte&nbsp;:</b> la <b>simulation perpétuelle (#16)</b> débloque la bourse, les paris, la succession, les royaumes saisonniers et la chaîne auto-diffusée. La V3 «&nbsp;Mémoire&nbsp;» n'en dépend pas → elle se livre <b>pendant</b> que l'infra de la V4 se construit en parallèle.
+      <b>Comment lire l'ordre</b> — chaque étape prépare la suivante : l'Étape 0 mesure (M7) ce que l'Étape 1 corrige (FTUE), l'Étape 2 pose la grammaire et la pipeline que la V3 consomme (cartes, portraits, ticker), la V3 fait grossir la base que la V4 connecte (simulation, marché), et la V5 anime ce que la V4 a construit. Les architectures lourdes s'écrivent toujours une version en avance.
     </div>
 
     <div class="group-label">Horizon — plateforme &amp; paris fous (après masse critique)</div>
@@ -173,7 +175,7 @@
   <div class="wrap">
     <footer>
       <div class="ft-title">Esport Tycoon — document de pilotage V3+</div>
-      Sources : <code>BRAINSTORM_V3_PLUS.md</code> (gameplay #1-36) · <code>DESIGN_REGIE.md</code> (design D1-D37) · <code>MONETISATION.md</code> (M1-M25) · <code>GROWTH.md</code> (G1-G22) · Légende effort : <span style="color:var(--green)">● faible</span> · <span style="color:var(--amber)">● moyen</span> · <span style="color:var(--red)">● élevé</span> · <span style="color:var(--violet)">● chantier pluri-mois</span> · <span style="color:var(--gold)">★ clé de voûte</span>. Fil rouge : <b style="color:var(--text)">«&nbsp;le monde d'Esport Tycoon a maintenant une mémoire&nbsp;»</b>.
+      Sources : <code>BRAINSTORM_V3_PLUS.md</code> (gameplay #1-36) · <code>DESIGN_REGIE.md</code> (design D1-D37) · <code>MONETISATION.md</code> (M1-M25) · <code>GROWTH.md</code> (G1-G22) · <code>FTUE.md</code> (audit + R1-R7) · Légende effort : <span style="color:var(--green)">● faible</span> · <span style="color:var(--amber)">● moyen</span> · <span style="color:var(--red)">● élevé</span> · <span style="color:var(--violet)">● chantier pluri-mois</span> · <span style="color:var(--gold)">★ clé de voûte</span>. Fil rouge : <b style="color:var(--text)">«&nbsp;le monde d'Esport Tycoon a maintenant une mémoire&nbsp;»</b>.
     </footer>
   </div>
 </main>
@@ -186,83 +188,207 @@ const PHASES=[
    "Streaming · Académie · Bannières · Live-ops","Ligue hebdo + tournois en ligne (Supabase)",
    "i18n FR/EN · Game Center · Android","Pack opening façon cartes Pokémon (Skia)",
    "F2P : scout pub ×3/jour + 7 types de notifs"]},
- {tag:"La Régie",cls:"regie",focus:"Design — transversal",sub:"Identité retenue : chaque écran est une émission du même network. Se déploie écran par écran, version par version (détail : DESIGN_REGIE.md).",items:[
-   {n:"D✦",title:"Grammaire broadcast (8 composants)",eff:"med",pr:"crit",src:"Design system",desc:"Bandeau d'antenne, lower-third, ticker, CAM, pupitre, VU-mètre, breaking, compteur. Chaque écran existant se traduit — pas de big-bang. Le ticker accueille le futur feed narratif."},
-   {n:"D3",title:"Foil holo + cartes animées",eff:"low",pr:"high",src:"Shaders SkSL",desc:"Reflet irisé au gyroscope sur les rares, particules dorées sur les Mythiques. Zéro asset, zéro poids — le marqueur premium du genre, rétroactif sur toute la collection."},
-   {n:"D28",title:"Le zapping",eff:"low",pr:"high",src:"Signature UX",desc:"Changer d'onglet = changer de chaîne : swipe, micro-glitch d'antenne, bandeau « CH 03 — MERCATO ». La signature sensorielle du jeu, quasi gratuite."},
-   {n:"D1",title:"Portraits joueurs IA + CDN",eff:"med",pr:"high",src:"Pipeline assets",desc:"100-300 portraits stylisés (archétype × rareté, variantes par code Skia) servis via Supabase Storage : du contenu visuel sans rebuild ni review. Prépare les cartes à biographie."},
-   {n:"D13",title:"Audimat-ressource + hype",eff:"high",pr:"crit",src:"Gameplay",desc:"Le public devient la 3ᵉ ressource (cash, gems, audience). Dilemme inédit : jouer pour gagner ou pour le show — la tactique « Spectaculaire » sacrifie du win-rate contre de la hype."},
-   {n:"D19",title:"Conf' de presse d'après-match",eff:"med",pr:"high",src:"Gameplay",desc:"3 déclarations possibles après un gros match : provoquer / protéger / courtiser. Relie moral + sponsors + narratif en une interaction de 5 secondes. Meilleur ratio impact/effort."},
-   {n:"D15",title:"Coupure pub diégétique",eff:"low",pr:"high",src:"Monétisation",desc:"La rewarded devient une coupure pub sur TA chaîne : tu la regardes en vrai, ton public fictif aussi — double revenu. La pub n'interrompt plus le jeu, elle EST le jeu."},
-   {n:"D21",title:"Clip highlight partageable",eff:"high",pr:"med",src:"Acquisition",desc:"Après un moment fort, le jeu monte le highlight (replay + habillage broadcast) en vidéo partageable Discord/TikTok. Chaque joueur devient un canal d'acquisition."},
-   {n:"D33",title:"Prestige = dernière émission",eff:"med",pr:"med",src:"Cérémonie",desc:"Revendre l'orga devient un épisode final généré : meilleurs moments, palmarès, l'écran se coupe… et tu redémarres sur une petite chaîne locale. Un moment, plus un bouton."},
-   {n:"D29",title:"Habillage sonore d'antenne",eff:"med",pr:"med",src:"Audio IA",desc:"Jingles, stinger de breaking, génériques par émission — générés par IA. Aucun idle mobile n'a une identité sonore broadcast. Toujours mute-friendly."}]},
- {tag:"Monétisation",cls:"money",focus:"€ — transversal",sub:"Diagnostic : 4 fuites corrigées, puis un étage contextuel, puis les modèles structurels (détail : MONETISATION.md). Phase ① = mesurer avant tout.",items:[
-   {n:"M7",title:"Analytics produit",eff:"med",pr:"crit",src:"Prérequis",desc:"PostHog/Amplitude : événements achat, pub, funnel boutique. 4 KPIs : conversion D7 (1-2 %), ARPDAU (0,05-0,15 €), pubs/DAU (3-6), attach pass (5-10 %). Sans mesure, tout le reste est du pilotage à l'aveugle."},
-   {n:"M6",title:"Médiation pub",eff:"low",pr:"high",src:"Quick win",desc:"AdMob direct → médiation avec bidding : +20-50 % d'eCPM sur le même trafic, ~1 jour de travail. Le meilleur euro/heure de tout le plan."},
-   {n:"M3",title:"Starter pack",eff:"low",pr:"crit",src:"Conversion",desc:"2,99 €, one-time, 48 h après la 1ʳᵉ promotion de ligue : 300 gems + pack Légende + 24 h boost (valeur ~10 €). Le SKU de conversion du F2P — le 1er achat est LA bataille, et il manque."},
-   {n:"M1",title:"Rework Pass Premium",eff:"med",pr:"high",src:"Fuite F1",desc:"Aujourd'hui : ~210 gems pour 5,99 € = 3× moins rentable que les gems bruts. Rework : carte exclusive de saison (jamais re-disponible) + cosmétiques + gems d'appoint. Un pass vend de l'exclusif, pas de la monnaie."},
-   {n:"M2",title:"Rework Ultra",eff:"med",pr:"high",src:"Fuite F2",desc:"L'abonnement cannibalise no-ads et ×2 (achetables à vie). Rework : Pass Premium inclus chaque mois + badge au classement + file cosmétique. « Ultra = le pass + zéro pub + des gems »."},
-   {n:"M8",title:"Le Téléachat",eff:"med",pr:"high",src:"Régie",desc:"Offres contextuelles en émissions spéciales (« plus que 24 h à l'antenne ») : post-promotion, post-prestige, pity proche, retour d'absence. Les offres déclenchées convertissent 5-10× mieux que la vitrine."},
-   {n:"M9",title:"Cagnotte d'antenne",eff:"med",pr:"med",src:"Régie",desc:"Piggy bank : les victoires remplissent une cagnotte de gems verrouillée (cap ~150), 2,99 € pour l'encaisser. Conversion redoutable, ressenti juste — « c'est MES gems »."},
-   {n:"M5",title:"« Directeur de nuit »",eff:"low",pr:"med",src:"QoL",desc:"SKU permanent 6,99 € : cap offline 2 h → 8 h. Confort pur, non-P2W — « l'antenne continue la nuit »."},
-   {n:"M17",title:"Taxe de marché",eff:"epic",pr:"crit",src:"Modèle V4",desc:"Le marché des transferts (#12) taxé 5-10 % en gems (modèle FUT) : la demande de gems devient endogène et sans fin. On ne vend plus de puissance — on prélève le péage. Le modèle plateforme, antifragile."},
-   {n:"M22",title:"Enchères d'attention",eff:"high",pr:"med",src:"Modèle V4",desc:"Enchères hebdo en gems : naming du tournoi, espace pub sur la chaîne du #1, segment des awards. Prix fixé par la rivalité entre whales → puits auto-régulé, statut sans pay-to-win."}]},
- {tag:"Growth",cls:"growth",focus:"Acquisition — transversal",sub:"Le growth est du produit déguisé. Hiérarchie ROI : ASO → devlog → boucles in-game → événement V3 → paid (détail : GROWTH.md). Tout le bloc « maintenant » se fait pendant le test Android, sans toucher au code.",items:[
-   {n:"G6",title:"Devlog « solo dev × IA »",eff:"med",pr:"crit",src:"Contenu",desc:"Le hook en or : « je développe un jeu esport en solo avec l'IA, il est déjà sur les stores ». Shorts/TikTok 30-60 s, 2-3/semaine, largement automatisable. Construit l'audience qui achètera le Founder's Pack."},
-   {n:"G1",title:"ASO : icône A/B + preview vidéo",eff:"low",pr:"crit",src:"Store",desc:"A/B d'icône natif gratuit (Play + PPO iOS) : +10-30 % de conversion fiche, à jamais. Preview vidéo manquante (→ D12). Les 2 premières captures doivent vendre le fantasme, pas l'UI."},
-   {n:"G15",title:"Machine à contenu auto",eff:"low",pr:"high",src:"Bot",desc:"Cron + Supabase : le bot poste résultats du Mondial hebdo, records, pull Mythique du jour sur Discord/X. Le jeu paraît habité — la social proof est le facteur de conversion n°1 d'un petit jeu."},
-   {n:"G13",title:"Discord = métagame",eff:"med",pr:"high",src:"Communauté",desc:"Rituels (drop de code hebdo, concours de pulls, pronostics du tournoi = le #15 gratuit dès maintenant) + superfans « staff de la chaîne » (TestFlight anticipé, pseudo en orga NPC)."},
-   {n:"G3",title:"Événements de fiche store",eff:"low",pr:"med",src:"Store",desc:"In-app events App Store + promotional content Play : chaque live-op visible SUR le store. Visibilité gratuite que quasi aucun solo dev n'exploite."},
-   {n:"G18",title:"Featuring éditorial",eff:"low",pr:"med",src:"Lancement V3",desc:"Nominations App Store / Indie corner Play / Google Play Indie Games Festival. Argument : « l'idle qui ne ressemble à aucun autre » (la Régie). 1 h par candidature, espérance massivement positive."},
-   {n:"G16",title:"Lancement V3 = re-lancement",eff:"med",pr:"high",src:"J-30",desc:"Press kit + ~10 YouTubers idle/incremental (build anticipé + code exclusif) + win-back email des anciens via Supabase + Founder's Pack. Jour J : Reddit + créateurs + event de fiche."},
-   {n:"G8",title:"L'angle IA (2 faces)",eff:"low",pr:"med",src:"Presse",desc:"Face tech (Show HN, presse dev) : « un solo dev ship à la vitesse d'un studio » — elles adorent. Face gamers : on vend le jeu, pas la méthode. Jamais l'inverse."},
-   {n:"G20",title:"Cross-promo ticker",eff:"low",pr:"med",src:"Diégétique",desc:"Le ticker ET·NEWS est un inventaire média : spot pour le jeu d'un autre solo dev contre la réciproque. Trafic qualifié gratuit, dans le lore."},
-   {n:"G21",title:"Démo web",eff:"high",pr:"med",src:"r/incremental",desc:"L'audience incremental joue en navigateur : tranche web (1ʳᵉ ligue, export Expo web) = lien sans friction + « continue sur mobile ». L'arme du post Reddit V3. Sous-produit du compagnon #27."}]},
- {tag:"V3",cls:"crit",focus:"La mémoire",sub:"Le monde gagne une mémoire. Zéro dépendance serveur lourde → livrable vite, fort impact émotionnel.",items:[
-   {n:14,title:"Cartes à biographie",eff:"med",pr:"crit",src:"Fournée 4",desc:"Chaque carte tirée est unique au monde : biographie gravée (tirages, victoires, propriétaires, titres). Rareté historique en plus de la rareté statistique — la valeur s'apprécie sans produire de contenu."},
-   {n:20,title:"L'Histoire / almanach",eff:"high",pr:"high",src:"Fournée 3",desc:"Archives permanentes : hall of fame gravé à vie, joueurs qui vieillissent → retraite → coachs, dynasties, époques nommées. La rétention par l'héritage."},
-   {n:1,title:"Multi-discipline",eff:"high",pr:"high",src:"Archi validée",desc:"2ᵉ équipe (course), budget partagé, chaque système existant se décline. Déjà architecturé (ARCHI_MULTI_DISCIPLINE.md, option A, séquence shippable)."},
-   {n:30,title:"Sponsor diégétique",eff:"low",pr:"high",src:"Fournée 4",desc:"La rewarded ad re-habillée en acte de management : « le sponsor exige un entretien » → pub → contrat signé dans la fiction. Même eCPM, ressenti radicalement meilleur."},
-   {n:8,title:"Parrainage",eff:"low",pr:"med",src:"Fournée 1",desc:"Code ami → récompenses des deux côtés. L'acquisition organique qui manque aujourd'hui."}]},
- {tag:"V4",cls:"",focus:"Le monde partagé",sub:"Toutes les orgas coexistent réellement. L'investissement structurant : la simulation perpétuelle.",items:[
-   {n:16,title:"Simulation perpétuelle",eff:"epic",pr:"crit",src:"Clé de voûte",desc:"Le monde tourne côté serveur en continu : matchs à heure fixe, saisons qui vivent sans toi. On ne « lance » plus une partie — on consulte un monde qui ne t'a pas attendu."},
-   {n:12,title:"Marché des transferts",eff:"epic",pr:"high",src:"Palier MMO-lite",desc:"Cartes achetées/vendues entre vrais joueurs (enchères, prix fluctuants). Croisé avec la biographie (#14) : tu n'achètes plus des stats, tu achètes un palmarès."},
-   {n:6,title:"Clans / écuries",eff:"high",pr:"high",src:"Fournée 1",desc:"Fédérations d'orgas, classement de clans, events coopératifs. Le levier de rétention n°1 des idle games matures."},
-   {n:11,title:"Ancrage territorial",eff:"med",pr:"med",src:"Fournée 4",desc:"Ville natale réelle : classements par ville, derbies Lyon–Marseille, ligues nationales. L'identité du clocher, gratuite en contenu."},
-   {n:7,title:"Défis entre amis",eff:"med",pr:"med",src:"Fournée 1",desc:"Défier l'orga d'un ami, en asynchrone (pas de PvP temps réel). S'appuie sur les comptes existants."}]},
- {tag:"V5",cls:"viv",focus:"Le monde vivant",sub:"Le jeu change sans nouvelle feature : du contenu que le système fabrique tout seul.",items:[
-   {n:17,title:"Feed narratif génératif",eff:"high",pr:"high",src:"Palier narratif",desc:"Réseau social in-game du monde fictif : rumeurs, clashs, interviews de TES joueurs, nourri par les vrais événements de partie. 90 % templaté, LLM réservé aux moments forts."},
-   {n:22,title:"Les Ères",eff:"epic",pr:"high",src:"Fournée 4",desc:"Le monde traverse des époques (LAN → streaming → stades → VR) : règles, revenus, disciplines et DA qui changent. Le prestige devient « traverser le temps ». Du contenu pour des années."},
-   {n:24,title:"Royaumes saisonniers",eff:"high",pr:"med",src:"Fournée 3",desc:"Serveurs à économie vierge tous les 2-3 mois avec modificateur fou (hardcore, turbo…), acquis convertis en héritage. La réponse au problème du retardataire."},
-   {n:28,title:"Chaîne auto-diffusée",eff:"epic",pr:"med",src:"Fournée 4",desc:"Twitch/YouTube 24/7 des matchs du top ladder fictif, habillage broadcast + commentaire généré. Le jeu fabrique son propre marketing — coût d'acquisition → 0."},
-   {n:21,title:"Succession d'orgas",eff:"high",pr:"med",src:"Fournée 4",desc:"Les orgas abandonnées déclinent puis passent en liquidation, rachetables (palmarès, cartes, nom). « Ton empire vit sous un autre toit » : le hook de réactivation ultime."}]}
+
+ {tag:"Étape 0",cls:"regie",focus:"Maintenant — pendant le test Android",sub:"Mesurer, optimiser, semer. Rien ne touche au gameplay — et tout sert chaque étape suivante. C'est le travail qui se fait pendant que les testeurs valident le test fermé.",items:[
+   {n:"M7",title:"Analytics produit + funnel FTUE",eff:"med",pr:"crit",src:"Prérequis universel",
+    desc:"Brancher un outil d'analytics (PostHog ou Amplitude, gratuits à cette échelle) et tracer chaque moment clé : achats, pubs regardées, funnel boutique, et le parcours du nouveau joueur étape par étape.",
+    why:"Le jeu vole à l'aveugle : aucune donnée produit aujourd'hui. Or toutes les décisions des étapes suivantes (prix, FTUE, paid) exigent une mesure. Les 4 piliers du dossier convergent vers cette brique.",
+    how:"SDK + ~20 événements bien nommés. 4 KPIs à suivre : conversion payeur D7 (cible 1-2 %), ARPDAU (0,05-0,15 €), pubs/DAU (3-6), attach rate du pass (5-10 %)."},
+   {n:"M6",title:"Médiation pub",eff:"low",pr:"high",src:"Quick win revenu",
+    desc:"Remplacer l'appel AdMob direct par une couche de médiation (AdMob mediation ou AppLovin MAX) où plusieurs régies publicitaires enchérissent en temps réel sur chaque impression.",
+    why:"Le même inventaire rapporte +20 à +50 % d'eCPM dès que les régies se font concurrence. Du revenu immédiat, invisible pour le joueur — le meilleur euro/heure de tout le dossier.",
+    how:"~1 jour de travail : SDK de médiation, mapper les 7 placements rewarded existants, vérifier la compatibilité avec le consentement UMP."},
+   {n:"G1",title:"ASO complet",eff:"med",pr:"high",src:"Store (G1-G5)",
+    desc:"Optimiser la fiche store en continu : 3 icônes testées en A/B, captures qui vendent le fantasme (« bâtis ton empire esport »), preview vidéo, fiches traduites ES/PT-BR, réponses aux avis, et un événement de fiche à chaque live-op.",
+    why:"Le store est le seul canal qui travaille 24h/24. Une icône gagnante = +10-30 % de conversion sur chaque visiteur, pour toujours — et l'icône actuelle n'a jamais été challengée.",
+    how:"A/B natif gratuit (Store Listing Experiments sur Play, Product Page Optimization sur iOS), 2 semaines par test. Les événements de fiche se branchent sur le calendrier live-ops existant."},
+   {n:"G6",title:"Devlog « solo dev × IA »",eff:"med",pr:"crit",src:"Contenu (G6-G8)",
+    desc:"2-3 contenus courts par semaine (Shorts, TikTok) qui racontent le développement : before/after de features, « j'ai demandé à l'IA de faire ça », chiffres de revenus en transparence.",
+    why:"Le hook « un solo dev ship un jeu de studio grâce à l'IA » touche 3 audiences à la fois : joueurs idle, curieux de l'IA, et devs. C'est l'audience qui achètera le Founder's Pack au lancement V3 — et elle se construit des mois avant.",
+    how:"Captures et montages largement automatisables en session. Relais Reddit (r/incremental_games est accueillant avec les devs honnêtes). Règle d'or : mener avec le jeu chez les joueurs, avec la méthode chez les makers — jamais l'inverse."},
+   {n:"G13",title:"Communauté + bot de contenu",eff:"med",pr:"high",src:"Discord (G13-G15)",
+    desc:"Transformer le Discord en métagame : drop de code hebdo à heure fixe, concours de screenshots de pulls, pronostics sur le tournoi hebdo. Plus un bot qui poste automatiquement les résultats du Mondial, les records battus et les pulls Mythiques.",
+    why:"La social proof est le facteur de conversion n°1 d'un petit jeu : un serveur qui vit = « il se passe des choses ici ». Le jeu génère déjà ces histoires — personne ne les publie.",
+    how:"Le bot = un cron + les données Supabase déjà en place. Les ~10 superfans deviennent « staff de la chaîne » : TestFlight anticipé, pseudo donné à une orga NPC, consultation sur les features."},
+   {n:"M14",title:"Pricing régional + experiments",eff:"low",pr:"med",src:"M13-M14",
+    desc:"Adapter les prix au pouvoir d'achat local (LATAM, Asie du Sud-Est) et armer RevenueCat Experiments pour les tests de prix de l'Étape 2.",
+    why:"Un joueur brésilien à 30 % du prix US est un revenu qui n'existait pas du tout — et le volume idle de ces régions est énorme.",
+    how:"Console Play quasi automatique, price points par storefront sur iOS. Une après-midi de configuration."},
+   {n:"G20",title:"Cross-promo solo devs",eff:"low",pr:"med",src:"Réseau",
+    desc:"Échanger de la visibilité avec d'autres solo devs du genre idle : leur jeu mentionné chez toi, le tien chez eux.",
+    why:"Du trafic gratuit et ultra-qualifié : même audience, pas concurrents frontaux.",
+    how:"Se scelle sur les Discords de devs (où le recrutement de testeurs se fait déjà). Passera dans le ticker in-game une fois la Régie posée (Étape 2)."}]},
+
+ {tag:"Étape 1",cls:"money",focus:"v2.2 — FTUE + quick wins",sub:"La release du retour de test : réparer le premier quart d'heure (audité sur simulateur, simulé sur les vraies formules du code) et poser les SKUs manquants. Tout est petit ou moyen effort.",items:[
+   {n:"R1",title:"Onboarding actif « Premier jour »",eff:"med",pr:"crit",src:"FTUE §8",
+    desc:"Remplacer les 4 écrans de texte par 4 actions guidées : améliore ton Audience → ouvre ton courrier + l'event (35 💎 réunis) → ton 1er pack opening → « ton premier match officiel » : le tournoi local. Avec l'objectif suivant affiché : « Coach à 25 🏆 ».",
+    why:"L'audit a montré qu'un nouveau joueur sort de l'onboarding sans avoir rien touché, en regardant son équipe perdre à 3 %. Or la victoire scriptée existe déjà dans le code (le tournoi local est TOUJOURS gagné) et 3 pack openings sont disponibles jour-0 — tout est là, mais rien n'y mène.",
+    how:"Pas de nouveau système : du guidage sur l'existant. Chaque battement émet un événement analytics (M7) → le funnel d'onboarding se lit étape par étape et l'effet se mesure avant/après."},
+   {n:"R3",title:"Filets de la première impression",eff:"low",pr:"high",src:"FTUE (R3-R5)",
+    desc:"Cinq corrections : arène en mode « préparation » tant que 0 victoire (fini le « CHANCE 3% » en boucle), plancher de moral à 50 sous 5 victoires, permission notifs demandée après le daily, nom d'orga déplacé au 1er accès classement, notif « tournoi prêt » plutôt que « matchday » tant que la win chance est faible.",
+    why:"La simulation a révélé une spirale mathématique : défaite → -7 moral → -6,5 % de puissance → encore plus de défaites (moral 65 → 23 en 3 jours). Et la seule notification compétition de la semaine 1 convoque le joueur… à venir perdre.",
+    how:"Cinq petites conditions dans du code existant — l'ensemble tient en une journée de dev."},
+   {n:"M3",title:"Starter pack",eff:"low",pr:"crit",src:"Conversion",
+    desc:"Offre unique à 2,99 € : 300 gems + 1 pack Légende + 24 h de boost (valeur faciale ~10 €), proposée pendant 48 h après la première promotion de ligue.",
+    why:"Le premier achat est LA bataille du F2P : un joueur qui a payé une fois repaiera. Ce SKU est le plus convertisseur du genre, et il manque totalement au catalogue actuel.",
+    how:"Un produit RevenueCat + un déclencheur sur l'événement « promotion » + une fenêtre de 48 h. L'habillage Téléachat arrivera à l'Étape 2."},
+   {n:"M5",title:"« Directeur de nuit » + pack 49,99",eff:"low",pr:"med",src:"M4-M5",
+    desc:"Un SKU permanent à 6,99 € qui étend le cap de gains hors-ligne de 2 h à 8 h (« l'antenne continue la nuit »), et un pack 7 500 gems à 49,99 € en haut d'échelle.",
+    why:"Le cap 2 h actuel est frustrant (une nuit de sommeil = 75 % des gains perdus) : le confort pur, non-pay-to-win, se vend très bien. Et les gros payeurs n'ont littéralement rien à acheter au-dessus de 20 €.",
+    how:"Deux produits stores + une constante de cap à changer. Le chantier le plus simple de toute la roadmap."},
+   {n:"D3",title:"Foil holo + cartes animées",eff:"low",pr:"high",src:"Shaders SkSL",
+    desc:"Effet holographique sur les cartes rares : un reflet irisé qui bouge avec le gyroscope du téléphone. Les Mythiques gagnent des particules dorées en boucle et un halo pulsant.",
+    why:"Le marqueur visuel premium du genre (les golden cards de Hearthstone) : il revalorise rétroactivement toute la collection et chaque futur tirage — pour zéro octet d'asset dans le bundle.",
+    how:"~60 lignes de shader SkSL sur l'infra Skia déjà en place. S'applique à PlayerCard et GachaCard d'un coup."},
+   {n:"D28",title:"Le zapping",eff:"low",pr:"high",src:"Signature UX",
+    desc:"Changer d'onglet devient changer de chaîne : swipe, micro-glitch d'antenne (une frame de neige), bandeau « CH 03 — MERCATO » qui s'affiche une seconde, tab bar numérotée en canaux.",
+    why:"La signature sensorielle du jeu — ce qui fait dire « cette app a quelque chose » sans savoir quoi. La première brique tangible de l'identité Régie, quasi gratuite.",
+    how:"Une transition + un shader. Testable en une session, réversible si ça ne convainc pas."},
+   {n:"D15",title:"Pub & sponsor diégétiques",eff:"low",pr:"high",src:"D15-D16",
+    desc:"La rewarded ad re-racontée : « le sponsor exige un entretien » → tu regardes la pub → le contrat se signe dans la fiction. Et les sponsors fictifs s'affichent sur tes replays (« ce match vous est présenté par VoltBoost™ »).",
+    why:"Même inventaire AdMob, même eCPM — mais la pub cesse d'être une interruption : elle devient un acte de management. Le taux d'acceptation des rewarded monte mécaniquement.",
+    how:"Un re-habillage UI des 7 placements existants. Aucun changement côté régie publicitaire."},
+   {n:"G9",title:"Parrainage",eff:"low",pr:"med",src:"Boucle #8",
+    desc:"Code ami : le parrain et le filleul reçoivent chacun une récompense quand le filleul atteint un jalon (par exemple sa première promotion de ligue).",
+    why:"Le premier mécanisme d'acquisition in-game mesurable : le k-factor (combien d'installs chaque joueur génère). À 0,2-0,3, tout le marketing s'auto-amplifie de 25-40 %.",
+    how:"Réutilise l'infra codes cadeaux + les comptes Supabase. Récompenser au jalon (pas à l'install) évite la fraude. Mesuré par M7."}]},
+
+ {tag:"Étape 2",cls:"growth",focus:"v2.3 — La boutique vivante + la Régie posée",sub:"Corriger les deux fuites calculées (Pass, Ultra) au prix re-packagé, rendre la boutique contextuelle, et poser les premiers composants broadcast + la pipeline d'assets.",items:[
+   {n:"M1",title:"Reworks Pass + Ultra + re-pricing",eff:"med",pr:"crit",src:"Fuites F1-F2 (M1-M2-M23)",
+    desc:"Le Pass premium vend une carte exclusive de saison (jamais re-disponible ensuite) + cosmétiques au lieu de gems bruts, et passe à ~9,99 €. Ultra inclut le Pass chaque mois + un badge au classement + zéro pub, à 7,99-9,99 €.",
+    why:"Les maths actuelles sont mauvaises et calculables par les joueurs : le pass rapporte ~210 gems pour 5,99 € quand 4,99 € de gems bruts en donnent 550 (3× mieux). Et Ultra est cannibalisé par les achats permanents : no-ads + ×2 coûtent moins cher à vie que 3 mois d'abonnement.",
+    how:"Re-packaging, jamais de hausse sèche : le prix monte parce que le produit s'enrichit. Chaque variante testée via RevenueCat Experiments (armé à l'Étape 0). La carte exclusive s'appuie sur les portraits D1."},
+   {n:"M8",title:"Téléachat + calendrier d'offres",eff:"med",pr:"high",src:"M8 + M24",
+    desc:"Des offres déclenchées par le contexte — promotion, prestige, pity à 44/50, retour après 7 jours d'absence — habillées en « émissions spéciales » avec countdown. Plus un rythme hebdo piloté par les live_events Supabase : lundi = offre de rentrée d'antenne, week-end = pack tournoi.",
+    why:"Les offres contextuelles convertissent 5 à 10× mieux qu'une vitrine statique — c'est le levier n°1 absent de la boutique actuelle. Et le revenu F2P est un rythme, pas un catalogue.",
+    how:"Un moteur de triggers (événement de jeu → offre + durée) + l'habillage broadcast. Le calendrier est de la config serveur : du live-ops de studio entier, en autopilote solo dev."},
+   {n:"M9",title:"Cagnotte d'antenne + pity shop",eff:"med",pr:"med",src:"M9 + M12",
+    desc:"Une cagnotte de gems qui se remplit avec les victoires — visible mais verrouillée (cap ~150) — et s'ouvre pour 2,99 €. Plus la « carte de la semaine » achetable directement en gems, sans tirage.",
+    why:"La cagnotte a le meilleur ressenti du F2P (« c'est MES gems, je les ai gagnés ») et un taux de conversion redoutable. L'achat direct sert le segment anti-gacha ET couvre la pression réglementaire européenne sur les loot boxes (un chemin d'acquisition non aléatoire = dormir tranquille).",
+    how:"Deux compteurs + deux écrans. Le pity shop réutilise les données de cartes existantes."},
+   {n:"D✦",title:"Grammaire Régie — 1er lot",eff:"med",pr:"high",src:"Design system",
+    desc:"Poser 3 composants broadcast sur les écrans existants : le ticker (fil d'infos défilant en bas, thématisé par onglet), les bandeaux d'antenne (chaque écran annonce son « émission ») et le lower-third (les annonces deviennent des commentaires de caster).",
+    why:"C'est l'identité Régie qui se déploie sans big-bang : 3 composants réutilisables traduisent l'app écran par écran. Le ticker ouvre la cross-promo (G20) et sera l'emplacement naturel du feed narratif de la V5.",
+    how:"3 composants RN/Skia, maquettés et validés (maquette-regie-systeme.html), qui remplacent progressivement toasts et headers."},
+   {n:"D1",title:"Portraits IA + CDN + style bible",eff:"med",pr:"high",src:"Pipeline assets",
+    desc:"Un set de 100-300 portraits de joueurs stylisés générés par IA, déclinés par archétype × rareté avec des variantes de couleur appliquées par code, servis par un CDN (Supabase Storage) avec cache disque.",
+    why:"Les joueurs n'ont pas de visage — or toute la V3 (biographies, retraites, attachement) exige des individus. Et le CDN permet de shipper du contenu visuel sans rebuild ni review store : une nouvelle bannière = un simple upload.",
+    how:"Pipeline scriptée de bout en bout : génération → upscale → détourage → WebP → upload. La style bible (prompts de référence, palette, éclairage) se rédige AVANT le premier lot — c'est elle qui garantit la cohérence dans 6 mois."},
+   {n:"M15",title:"Programme créateurs",eff:"med",pr:"med",src:"Infra #19",
+    desc:"Des codes créateurs sur l'infra codes cadeaux existante : le joueur qui entre « KEVIN » reçoit des gems, et le créateur est récompensé (gems, Ultra) selon les entrées de son code.",
+    why:"Acquisition et monétisation fusionnées à coût quasi nul — la niche YouTube idle/incremental est petite mais convertit énormément, et c'est elle qui sera contactée au lancement V3.",
+    how:"L'infra de codes est en prod depuis la v1.2 : il ne manque que le tracking par code et une page « programme créateurs » dans le futur press kit."}]},
+
+ {tag:"V3",cls:"crit",focus:"La mémoire — le re-lancement",sub:"Le monde gagne une mémoire. Zéro dépendance serveur lourde (tout est livrable avec l'infra actuelle) — et ça se lance comme un événement : Founder's, presse, featuring. Pendant ce temps, l'architecture de la V4 s'écrit.",items:[
+   {n:14,title:"Cartes à biographie",eff:"med",pr:"crit",src:"Gameplay #14",
+    desc:"Chaque carte tirée devient un exemplaire unique au monde : numéro de série, historique gravé (date de tirage, managers successifs, victoires, titres gagnés). Deux cartes aux stats identiques n'ont plus la même valeur.",
+    why:"Ça crée de la rareté HISTORIQUE en plus de la rareté statistique : « LE Nova qui a gagné le premier Mondial du serveur » est unique à jamais — et cette valeur s'apprécie avec le temps sans que tu produises rien. Les joueurs fabriquent la valeur en jouant.",
+    how:"Trois colonnes Supabase + l'affichage au dos de la carte (le foil D3 et les portraits D1 sont déjà en place). Prend toute sa dimension au marché V4 : on y achètera un palmarès, pas des stats."},
+   {n:20,title:"L'Histoire / almanach",eff:"high",pr:"high",src:"Gameplay #20",
+    desc:"Les archives permanentes du monde : hall of fame des champions (de vrais joueurs, gravés à vie), joueurs qui vieillissent puis prennent leur retraite et deviennent coachs, dynasties, époques nommées (« l'ère NovaCorp, 2026-2027 »).",
+    why:"La rétention par l'héritage : on ne désinstalle pas un jeu où son nom est écrit dans les livres d'Histoire. C'est le fossé émotionnel qu'aucun des 8 concurrents analysés n'a franchi.",
+    how:"Tables d'archives saisonnières (les données existent déjà côté Supabase) + un écran almanach + le cycle vieillissement → retraite branché sur l'académie existante."},
+   {n:1,title:"Multi-discipline",eff:"high",pr:"high",src:"Archi validée",
+    desc:"Une 2ᵉ équipe dans une 2ᵉ discipline (course), budget partagé avec l'organisation : chaque système existant — gacha, ligues, académie, sponsors, streaming — se décline par discipline.",
+    why:"Le multiplicateur de contenu le moins risqué : on ne réinvente rien, on décline. Et chaque discipline future (V3.1, V3.2…) devient une extension naturelle, annonçable, attendue.",
+    how:"Déjà architecturé en détail (ARCHI_MULTI_DISCIPLINE.md : discipline = 1er rang du store, migration des saves à zéro casse, séquence shippable par étapes). Le vrai morceau neuf : le rendu de match de course."},
+   {n:"D19",title:"Conf' de presse d'après-match",eff:"med",pr:"high",src:"Régie gameplay",
+    desc:"Après chaque gros match, 3 déclarations possibles face à la presse : provoquer le rival (hype ↑, moral adverse ↓), protéger ses joueurs (moral ↑), courtiser les sponsors (négociation ↑).",
+    why:"Une interaction de 5 secondes qui relie trois systèmes existants (moral, sponsors, narratif) et donne au joueur un rôle de personnage public. Le meilleur ratio impact/effort de tout le volet Régie.",
+    how:"Un écran de choix + 3 effets sur des systèmes déjà en place + les retombées affichées dans le ticker (posé à l'Étape 2)."},
+   {n:"D33",title:"La mémoire à l'antenne",eff:"high",pr:"med",src:"D25-D26-D33",
+    desc:"Les archives de la chaîne (chaque grand moment conservé en « footage », les vieilles finales re-regardables), un documentaire généré à chaque retraite de Légende, et le prestige transformé en « dernière émission » : un épisode final qui remonte ton parcours avant l'écran noir… puis tu redémarres sur une petite chaîne locale.",
+    why:"Le prestige actuel est un bouton froid ; en faire une cérémonie en fait le moment le plus mémorable et le plus partagé du jeu. Les archives donnent un corps physique à la mémoire V3.",
+    how:"Les replays se re-simulent depuis les logs de match (stockage quasi nul) ; le documentaire est templaté, le LLM réservé aux moments forts."},
+   {n:"D29",title:"DA niveau 2 : le son + les lieux",eff:"med",pr:"med",src:"D7 + D29",
+    desc:"L'habillage sonore d'antenne — jingles d'émission, stinger de breaking, génériques de 3 secondes, générés par IA et toujours mute-friendly — plus les 7 tiers de gaming house illustrés en header du Studio.",
+    why:"Le son est la moitié de l'identité d'une chaîne TV et aucun idle mobile n'en a. La maison illustrée rend la progression visible d'un coup d'œil — le plus vieux levier de dopamine du tycoon.",
+    how:"Production IA (musique/SFX, illustrations via la pipeline D1), intégration légère par-dessus l'existant."},
+   {n:"M19",title:"Founder's Pack + Producteur exécutif",eff:"med",pr:"med",src:"M18-M19",
+    desc:"Le Founder's Pack au lancement V3 (édition limitée dans le temps : emblème « Première Heure », carte commémorative, gems) + le SKU mécénat « Producteur exécutif » : ton pseudo au générique de fin de saison, badge permanent, rôle Discord.",
+    why:"Monétise l'attachement — les joueurs qui t'aiment toi, que le gacha ne touchera jamais. Zéro puissance vendue, une urgence saine, et l'audience construite par le devlog l'attend déjà.",
+    how:"Deux produits + le générique branché sur la fin de saison. Règle du canal affectif : prix visible, contrepartie symbolique, jamais de puissance."},
+   {n:"G16",title:"Le lancement-événement",eff:"med",pr:"high",src:"G16-G19 + G8",
+    desc:"Le re-lancement orchestré : press kit (pitch 3 lignes, GIFs, l'histoire du solo dev), ~10 YouTubers idle contactés avec build anticipé + code exclusif, candidatures featuring (App Store, Indie corner Play, Indie Games Festival), win-back email des anciens joueurs, Show HN côté tech.",
+    why:"La V3 est une actu complète (nouvelle identité, mémoire, Founder's) : un lancement se prépare à J-30, pas le jour du push store. Et chaque canal aura été semé à l'Étape 0.",
+    how:"Cadence : J-30 press kit + contacts → crescendo devlog → jour J : post Reddit + vidéos créateurs + événement de fiche + Founder's Pack."}]},
+
+ {tag:"V4",cls:"",focus:"Le monde partagé",sub:"Toutes les orgas coexistent réellement. L'investissement structurant — la simulation perpétuelle — s'architecture pendant la V3 et se construit ici. C'est aussi la version où le modèle économique bascule.",items:[
+   {n:16,title:"Simulation perpétuelle",eff:"epic",pr:"crit",src:"Clé de voûte",
+    desc:"Le monde tourne côté serveur en continu : les matchs de ligue se jouent à heure fixe que tu sois là ou non, les saisons avancent, les autres orgas vivent. On ne « lance » plus une partie — on consulte un monde qui ne t'a pas attendu.",
+    why:"C'est la clé de voûte de tout le reste : le marché, les enchères, la succession, les royaumes et la chaîne diffusée en dépendent tous. Et c'est le saut psychologique du genre : d'un idle solitaire à un monde persistant.",
+    how:"Chantier serveur (tick distribué, Supabase cron/edge functions, coûts à modéliser AVANT d'écrire une ligne). L'architecture s'écrit pendant la V3 — comme ARCHI_MULTI_DISCIPLINE l'a été avant son chantier."},
+   {n:12,title:"Marché des transferts + taxe",eff:"epic",pr:"crit",src:"#12 + M17",
+    desc:"Les cartes s'achètent et se vendent entre vrais joueurs (enchères, prix qui fluctuent avec l'offre et la demande), chaque transaction taxée 5-10 % en gems.",
+    why:"Le modèle FUT : la demande de gems devient endogène et sans fin (acheter aux autres ne s'épuise jamais, contrairement au désir de gacha). Tu ne vends plus de puissance — tu prélèves le péage pendant que les joueurs s'échangent la leur. Croisé aux biographies : on achète un palmarès. Le modèle économique le plus solide du dossier.",
+    how:"Enchères Supabase Realtime + autorité serveur (l'anti-triche v1.1 sert de fondation). ⚠️ La régulation (multi-comptes, RMT) devient un poste permanent — assumé dans les risques."},
+   {n:6,title:"Clans / écuries + gifting",eff:"high",pr:"high",src:"#6 + M25 + #7",
+    desc:"Les écuries : fédérations d'orgas avec classement de clans, events coopératifs (objectif commun → récompense pour tous), défis entre amis en asynchrone, et le gifting (offrir un pack à un coéquipier).",
+    why:"Le levier de rétention n°1 des idle matures : on reste pour ne pas lâcher son équipe. Et la dépense « généreuse » du gifting est la seule dont les joueurs ne se lassent jamais.",
+    how:"Tables clans + agrégats Supabase. Le travail communautaire de l'Étape 0 aura fait émerger les meneurs naturels qui fonderont les premières écuries."},
+   {n:11,title:"Territorial = droits de diffusion",eff:"high",pr:"med",src:"#11 + D36",
+    desc:"Chaque orga déclare une ville réelle : classements par ville, derbies (Lyon–Marseille), ligues nationales. Et les clans se disputent les « droits de diffusion » des régions du monde — audience régionale et sponsors locaux à la clé.",
+    why:"La fierté du clocher est le mécanisme d'identité le plus puissant du jeu mobile (les clan wars nationales en vivent depuis 10 ans) — et le contenu est gratuit : les villes existent déjà.",
+    how:"Un champ ville + des classements filtrés + la couche « droits de diffusion » par-dessus les clans. Le re-théming broadcast résout l'incongruité « conquête militaire dans l'esport »."},
+   {n:"D13",title:"Audimat-ressource + hype",eff:"high",pr:"high",src:"Régie gameplay",
+    desc:"Le public devient la 3ᵉ ressource (cash, gems, audience) : les matchs produisent du spectacle mesuré, la tactique « Spectaculaire » sacrifie du win-rate contre de la hype, et l'audience nourrit streaming et sponsors. Et quand de vrais joueurs regardent tes matchs, ils comptent dans ton audimat.",
+    why:"Un dilemme stratégique que personne n'a dans le genre — jouer pour gagner ou pour briller — et la fusion fiction/réalité du chiffre d'audience. Le moment où la Régie cesse d'être une DA pour devenir du gameplay.",
+    how:"Une ressource + ses sources/puits branchés sur les systèmes existants. ⚠️ À équilibrer comme une vraie monnaie, pas comme un compteur cosmétique."},
+   {n:"M22",title:"Enchères d'attention",eff:"high",pr:"med",src:"Puits whale",
+    desc:"Des enchères hebdomadaires en gems sur des espaces de prestige : le naming du tournoi hebdo (« l'Arène TEAM-KEVIN »), l'espace pub sur la chaîne du #1 mondial, le segment sponsor de la cérémonie des awards.",
+    why:"Le puits parfait : le prix est fixé par la rivalité entre gros joueurs (pas par toi), il absorbe l'excès de gems automatiquement (contrôle d'inflation intégré), et il vend du statut — zéro pay-to-win. Il résout le problème « le whale n'a plus rien à acheter ».",
+    how:"Un système d'enchères Supabase + les emplacements visibles in-game. Dépend de la simulation (#16) pour exister « pendant » les matchs."},
+   {n:"D21",title:"Clips highlights partageables",eff:"high",pr:"med",src:"D21/G10",
+    desc:"Après un moment fort (Mythique tiré, finale gagnée), le jeu monte automatiquement un clip vidéo habillé broadcast — replay, score, logo — partageable en un tap vers Discord ou TikTok.",
+    why:"Chaque joueur devient un canal d'acquisition. C'est la version solo-dev de la chaîne 24/7 (V5), livrable bien avant elle.",
+    how:"Re-simulation du moment depuis les logs + rendu Skia en vidéo + share sheet natif. Le défi technique : le rendu offscreen."},
+   {n:"M16",title:"Le web : boutique + démo",eff:"high",pr:"med",src:"M16 + G21",
+    desc:"La boutique web (Stripe + comptes Supabase, +20 % de gems bonus sur le web) qui économise les 15-30 % de commission stores, et une tranche du jeu jouable en navigateur (la 1ʳᵉ ligue) pour la communauté incremental.",
+    why:"Les gros payeurs font l'effort du web pour 20 % de bonus (pattern Supercell) — pertinent maintenant que le couloir whale existe. Et r/incremental_games sur-récompense le jouable en un clic : la démo est l'arme du post Reddit.",
+    how:"Le cadre légal a bougé (anti-steering US, DMA EU — modalités par région). Export web Expo + Skia web pour la démo, avec « continue ton empire sur mobile » en fin de tranche."}]},
+
+ {tag:"V5",cls:"viv",focus:"Le monde vivant",sub:"Le jeu change sans nouvelle feature : du contenu que le système fabrique tout seul. Tout s'appuie sur la simulation perpétuelle et la grammaire broadcast posées avant.",items:[
+   {n:17,title:"Feed narratif + talk-show",eff:"high",pr:"high",src:"#17 + D17",
+    desc:"La scène esport fictive gagne une vie médiatique : rumeurs de transferts, clashs entre orgas, interviews de TES joueurs après une finale — nourris par les vrais événements de la partie. Et le talk-show : des pundits récurrents qui débattent de tes résultats en plateau.",
+    why:"La dimension qu'aucun concurrent ne peut copier facilement : l'attachement narratif. Les idle concurrents sont des tableurs habillés — ici, tes systèmes (moral, rivalités, transferts) deviennent des histoires.",
+    how:"90 % templaté (gratuit, hors-ligne), LLM réservé aux moments forts — le coût par utilisateur reste maîtrisé. Le ticker de l'Étape 2 est déjà l'emplacement d'affichage."},
+   {n:22,title:"Les Ères = rebrands du network",eff:"epic",pr:"high",src:"#22 + D32",
+    desc:"Le monde traverse des époques : ère LAN (chaîne câblée années 2000, 4:3, chyrons pixelisés) → ère streaming (le néon actuel) → ère stade (4K corporate). Règles, revenus, disciplines ET habillage de la chaîne changent à chaque ère — et les archives gardent le format de leur époque (grain VHS sur tes vieilles finales).",
+    why:"L'arc qui structure des années de contenu : chaque ère est une extension attendue et annonçable. Le prestige cesse d'être « recommencer » pour devenir « traverser le temps ».",
+    how:"Chantier majeur mais découpable (une ère à la fois) ; la DA par ère passe par la pipeline IA posée à l'Étape 2."},
+   {n:24,title:"Royaumes saisonniers + season ticket",eff:"high",pr:"high",src:"#24 + M20-M21",
+    desc:"Tous les 2-3 mois, un royaume à économie vierge s'ouvre avec un modificateur fou (hardcore : les défaites coûtent des joueurs ; turbo : tout ×10). Tout le monde repart de zéro et les exploits se convertissent en héritage permanent. Entrée gratuite, season ticket cosmétique, carte commémorative gravée (nom + rang) en fin de royaume.",
+    why:"La réponse structurelle au problème du retardataire — ET la machine à re-vendre : chaque saison ré-arme starter pack, pass et boosts. Le reset v2 a déjà prouvé que ta communauté accepte de repartir de zéro.",
+    how:"Le prestige v1.2 est la moitié de la mécanique ; le reste = un scope d'économie par royaume côté serveur. Règle absolue : jamais de puissance vendue dans la course."},
+   {n:28,title:"Chaîne auto-diffusée",eff:"epic",pr:"med",src:"#28 + G12",
+    desc:"Une chaîne Twitch/YouTube officielle qui diffuse 24h/24 les matchs du top ladder du monde fictif, avec habillage broadcast et commentaire généré.",
+    why:"Le jeu fabrique son propre marketing en jouant : des spectateurs s'attachent à des orgas — dont celles de tes vrais joueurs, qui gagnent une raison folle de progresser : passer à la télé. Coût d'acquisition → 0.",
+    how:"Dépend de la simulation perpétuelle. Rendu broadcast + TTS + diffusion headless. Le bot Discord de l'Étape 0 en est l'embryon, les clips D21 le galop d'essai."},
+   {n:21,title:"Succession + chaîne rivale",eff:"high",pr:"med",src:"#21 + D18-D20",
+    desc:"Les orgas abandonnées ne s'évaporent pas : elles déclinent à l'écran de tous, passent en liquidation et se rachètent (palmarès, cartes, nom compris). Le némésis a SA chaîne qui te descend après tes défaites, et les casters-personnages gagnent une voix (TTS) pour les finales.",
+    why:"« Ton empire vit sous un autre toit » est le hook de réactivation le plus puissant imaginable — et la guerre médiatique donne au genre son premier antagoniste personnel.",
+    how:"S'appuie sur la simulation + le feed narratif. La voix est réservée aux moments d'exception (coût TTS maîtrisé). Le némésis se designe en s'écartant du brevet WB (Shadow of Mordor)."},
+   {n:"D34",title:"Cérémonie des awards",eff:"high",pr:"med",src:"Design × #20",
+    desc:"Une fois par saison, la soirée des trophées du monde entier, diffusée à l'antenne : orga de l'année, comeback, carte MVP de l'année — de vrais joueurs gagnent les catégories, et l'événement s'auto-génère depuis les données du serveur.",
+    why:"L'almanach + le spectacle + le monde partagé fusionnés en un rendez-vous regardable. Le segment sponsor de la cérémonie est un emplacement d'enchères (M22), et le générique porte les « Producteurs exécutifs » (M19).",
+    how:"Agrégats de saison + cérémonie templatée + habillage broadcast. À ce stade, quasi tout existe déjà — c'est un assemblage."}]}
 ];
 const POOL=[
- {n:13,title:"Bourse des orgas",eff:"high",src:"Fournée 3",desc:"Investir dans les orgas des autres : parts du top 10, dividendes sur victoires. Le classement devient un marché à trader."},
- {n:15,title:"Paris du spectateur",eff:"med",src:"Fournée 3",desc:"Parier (monnaie douce) sur les matchs du top ladder. Transforme les non-top-10 en public engagé."},
- {n:19,title:"Rival juré (némésis)",eff:"high",src:"Fournée 3",desc:"Orga NPC persistante qui te connaît : se souvient, te chambre dans le feed, recrute pour te contrer."},
- {n:23,title:"Gouvernance du monde",eff:"med",src:"Fournée 3",desc:"Vote communautaire de fin de saison (discipline, méta, règles), pondéré par les trophées."},
- {n:25,title:"Live Activities / widgets",eff:"med",src:"Fournée 3",desc:"Match de ligue en direct sur l'écran verrouillé (Dynamic Island). Jamais vu sur un match simulé."},
- {n:26,title:"Bot Discord = 2ᵉ client",eff:"med",src:"Fournée 3",desc:"Consulter son orga, encaisser, voir les résultats — depuis Discord."},
- {n:32,title:"Ligues créées par les joueurs",eff:"epic",src:"Palier plateforme",desc:"Créer sa ligue (format, règles, cagnotte) et inviter d'autres orgas. Manager → propriétaire de ligue → fédération."},
- {n:34,title:"Studio endgame",eff:"epic",src:"Palier plateforme",desc:"Prestige ultime : créer son propre jeu esport fictif, jouable par les autres. La communauté génère les disciplines."},
- {n:35,title:"Écosystème asymétrique",eff:"epic",src:"Fournée 3",desc:"D'autres rôles jouables dans la même économie : agents de joueurs, organisateurs, sponsors."},
- {n:36,title:"Jeu miroir",eff:"epic",src:"Fournée 3",desc:"2ᵉ app où tu incarnes un joueur pro… recrutable par les managers (cartes = vraies personnes). L'idée à licorne."},
- {n:31,title:"Sponsors réels (marques)",eff:"epic",src:"Fournée 4",desc:"De vraies marques comme sponsors in-game, logo sur les maillots. Le placement produit du sport réel, transposé."},
- {n:10,title:"Orga co-gérée",eff:"high",src:"Fournée 4",desc:"Une orga à plusieurs vrais joueurs, chacun son département. Le jeu « en couple / entre potes »."},
- {n:"D32",title:"Les Ères = rebrands du network",eff:"epic",src:"Design × #22",desc:"Ère LAN = chaîne câblée 2000s (4:3, chyrons pixelisés) → streaming → stade 4K. Les archives gardent le format de leur époque (grain VHS sur tes vieilles finales)."},
- {n:"D34",title:"Cérémonie des awards",eff:"high",src:"Design × #20",desc:"La soirée des trophées du monde entier, auto-générée — de vrais joueurs gagnent les catégories (orga de l'année, comeback, carte MVP)."},
- {n:"D17",title:"Talk-show + chaîne rivale",eff:"high",src:"Design × #17-19",desc:"Des pundits NPC débattent de TES résultats ; ton némésis a SA chaîne qui te descend. La guerre médiatique comme PvP-light."},
- {n:"D36",title:"Droits de diffusion (clans)",eff:"high",src:"Design × #9",desc:"Le territorial re-thématisé : ton clan détient les droits de diffusion d'une région. Bouquets de chaînes, guerre des parts d'audience."},
- {n:"D37",title:"Pub inter-joueurs",eff:"high",src:"Design × #12",desc:"Acheter un espace pub sur la chaîne d'un autre joueur — ton logo diffusé pendant les matchs du #1 mondial. Flex + puits à gems."},
- {n:"D23",title:"AirPlay TV + télécommande",eff:"med",src:"Hors-app",desc:"Le match diffusé sur la TV du salon pendant que tu manages sur le téléphone ; widget iOS = télécommande de la chaîne."},
- {n:"M16",title:"Boutique web",eff:"high",src:"Monétisation",desc:"Stripe + comptes Supabase, +20 % de gems bonus sur le web (pattern Supercell) : 15-30 % de commission économisée. À dégainer quand le couloir whale existe."},
- {n:"M20",title:"Season ticket + commémorative",eff:"high",src:"Monétisation × #24",desc:"Royaume gratuit, ticket cosmétique payant ; chaque saison ré-arme tout le catalogue. En fin de royaume : carte gravée à ton nom et ton rang (2,99 €)."},
- {n:"M18",title:"« Producteur exécutif »",eff:"med",src:"Mécénat",desc:"9,99 € : ton pseudo au générique de fin de saison (awards, almanach), badge, rôle Discord. Zéro puissance — monétise ceux qui aiment le dev. + Founder's Pack au lancement V3."},
- {n:"M15",title:"Programme créateurs",eff:"med",src:"Monétisation",desc:"Sur l'infra codes cadeaux existante : code créateur = gems pour le joueur + récompenses pour le créateur. Acquisition + monétisation fusionnées, coût quasi nul."}
+ {n:13,title:"Bourse des orgas",eff:"high",src:"Fournée 3",desc:"Investir dans les orgas des autres joueurs : parts du top 10, dividendes sur leurs victoires, revente avant la chute. Le classement devient un marché à trader, et les petits joueurs deviennent le public engagé des gros."},
+ {n:15,title:"Paris du spectateur",eff:"med",src:"Fournée 3",desc:"Parier (monnaie douce) sur les matchs du top ladder et les finales. Transforme les non-top-10 en public. ⚠️ Vérifier l'impact sur la classification d'âge (jeu d'argent simulé). Commence en pronostics Discord dès l'Étape 0."},
+ {n:23,title:"Gouvernance du monde",eff:"med",src:"Fournée 3",desc:"Vote communautaire de fin de saison (prochaine discipline, patch de méta, règles de ligue), pondéré par les trophées — le pouvoir politique devient une récompense de jeu. Prototype gratuit : les sondages Discord."},
+ {n:25,title:"Live Activities / widgets",eff:"med",src:"D22 + D31",desc:"Le match de ligue en direct sur l'écran verrouillé (Dynamic Island) comme un score de foot, et le widget « télécommande de la chaîne ». Jamais vu sur un match simulé — et parfaitement Régie."},
+ {n:26,title:"Bot Discord = 2ᵉ client",eff:"med",src:"Fournée 3",desc:"Consulter son orga, encaisser ses gains, voir les résultats — directement depuis Discord. Le prolongement naturel du bot de contenu de l'Étape 0."},
+ {n:"D23",title:"AirPlay TV",eff:"med",src:"Hors-app",desc:"Le match diffusé sur la TV du salon pendant que tu manages sur le téléphone. « Le jeu mobile qui se regarde comme un vrai match » — une story de presse à lui tout seul."},
+ {n:32,title:"Ligues créées par les joueurs",eff:"epic",src:"Plateforme",desc:"Créer sa propre ligue (format, règles, cagnotte, accès) et inviter d'autres orgas. L'escalade thématique : manager → propriétaire d'orga → propriétaire de ligue → fédération. Exige une masse critique de joueurs."},
+ {n:34,title:"Studio endgame",eff:"epic",src:"Plateforme",desc:"Le prestige ultime : créer son propre jeu esport fictif (genre, méta, identité), qui devient une vraie discipline jouable par les autres. La communauté génère le contenu multi-discipline à ta place."},
+ {n:35,title:"Écosystème asymétrique",eff:"epic",src:"Fournée 3",desc:"D'autres rôles jouables dans la même économie : agents de joueurs (commission sur les transferts), organisateurs de tournois, sponsors. Chaque rôle = un gameplay idle différent, interdépendant des autres."},
+ {n:36,title:"Jeu miroir",eff:"epic",src:"Fournée 3",desc:"Une 2ᵉ app où tu incarnes un joueur pro… recrutable par les managers d'Esport Tycoon : une partie des cartes du gacha sont de vraies personnes. Marché biface — l'idée à licorne du dossier."},
+ {n:31,title:"Sponsors réels (marques)",eff:"epic",src:"Fournée 4",desc:"De vraies marques (périphériques, energy drinks) comme sponsors in-game du monde fictif, logo sur les maillots. Le placement produit du sport réel transposé au tycoon mobile. Après traction uniquement."},
+ {n:10,title:"Orga co-gérée",eff:"high",src:"Fournée 4",desc:"Une organisation gérée à plusieurs vrais joueurs, chacun son département (recrutement, finances, académie). Le jeu « en couple / entre potes » que le genre ignore complètement."},
+ {n:"G22",title:"Paid UA",eff:"med",src:"Growth",desc:"De l'acquisition payante seulement quand LTV > CPI — mesurable grâce à M7. Commencer par Apple Search Ads sur ses propres mots-clés (intention forte, CPI faible). Un amplificateur de boucles qui marchent, jamais un substitut."}
 ];
-const prLabel={crit:"★ Clé de voûte",high:"Haute",med:"Moyenne",low:"Basse"};
+const prLabel={crit:"★ Critique",high:"Haute",med:"Moyenne",low:"Basse"};
 const effLabel={low:"Faible",med:"Moyen",high:"Élevé",epic:"Chantier"};
 
 function el(tag,cls,txt){const e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e;}
@@ -287,6 +413,8 @@ function buildCard(it,i){
   }
   card.append(badges);
   card.append(el("p",null,it.desc));
+  if(it.why){const w=document.createElement("p");w.className="det";w.innerHTML="<b>Pourquoi</b>"+it.why;card.append(w);}
+  if(it.how){const h=document.createElement("p");h.className="det";h.innerHTML="<b>Concrètement</b>"+it.how;card.append(h);}
   card.append(el("span","src",it.src));
   return card;
 }
