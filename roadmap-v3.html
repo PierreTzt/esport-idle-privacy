@@ -71,6 +71,7 @@
   .phase.viv .phase-tag::before{background:var(--violet);box-shadow:0 0 0 5px rgba(176,124,255,.16),0 0 22px var(--violet)}
   .phase.regie .phase-tag::before{background:var(--cyan);box-shadow:0 0 0 5px rgba(70,224,255,.16),0 0 22px var(--cyan)}
   .phase.money .phase-tag::before{background:var(--green);box-shadow:0 0 0 5px rgba(63,217,155,.16),0 0 22px var(--green)}
+  .phase.growth .phase-tag::before{background:#ff7a8a;box-shadow:0 0 0 5px rgba(255,122,138,.16),0 0 22px #ff7a8a}
   .phase-focus{font-family:var(--display);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:600}
   .phase-sub{color:var(--muted);font-size:14px;font-weight:300;width:100%;margin-top:-14px;padding-left:26px}
 
@@ -134,7 +135,7 @@
     </p>
     <div class="statusbar reveal" style="animation-delay:.28s">
       <span class="pill live"><span class="dot"></span>v2.1.0 live — Android en test fermé</span>
-      <span class="pill"><span class="dot" style="background:var(--gold)"></span>36 gameplay · 37 design · 25 monétisation</span>
+      <span class="pill"><span class="dot" style="background:var(--gold)"></span>36 gameplay · 37 design · 25 monétisation · 22 growth</span>
       <span class="pill"><span class="dot" style="background:var(--cyan)"></span>Identité retenue : La Régie 📺</span>
       <span class="pill"><span class="dot" style="background:var(--violet)"></span>3 versions majeures + horizon</span>
     </div>
@@ -172,7 +173,7 @@
   <div class="wrap">
     <footer>
       <div class="ft-title">Esport Tycoon — document de pilotage V3+</div>
-      Sources : <code>BRAINSTORM_V3_PLUS.md</code> (gameplay #1-36) · <code>DESIGN_REGIE.md</code> (design D1-D37) · <code>MONETISATION.md</code> (M1-M25) · Légende effort : <span style="color:var(--green)">● faible</span> · <span style="color:var(--amber)">● moyen</span> · <span style="color:var(--red)">● élevé</span> · <span style="color:var(--violet)">● chantier pluri-mois</span> · <span style="color:var(--gold)">★ clé de voûte</span>. Fil rouge : <b style="color:var(--text)">«&nbsp;le monde d'Esport Tycoon a maintenant une mémoire&nbsp;»</b>.
+      Sources : <code>BRAINSTORM_V3_PLUS.md</code> (gameplay #1-36) · <code>DESIGN_REGIE.md</code> (design D1-D37) · <code>MONETISATION.md</code> (M1-M25) · <code>GROWTH.md</code> (G1-G22) · Légende effort : <span style="color:var(--green)">● faible</span> · <span style="color:var(--amber)">● moyen</span> · <span style="color:var(--red)">● élevé</span> · <span style="color:var(--violet)">● chantier pluri-mois</span> · <span style="color:var(--gold)">★ clé de voûte</span>. Fil rouge : <b style="color:var(--text)">«&nbsp;le monde d'Esport Tycoon a maintenant une mémoire&nbsp;»</b>.
     </footer>
   </div>
 </main>
@@ -207,6 +208,17 @@ const PHASES=[
    {n:"M5",title:"« Directeur de nuit »",eff:"low",pr:"med",src:"QoL",desc:"SKU permanent 6,99 € : cap offline 2 h → 8 h. Confort pur, non-P2W — « l'antenne continue la nuit »."},
    {n:"M17",title:"Taxe de marché",eff:"epic",pr:"crit",src:"Modèle V4",desc:"Le marché des transferts (#12) taxé 5-10 % en gems (modèle FUT) : la demande de gems devient endogène et sans fin. On ne vend plus de puissance — on prélève le péage. Le modèle plateforme, antifragile."},
    {n:"M22",title:"Enchères d'attention",eff:"high",pr:"med",src:"Modèle V4",desc:"Enchères hebdo en gems : naming du tournoi, espace pub sur la chaîne du #1, segment des awards. Prix fixé par la rivalité entre whales → puits auto-régulé, statut sans pay-to-win."}]},
+ {tag:"Growth",cls:"growth",focus:"Acquisition — transversal",sub:"Le growth est du produit déguisé. Hiérarchie ROI : ASO → devlog → boucles in-game → événement V3 → paid (détail : GROWTH.md). Tout le bloc « maintenant » se fait pendant le test Android, sans toucher au code.",items:[
+   {n:"G6",title:"Devlog « solo dev × IA »",eff:"med",pr:"crit",src:"Contenu",desc:"Le hook en or : « je développe un jeu esport en solo avec l'IA, il est déjà sur les stores ». Shorts/TikTok 30-60 s, 2-3/semaine, largement automatisable. Construit l'audience qui achètera le Founder's Pack."},
+   {n:"G1",title:"ASO : icône A/B + preview vidéo",eff:"low",pr:"crit",src:"Store",desc:"A/B d'icône natif gratuit (Play + PPO iOS) : +10-30 % de conversion fiche, à jamais. Preview vidéo manquante (→ D12). Les 2 premières captures doivent vendre le fantasme, pas l'UI."},
+   {n:"G15",title:"Machine à contenu auto",eff:"low",pr:"high",src:"Bot",desc:"Cron + Supabase : le bot poste résultats du Mondial hebdo, records, pull Mythique du jour sur Discord/X. Le jeu paraît habité — la social proof est le facteur de conversion n°1 d'un petit jeu."},
+   {n:"G13",title:"Discord = métagame",eff:"med",pr:"high",src:"Communauté",desc:"Rituels (drop de code hebdo, concours de pulls, pronostics du tournoi = le #15 gratuit dès maintenant) + superfans « staff de la chaîne » (TestFlight anticipé, pseudo en orga NPC)."},
+   {n:"G3",title:"Événements de fiche store",eff:"low",pr:"med",src:"Store",desc:"In-app events App Store + promotional content Play : chaque live-op visible SUR le store. Visibilité gratuite que quasi aucun solo dev n'exploite."},
+   {n:"G18",title:"Featuring éditorial",eff:"low",pr:"med",src:"Lancement V3",desc:"Nominations App Store / Indie corner Play / Google Play Indie Games Festival. Argument : « l'idle qui ne ressemble à aucun autre » (la Régie). 1 h par candidature, espérance massivement positive."},
+   {n:"G16",title:"Lancement V3 = re-lancement",eff:"med",pr:"high",src:"J-30",desc:"Press kit + ~10 YouTubers idle/incremental (build anticipé + code exclusif) + win-back email des anciens via Supabase + Founder's Pack. Jour J : Reddit + créateurs + event de fiche."},
+   {n:"G8",title:"L'angle IA (2 faces)",eff:"low",pr:"med",src:"Presse",desc:"Face tech (Show HN, presse dev) : « un solo dev ship à la vitesse d'un studio » — elles adorent. Face gamers : on vend le jeu, pas la méthode. Jamais l'inverse."},
+   {n:"G20",title:"Cross-promo ticker",eff:"low",pr:"med",src:"Diégétique",desc:"Le ticker ET·NEWS est un inventaire média : spot pour le jeu d'un autre solo dev contre la réciproque. Trafic qualifié gratuit, dans le lore."},
+   {n:"G21",title:"Démo web",eff:"high",pr:"med",src:"r/incremental",desc:"L'audience incremental joue en navigateur : tranche web (1ʳᵉ ligue, export Expo web) = lien sans friction + « continue sur mobile ». L'arme du post Reddit V3. Sous-produit du compagnon #27."}]},
  {tag:"V3",cls:"crit",focus:"La mémoire",sub:"Le monde gagne une mémoire. Zéro dépendance serveur lourde → livrable vite, fort impact émotionnel.",items:[
    {n:14,title:"Cartes à biographie",eff:"med",pr:"crit",src:"Fournée 4",desc:"Chaque carte tirée est unique au monde : biographie gravée (tirages, victoires, propriétaires, titres). Rareté historique en plus de la rareté statistique — la valeur s'apprécie sans produire de contenu."},
    {n:20,title:"L'Histoire / almanach",eff:"high",pr:"high",src:"Fournée 3",desc:"Archives permanentes : hall of fame gravé à vie, joueurs qui vieillissent → retraite → coachs, dynasties, époques nommées. La rétention par l'héritage."},
