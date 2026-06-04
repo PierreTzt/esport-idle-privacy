@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Esport Tycoon — Vision V3+</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#070819; --blue:#4d7cff; --blue-bright:#7fb0ff; --cyan:#46e0ff;
+    --gold:#ffc24b; --gold-soft:#ffd98a;
+    --green:#3fd99b; --amber:#ffb22e; --red:#ff5d6c; --violet:#b07cff;
+    --text:#eaedff; --muted:#9298c4; --faint:#5b5f86;
+    --card:rgba(255,255,255,.045); --card-bd:rgba(255,255,255,.09);
+    --display:'Chakra Petch',sans-serif; --body:'Sora',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--body);color:var(--text);background:var(--navy);line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  body::before{
+    content:"";position:fixed;inset:0;z-index:-2;
+    background:
+      radial-gradient(1100px 700px at 12% -5%,rgba(77,124,255,.28),transparent 60%),
+      radial-gradient(900px 800px at 95% 8%,rgba(120,60,220,.26),transparent 55%),
+      radial-gradient(1000px 900px at 70% 110%,rgba(255,194,75,.10),transparent 55%),
+      linear-gradient(160deg,#070819 0%,#0c0d28 45%,#120b30 100%);
+  }
+  body::after{
+    content:"";position:fixed;inset:0;z-index:-1;opacity:.5;pointer-events:none;
+    background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+    background-size:54px 54px;
+    -webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 30%,#000 30%,transparent 85%);
+            mask-image:radial-gradient(ellipse 80% 70% at 50% 30%,#000 30%,transparent 85%);
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+
+  header.hero{padding:74px 0 26px;position:relative}
+  .eyebrow{font-family:var(--display);font-weight:600;letter-spacing:.42em;font-size:12px;color:var(--gold);text-transform:uppercase;display:flex;align-items:center;gap:12px;margin-bottom:16px}
+  .eyebrow::before{content:"";width:34px;height:2px;background:linear-gradient(90deg,var(--gold),transparent)}
+  h1{font-family:var(--display);font-weight:700;line-height:.96;letter-spacing:-.01em;font-size:clamp(44px,8vw,92px);text-transform:uppercase;
+     background:linear-gradient(180deg,#fff 30%,#aebbff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 6px 40px rgba(77,124,255,.35))}
+  h1 .accent{background:linear-gradient(180deg,var(--gold-soft),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lede{max-width:640px;margin-top:18px;color:var(--muted);font-size:17px;font-weight:300}
+  .lede b{color:var(--text);font-weight:500}
+  .statusbar{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+  .pill{font-family:var(--display);font-size:12.5px;font-weight:600;letter-spacing:.04em;padding:8px 14px;border-radius:999px;border:1px solid var(--card-bd);background:var(--card);backdrop-filter:blur(8px);display:flex;align-items:center;gap:8px}
+  .pill .dot{width:8px;height:8px;border-radius:50%}
+  .pill.live .dot{background:var(--green);box-shadow:0 0 12px var(--green);animation:pulse 1.8s infinite}
+  @keyframes pulse{50%{opacity:.4}}
+
+  .controls{position:sticky;top:0;z-index:30;margin-top:42px;padding:14px 0;background:linear-gradient(180deg,rgba(7,8,25,.92),rgba(7,8,25,.55));backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.06)}
+  .controls-inner{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px}
+  .ctl-label{font-family:var(--display);font-size:11px;letter-spacing:.2em;color:var(--faint);text-transform:uppercase}
+  .chips{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{cursor:pointer;font-family:var(--display);font-weight:600;font-size:12.5px;letter-spacing:.03em;padding:7px 14px;border-radius:999px;border:1px solid var(--card-bd);background:var(--card);color:var(--muted);transition:.18s;user-select:none;display:flex;align-items:center;gap:7px}
+  .chip:hover{color:var(--text);border-color:rgba(255,255,255,.22)}
+  .chip.active{background:rgba(77,124,255,.16);border-color:var(--blue);color:#fff;box-shadow:0 0 18px rgba(77,124,255,.25)}
+  .chip .sw{width:9px;height:9px;border-radius:2px}
+  .sw.low{background:var(--green)} .sw.med{background:var(--amber)} .sw.high{background:var(--red)} .sw.epic{background:var(--violet)}
+
+  main{padding:30px 0 90px;position:relative}
+  .phase{position:relative;padding:42px 0 8px 0}
+  .phase-head{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:26px;position:relative}
+  .phase-tag{font-family:var(--display);font-weight:700;font-size:clamp(26px,4vw,40px);letter-spacing:-.01em;color:#fff;position:relative;padding-left:26px}
+  .phase-tag::before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);width:13px;height:13px;border-radius:50%;background:var(--blue);box-shadow:0 0 0 5px rgba(77,124,255,.15),0 0 22px var(--blue)}
+  .phase.crit .phase-tag::before{background:var(--gold);box-shadow:0 0 0 5px rgba(255,194,75,.16),0 0 22px var(--gold)}
+  .phase.done .phase-tag::before{background:var(--green);box-shadow:0 0 0 5px rgba(63,217,155,.16),0 0 22px var(--green)}
+  .phase.late .phase-tag::before{background:var(--faint);box-shadow:0 0 0 5px rgba(91,95,134,.18)}
+  .phase.viv .phase-tag::before{background:var(--violet);box-shadow:0 0 0 5px rgba(176,124,255,.16),0 0 22px var(--violet)}
+  .phase-focus{font-family:var(--display);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:600}
+  .phase-sub{color:var(--muted);font-size:14px;font-weight:300;width:100%;margin-top:-14px;padding-left:26px}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:16px}
+
+  .card{position:relative;border-radius:16px;border:1px solid var(--card-bd);background:var(--card);backdrop-filter:blur(9px);padding:20px 20px 18px 24px;overflow:hidden;transition:transform .22s cubic-bezier(.2,.7,.3,1),border-color .22s,box-shadow .22s}
+  .card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--barclr,var(--blue));box-shadow:0 0 16px var(--barclr,var(--blue))}
+  .card[data-effort=low]{--barclr:var(--green)}
+  .card[data-effort=med]{--barclr:var(--amber)}
+  .card[data-effort=high]{--barclr:var(--red)}
+  .card[data-effort=epic]{--barclr:var(--violet)}
+  .card:hover{transform:translateY(-5px);border-color:rgba(255,255,255,.2);box-shadow:0 18px 50px rgba(0,0,0,.45)}
+  .card-top{display:flex;align-items:flex-start;gap:13px;margin-bottom:9px}
+  .num{flex:none;width:38px;height:38px;border-radius:11px;display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:16px;color:#cdd6ff;background:linear-gradient(160deg,rgba(77,124,255,.22),rgba(77,124,255,.04));border:1px solid rgba(127,176,255,.25)}
+  .num.star{color:var(--navy);background:linear-gradient(160deg,var(--gold-soft),var(--gold));border-color:var(--gold)}
+  .card h3{font-family:var(--display);font-weight:600;font-size:16.5px;line-height:1.18;letter-spacing:.005em}
+  .badges{display:flex;gap:7px;flex-wrap:wrap;margin:4px 0 11px}
+  .badge{font-family:var(--display);font-size:10.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:3.5px 9px;border-radius:6px;display:flex;align-items:center;gap:5px}
+  .b-eff{border:1px solid transparent}
+  .b-eff.low{background:rgba(63,217,155,.12);color:var(--green);border-color:rgba(63,217,155,.28)}
+  .b-eff.med{background:rgba(255,178,46,.12);color:var(--amber);border-color:rgba(255,178,46,.28)}
+  .b-eff.high{background:rgba(255,93,108,.12);color:var(--red);border-color:rgba(255,93,108,.28)}
+  .b-eff.epic{background:rgba(176,124,255,.12);color:var(--violet);border-color:rgba(176,124,255,.28)}
+  .b-eff .swd{width:7px;height:7px;border-radius:2px;background:currentColor;display:inline-block}
+  .b-pr{background:rgba(255,255,255,.05);color:var(--muted);border:1px solid var(--card-bd)}
+  .b-pr.crit{background:rgba(255,194,75,.13);color:var(--gold);border-color:rgba(255,194,75,.3)}
+  .b-dep{background:rgba(70,224,255,.08);color:var(--cyan);border:1px solid rgba(70,224,255,.25)}
+  .card p{color:var(--muted);font-size:13.5px;font-weight:300;line-height:1.5}
+  .src{margin-top:13px;display:inline-flex;align-items:center;gap:6px;font-family:var(--display);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+  .src::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan)}
+
+  .done-strip{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:6px}
+  .done-chip{font-size:13px;font-weight:400;color:var(--text);padding:9px 15px;border-radius:11px;background:rgba(63,217,155,.07);border:1px solid rgba(63,217,155,.22);display:flex;align-items:center;gap:9px}
+  .done-chip .ck{color:var(--green);font-weight:700}
+
+  .group-label{font-family:var(--display);font-weight:600;letter-spacing:.22em;text-transform:uppercase;font-size:12px;color:var(--faint);margin:54px 0 18px;display:flex;align-items:center;gap:14px}
+  .group-label::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(255,255,255,.14),transparent)}
+
+  .note{color:var(--muted);font-size:13.5px;font-weight:300;background:var(--card);border:1px solid var(--card-bd);border-left:3px solid var(--gold);border-radius:0 12px 12px 0;padding:14px 18px;margin:20px 0}
+  .note b{color:var(--gold-soft);font-weight:600}
+
+  footer{padding:46px 0 60px;border-top:1px solid rgba(255,255,255,.06);color:var(--faint);font-size:13px}
+  footer .ft-title{font-family:var(--display);color:var(--muted);letter-spacing:.04em;margin-bottom:6px;font-weight:600}
+  code{font-family:var(--display);color:var(--blue-bright)}
+
+  .reveal{opacity:0;transform:translateY(18px);animation:rise .6s cubic-bezier(.2,.7,.3,1) forwards}
+  @keyframes rise{to{opacity:1;transform:none}}
+  .is-hidden{display:none!important}
+  @media(prefers-reduced-motion:reduce){.reveal{animation:none;opacity:1;transform:none}}
+  @media(max-width:600px){header.hero{padding:50px 0 18px}.controls{position:static}.phase-sub{padding-left:0}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow reveal" style="animation-delay:.05s">Vision V3 · V4 · V5 — Juin 2026</div>
+    <h1 class="reveal" style="animation-delay:.12s">Esport&nbsp;Tycoon<br><span class="accent">Vision&nbsp;V3+</span></h1>
+    <p class="lede reveal" style="animation-delay:.2s">
+      La roadmap v1 est <b>exécutée à 100&nbsp;%</b> (23 chantiers + v1.4 + v2). La suite n'est plus une liste de features&nbsp;: chaque version majeure ouvre un <b>axe structurel</b>. Fil rouge&nbsp;: <b>faire exister le temps</b> — donner au monde une mémoire, puis une vie.
+    </p>
+    <div class="statusbar reveal" style="animation-delay:.28s">
+      <span class="pill live"><span class="dot"></span>v2.1.0 live — Android en test fermé</span>
+      <span class="pill"><span class="dot" style="background:var(--gold)"></span>36 idées · 4 fournées</span>
+      <span class="pill"><span class="dot" style="background:var(--violet)"></span>3 versions majeures + horizon</span>
+    </div>
+  </div>
+</header>
+
+<div class="controls">
+  <div class="wrap controls-inner">
+    <span class="ctl-label">Filtrer&nbsp;par&nbsp;effort</span>
+    <div class="chips" id="filters">
+      <span class="chip active" data-f="all">Tout</span>
+      <span class="chip" data-f="low"><span class="sw low"></span>Faible</span>
+      <span class="chip" data-f="med"><span class="sw med"></span>Moyen</span>
+      <span class="chip" data-f="high"><span class="sw high"></span>Élevé</span>
+      <span class="chip" data-f="epic"><span class="sw epic"></span>Chantier</span>
+    </div>
+  </div>
+</div>
+
+<main>
+  <div class="wrap">
+    <div id="timeline"></div>
+
+    <div class="note">
+      <b>La clé de voûte&nbsp;:</b> la <b>simulation perpétuelle (#16)</b> débloque la bourse, les paris, la succession, les royaumes saisonniers et la chaîne auto-diffusée. La V3 «&nbsp;Mémoire&nbsp;» n'en dépend pas → elle se livre <b>pendant</b> que l'infra de la V4 se construit en parallèle.
+    </div>
+
+    <div class="group-label">Horizon — plateforme &amp; paris fous (après masse critique)</div>
+    <div class="grid" id="pool"></div>
+
+    <div class="note" style="margin-top:34px">
+      <b>Règle d'or de l'horizon</b> — ces idées transforment le jeu en plateforme (ligues UGC, rôles asymétriques, studio endgame). Sans masse critique de joueurs, c'est vide&nbsp;: <b>toujours en dernier</b>, jamais avant que les V3-V5 aient fait grossir la base.
+    </div>
+  </div>
+  <div class="wrap">
+    <footer>
+      <div class="ft-title">Esport Tycoon — document de pilotage V3+</div>
+      Source : <code>BRAINSTORM_V3_PLUS.md</code> · Légende effort : <span style="color:var(--green)">● faible</span> · <span style="color:var(--amber)">● moyen</span> · <span style="color:var(--red)">● élevé</span> · <span style="color:var(--violet)">● chantier pluri-mois</span> · <span style="color:var(--gold)">★ clé de voûte</span>. Fil rouge : <b style="color:var(--text)">«&nbsp;le monde d'Esport Tycoon a maintenant une mémoire&nbsp;»</b>.
+    </footer>
+  </div>
+</main>
+
+<script>
+const PHASES=[
+ {tag:"v1 → v2.1",cls:"done",focus:"Livré",sub:"Le chemin parcouru — 23 chantiers de la roadmap v1, puis v1.4, v2.0 et v2.1.",done:[
+   "Comptes + cloud save (Apple / Google)","Battle pass + missions quotidiennes/hebdo",
+   "Boutique gems · abonnement Ultra · offres","Prestige + gating par trophées",
+   "Streaming · Académie · Bannières · Live-ops","Ligue hebdo + tournois en ligne (Supabase)",
+   "i18n FR/EN · Game Center · Android","Pack opening façon cartes Pokémon (Skia)",
+   "F2P : scout pub ×3/jour + 7 types de notifs"]},
+ {tag:"V3",cls:"crit",focus:"La mémoire",sub:"Le monde gagne une mémoire. Zéro dépendance serveur lourde → livrable vite, fort impact émotionnel.",items:[
+   {n:14,title:"Cartes à biographie",eff:"med",pr:"crit",src:"Fournée 4",desc:"Chaque carte tirée est unique au monde : biographie gravée (tirages, victoires, propriétaires, titres). Rareté historique en plus de la rareté statistique — la valeur s'apprécie sans produire de contenu."},
+   {n:20,title:"L'Histoire / almanach",eff:"high",pr:"high",src:"Fournée 3",desc:"Archives permanentes : hall of fame gravé à vie, joueurs qui vieillissent → retraite → coachs, dynasties, époques nommées. La rétention par l'héritage."},
+   {n:1,title:"Multi-discipline",eff:"high",pr:"high",src:"Archi validée",desc:"2ᵉ équipe (course), budget partagé, chaque système existant se décline. Déjà architecturé (ARCHI_MULTI_DISCIPLINE.md, option A, séquence shippable)."},
+   {n:30,title:"Sponsor diégétique",eff:"low",pr:"high",src:"Fournée 4",desc:"La rewarded ad re-habillée en acte de management : « le sponsor exige un entretien » → pub → contrat signé dans la fiction. Même eCPM, ressenti radicalement meilleur."},
+   {n:8,title:"Parrainage",eff:"low",pr:"med",src:"Fournée 1",desc:"Code ami → récompenses des deux côtés. L'acquisition organique qui manque aujourd'hui."}]},
+ {tag:"V4",cls:"",focus:"Le monde partagé",sub:"Toutes les orgas coexistent réellement. L'investissement structurant : la simulation perpétuelle.",items:[
+   {n:16,title:"Simulation perpétuelle",eff:"epic",pr:"crit",src:"Clé de voûte",desc:"Le monde tourne côté serveur en continu : matchs à heure fixe, saisons qui vivent sans toi. On ne « lance » plus une partie — on consulte un monde qui ne t'a pas attendu."},
+   {n:12,title:"Marché des transferts",eff:"epic",pr:"high",src:"Palier MMO-lite",desc:"Cartes achetées/vendues entre vrais joueurs (enchères, prix fluctuants). Croisé avec la biographie (#14) : tu n'achètes plus des stats, tu achètes un palmarès."},
+   {n:6,title:"Clans / écuries",eff:"high",pr:"high",src:"Fournée 1",desc:"Fédérations d'orgas, classement de clans, events coopératifs. Le levier de rétention n°1 des idle games matures."},
+   {n:11,title:"Ancrage territorial",eff:"med",pr:"med",src:"Fournée 4",desc:"Ville natale réelle : classements par ville, derbies Lyon–Marseille, ligues nationales. L'identité du clocher, gratuite en contenu."},
+   {n:7,title:"Défis entre amis",eff:"med",pr:"med",src:"Fournée 1",desc:"Défier l'orga d'un ami, en asynchrone (pas de PvP temps réel). S'appuie sur les comptes existants."}]},
+ {tag:"V5",cls:"viv",focus:"Le monde vivant",sub:"Le jeu change sans nouvelle feature : du contenu que le système fabrique tout seul.",items:[
+   {n:17,title:"Feed narratif génératif",eff:"high",pr:"high",src:"Palier narratif",desc:"Réseau social in-game du monde fictif : rumeurs, clashs, interviews de TES joueurs, nourri par les vrais événements de partie. 90 % templaté, LLM réservé aux moments forts."},
+   {n:22,title:"Les Ères",eff:"epic",pr:"high",src:"Fournée 4",desc:"Le monde traverse des époques (LAN → streaming → stades → VR) : règles, revenus, disciplines et DA qui changent. Le prestige devient « traverser le temps ». Du contenu pour des années."},
+   {n:24,title:"Royaumes saisonniers",eff:"high",pr:"med",src:"Fournée 3",desc:"Serveurs à économie vierge tous les 2-3 mois avec modificateur fou (hardcore, turbo…), acquis convertis en héritage. La réponse au problème du retardataire."},
+   {n:28,title:"Chaîne auto-diffusée",eff:"epic",pr:"med",src:"Fournée 4",desc:"Twitch/YouTube 24/7 des matchs du top ladder fictif, habillage broadcast + commentaire généré. Le jeu fabrique son propre marketing — coût d'acquisition → 0."},
+   {n:21,title:"Succession d'orgas",eff:"high",pr:"med",src:"Fournée 4",desc:"Les orgas abandonnées déclinent puis passent en liquidation, rachetables (palmarès, cartes, nom). « Ton empire vit sous un autre toit » : le hook de réactivation ultime."}]}
+];
+const POOL=[
+ {n:13,title:"Bourse des orgas",eff:"high",src:"Fournée 3",desc:"Investir dans les orgas des autres : parts du top 10, dividendes sur victoires. Le classement devient un marché à trader."},
+ {n:15,title:"Paris du spectateur",eff:"med",src:"Fournée 3",desc:"Parier (monnaie douce) sur les matchs du top ladder. Transforme les non-top-10 en public engagé."},
+ {n:19,title:"Rival juré (némésis)",eff:"high",src:"Fournée 3",desc:"Orga NPC persistante qui te connaît : se souvient, te chambre dans le feed, recrute pour te contrer."},
+ {n:23,title:"Gouvernance du monde",eff:"med",src:"Fournée 3",desc:"Vote communautaire de fin de saison (discipline, méta, règles), pondéré par les trophées."},
+ {n:25,title:"Live Activities / widgets",eff:"med",src:"Fournée 3",desc:"Match de ligue en direct sur l'écran verrouillé (Dynamic Island). Jamais vu sur un match simulé."},
+ {n:26,title:"Bot Discord = 2ᵉ client",eff:"med",src:"Fournée 3",desc:"Consulter son orga, encaisser, voir les résultats — depuis Discord."},
+ {n:32,title:"Ligues créées par les joueurs",eff:"epic",src:"Palier plateforme",desc:"Créer sa ligue (format, règles, cagnotte) et inviter d'autres orgas. Manager → propriétaire de ligue → fédération."},
+ {n:34,title:"Studio endgame",eff:"epic",src:"Palier plateforme",desc:"Prestige ultime : créer son propre jeu esport fictif, jouable par les autres. La communauté génère les disciplines."},
+ {n:35,title:"Écosystème asymétrique",eff:"epic",src:"Fournée 3",desc:"D'autres rôles jouables dans la même économie : agents de joueurs, organisateurs, sponsors."},
+ {n:36,title:"Jeu miroir",eff:"epic",src:"Fournée 3",desc:"2ᵉ app où tu incarnes un joueur pro… recrutable par les managers (cartes = vraies personnes). L'idée à licorne."},
+ {n:31,title:"Sponsors réels (marques)",eff:"epic",src:"Fournée 4",desc:"De vraies marques comme sponsors in-game, logo sur les maillots. Le placement produit du sport réel, transposé."},
+ {n:10,title:"Orga co-gérée",eff:"high",src:"Fournée 4",desc:"Une orga à plusieurs vrais joueurs, chacun son département. Le jeu « en couple / entre potes »."}
+];
+const prLabel={crit:"★ Clé de voûte",high:"Haute",med:"Moyenne",low:"Basse"};
+const effLabel={low:"Faible",med:"Moyen",high:"Élevé",epic:"Chantier"};
+
+function el(tag,cls,txt){const e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e;}
+
+function buildCard(it,i){
+  const card=el("div","card reveal");
+  card.dataset.effort=it.eff;
+  card.style.animationDelay=(0.04*i+0.05)+"s";
+
+  const top=el("div","card-top");
+  const num=el("div","num"+(it.pr==="crit"?" star":""),String(it.n));
+  top.append(num,el("h3",null,it.title));
+  card.append(top);
+
+  const badges=el("div","badges");
+  const be=el("span","badge b-eff "+it.eff);
+  be.append(el("span","swd"),document.createTextNode(effLabel[it.eff]));
+  badges.append(be);
+  if(it.pr){
+    badges.append(el("span","badge b-pr"+(it.pr==="crit"?" crit":""),prLabel[it.pr]));
+  }
+  card.append(badges);
+  card.append(el("p",null,it.desc));
+  card.append(el("span","src",it.src));
+  return card;
+}
+
+const tl=document.getElementById("timeline");
+PHASES.forEach(ph=>{
+  const sec=el("section","phase "+ph.cls);
+  const head=el("div","phase-head");
+  head.append(el("span","phase-tag",ph.tag),el("span","phase-focus",ph.focus),el("span","phase-sub",ph.sub));
+  sec.append(head);
+  if(ph.done){
+    const strip=el("div","done-strip");
+    ph.done.forEach(d=>{const c=el("span","done-chip");c.append(el("span","ck","✓"),document.createTextNode(d));strip.append(c);});
+    sec.append(strip);
+  }
+  if(ph.items){
+    const grid=el("div","grid");
+    ph.items.forEach((it,i)=>grid.append(buildCard(it,i)));
+    sec.append(grid);
+  }
+  tl.append(sec);
+});
+const pool=document.getElementById("pool");
+POOL.forEach((it,i)=>pool.append(buildCard(it,i)));
+
+const filters=document.getElementById("filters");
+filters.addEventListener("click",e=>{
+  const chip=e.target.closest(".chip"); if(!chip) return;
+  [...filters.children].forEach(c=>c.classList.toggle("active",c===chip));
+  const f=chip.dataset.f;
+  document.querySelectorAll(".card").forEach(c=>{
+    c.classList.toggle("is-hidden",f!=="all" && c.dataset.effort!==f);
+  });
+});
+</script>
+</body>
+</html>
