@@ -69,6 +69,7 @@
   .phase.done .phase-tag::before{background:var(--green);box-shadow:0 0 0 5px rgba(63,217,155,.16),0 0 22px var(--green)}
   .phase.late .phase-tag::before{background:var(--faint);box-shadow:0 0 0 5px rgba(91,95,134,.18)}
   .phase.viv .phase-tag::before{background:var(--violet);box-shadow:0 0 0 5px rgba(176,124,255,.16),0 0 22px var(--violet)}
+  .phase.regie .phase-tag::before{background:var(--cyan);box-shadow:0 0 0 5px rgba(70,224,255,.16),0 0 22px var(--cyan)}
   .phase-focus{font-family:var(--display);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:600}
   .phase-sub{color:var(--muted);font-size:14px;font-weight:300;width:100%;margin-top:-14px;padding-left:26px}
 
@@ -132,7 +133,8 @@
     </p>
     <div class="statusbar reveal" style="animation-delay:.28s">
       <span class="pill live"><span class="dot"></span>v2.1.0 live — Android en test fermé</span>
-      <span class="pill"><span class="dot" style="background:var(--gold)"></span>36 idées · 4 fournées</span>
+      <span class="pill"><span class="dot" style="background:var(--gold)"></span>36 idées gameplay + 37 idées design</span>
+      <span class="pill"><span class="dot" style="background:var(--cyan)"></span>Identité retenue : La Régie 📺</span>
       <span class="pill"><span class="dot" style="background:var(--violet)"></span>3 versions majeures + horizon</span>
     </div>
   </div>
@@ -169,7 +171,7 @@
   <div class="wrap">
     <footer>
       <div class="ft-title">Esport Tycoon — document de pilotage V3+</div>
-      Source : <code>BRAINSTORM_V3_PLUS.md</code> · Légende effort : <span style="color:var(--green)">● faible</span> · <span style="color:var(--amber)">● moyen</span> · <span style="color:var(--red)">● élevé</span> · <span style="color:var(--violet)">● chantier pluri-mois</span> · <span style="color:var(--gold)">★ clé de voûte</span>. Fil rouge : <b style="color:var(--text)">«&nbsp;le monde d'Esport Tycoon a maintenant une mémoire&nbsp;»</b>.
+      Sources : <code>BRAINSTORM_V3_PLUS.md</code> (gameplay #1-36) · <code>DESIGN_REGIE.md</code> (design D1-D37) · Légende effort : <span style="color:var(--green)">● faible</span> · <span style="color:var(--amber)">● moyen</span> · <span style="color:var(--red)">● élevé</span> · <span style="color:var(--violet)">● chantier pluri-mois</span> · <span style="color:var(--gold)">★ clé de voûte</span>. Fil rouge : <b style="color:var(--text)">«&nbsp;le monde d'Esport Tycoon a maintenant une mémoire&nbsp;»</b>.
     </footer>
   </div>
 </main>
@@ -182,6 +184,17 @@ const PHASES=[
    "Streaming · Académie · Bannières · Live-ops","Ligue hebdo + tournois en ligne (Supabase)",
    "i18n FR/EN · Game Center · Android","Pack opening façon cartes Pokémon (Skia)",
    "F2P : scout pub ×3/jour + 7 types de notifs"]},
+ {tag:"La Régie",cls:"regie",focus:"Design — transversal",sub:"Identité retenue : chaque écran est une émission du même network. Se déploie écran par écran, version par version (détail : DESIGN_REGIE.md).",items:[
+   {n:"D✦",title:"Grammaire broadcast (8 composants)",eff:"med",pr:"crit",src:"Design system",desc:"Bandeau d'antenne, lower-third, ticker, CAM, pupitre, VU-mètre, breaking, compteur. Chaque écran existant se traduit — pas de big-bang. Le ticker accueille le futur feed narratif."},
+   {n:"D3",title:"Foil holo + cartes animées",eff:"low",pr:"high",src:"Shaders SkSL",desc:"Reflet irisé au gyroscope sur les rares, particules dorées sur les Mythiques. Zéro asset, zéro poids — le marqueur premium du genre, rétroactif sur toute la collection."},
+   {n:"D28",title:"Le zapping",eff:"low",pr:"high",src:"Signature UX",desc:"Changer d'onglet = changer de chaîne : swipe, micro-glitch d'antenne, bandeau « CH 03 — MERCATO ». La signature sensorielle du jeu, quasi gratuite."},
+   {n:"D1",title:"Portraits joueurs IA + CDN",eff:"med",pr:"high",src:"Pipeline assets",desc:"100-300 portraits stylisés (archétype × rareté, variantes par code Skia) servis via Supabase Storage : du contenu visuel sans rebuild ni review. Prépare les cartes à biographie."},
+   {n:"D13",title:"Audimat-ressource + hype",eff:"high",pr:"crit",src:"Gameplay",desc:"Le public devient la 3ᵉ ressource (cash, gems, audience). Dilemme inédit : jouer pour gagner ou pour le show — la tactique « Spectaculaire » sacrifie du win-rate contre de la hype."},
+   {n:"D19",title:"Conf' de presse d'après-match",eff:"med",pr:"high",src:"Gameplay",desc:"3 déclarations possibles après un gros match : provoquer / protéger / courtiser. Relie moral + sponsors + narratif en une interaction de 5 secondes. Meilleur ratio impact/effort."},
+   {n:"D15",title:"Coupure pub diégétique",eff:"low",pr:"high",src:"Monétisation",desc:"La rewarded devient une coupure pub sur TA chaîne : tu la regardes en vrai, ton public fictif aussi — double revenu. La pub n'interrompt plus le jeu, elle EST le jeu."},
+   {n:"D21",title:"Clip highlight partageable",eff:"high",pr:"med",src:"Acquisition",desc:"Après un moment fort, le jeu monte le highlight (replay + habillage broadcast) en vidéo partageable Discord/TikTok. Chaque joueur devient un canal d'acquisition."},
+   {n:"D33",title:"Prestige = dernière émission",eff:"med",pr:"med",src:"Cérémonie",desc:"Revendre l'orga devient un épisode final généré : meilleurs moments, palmarès, l'écran se coupe… et tu redémarres sur une petite chaîne locale. Un moment, plus un bouton."},
+   {n:"D29",title:"Habillage sonore d'antenne",eff:"med",pr:"med",src:"Audio IA",desc:"Jingles, stinger de breaking, génériques par émission — générés par IA. Aucun idle mobile n'a une identité sonore broadcast. Toujours mute-friendly."}]},
  {tag:"V3",cls:"crit",focus:"La mémoire",sub:"Le monde gagne une mémoire. Zéro dépendance serveur lourde → livrable vite, fort impact émotionnel.",items:[
    {n:14,title:"Cartes à biographie",eff:"med",pr:"crit",src:"Fournée 4",desc:"Chaque carte tirée est unique au monde : biographie gravée (tirages, victoires, propriétaires, titres). Rareté historique en plus de la rareté statistique — la valeur s'apprécie sans produire de contenu."},
    {n:20,title:"L'Histoire / almanach",eff:"high",pr:"high",src:"Fournée 3",desc:"Archives permanentes : hall of fame gravé à vie, joueurs qui vieillissent → retraite → coachs, dynasties, époques nommées. La rétention par l'héritage."},
@@ -213,7 +226,13 @@ const POOL=[
  {n:35,title:"Écosystème asymétrique",eff:"epic",src:"Fournée 3",desc:"D'autres rôles jouables dans la même économie : agents de joueurs, organisateurs, sponsors."},
  {n:36,title:"Jeu miroir",eff:"epic",src:"Fournée 3",desc:"2ᵉ app où tu incarnes un joueur pro… recrutable par les managers (cartes = vraies personnes). L'idée à licorne."},
  {n:31,title:"Sponsors réels (marques)",eff:"epic",src:"Fournée 4",desc:"De vraies marques comme sponsors in-game, logo sur les maillots. Le placement produit du sport réel, transposé."},
- {n:10,title:"Orga co-gérée",eff:"high",src:"Fournée 4",desc:"Une orga à plusieurs vrais joueurs, chacun son département. Le jeu « en couple / entre potes »."}
+ {n:10,title:"Orga co-gérée",eff:"high",src:"Fournée 4",desc:"Une orga à plusieurs vrais joueurs, chacun son département. Le jeu « en couple / entre potes »."},
+ {n:"D32",title:"Les Ères = rebrands du network",eff:"epic",src:"Design × #22",desc:"Ère LAN = chaîne câblée 2000s (4:3, chyrons pixelisés) → streaming → stade 4K. Les archives gardent le format de leur époque (grain VHS sur tes vieilles finales)."},
+ {n:"D34",title:"Cérémonie des awards",eff:"high",src:"Design × #20",desc:"La soirée des trophées du monde entier, auto-générée — de vrais joueurs gagnent les catégories (orga de l'année, comeback, carte MVP)."},
+ {n:"D17",title:"Talk-show + chaîne rivale",eff:"high",src:"Design × #17-19",desc:"Des pundits NPC débattent de TES résultats ; ton némésis a SA chaîne qui te descend. La guerre médiatique comme PvP-light."},
+ {n:"D36",title:"Droits de diffusion (clans)",eff:"high",src:"Design × #9",desc:"Le territorial re-thématisé : ton clan détient les droits de diffusion d'une région. Bouquets de chaînes, guerre des parts d'audience."},
+ {n:"D37",title:"Pub inter-joueurs",eff:"high",src:"Design × #12",desc:"Acheter un espace pub sur la chaîne d'un autre joueur — ton logo diffusé pendant les matchs du #1 mondial. Flex + puits à gems."},
+ {n:"D23",title:"AirPlay TV + télécommande",eff:"med",src:"Hors-app",desc:"Le match diffusé sur la TV du salon pendant que tu manages sur le téléphone ; widget iOS = télécommande de la chaîne."}
 ];
 const prLabel={crit:"★ Clé de voûte",high:"Haute",med:"Moyenne",low:"Basse"};
 const effLabel={low:"Faible",med:"Moyen",high:"Élevé",epic:"Chantier"};
@@ -227,6 +246,7 @@ function buildCard(it,i){
 
   const top=el("div","card-top");
   const num=el("div","num"+(it.pr==="crit"?" star":""),String(it.n));
+  if(String(it.n).length>2)num.style.fontSize="12.5px";
   top.append(num,el("h3",null,it.title));
   card.append(top);
 
