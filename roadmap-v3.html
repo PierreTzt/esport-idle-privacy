@@ -320,7 +320,11 @@ const PHASES=[
    {n:"G22",title:"Paid UA (si la LTV le permet)",eff:"med",pr:"low",src:"Growth",
     desc:"De l'acquisition payante pour amplifier le lancement : Apple Search Ads sur ses propres mots-clés d'abord (intention forte, CPI faible), campagnes plus larges ensuite.",
     why:"La règle est arithmétique : on n'achète du trafic que si LTV > CPI — et après l'Étape 0 (analytics) et le lancement, la LTV est enfin connue. Le paid amplifie des boucles qui marchent, il ne les remplace jamais.",
-    how:"Budget test limité, mesuré par cohortes (M7). Arrêt immédiat si CPI > LTV."}]},
+    how:"Budget test limité, mesuré par cohortes (M7). Arrêt immédiat si CPI > LTV."},
+   {n:"OPS",title:"Back-office hébergé sur le VPS",eff:"med",pr:"med",src:"REMOTE_CONFIG.md §4",
+    desc:"L'admin local (admin.html + onglets RC) déménage sur le VPS en vraie app authentifiée : bannières, offres, saisons, tournois, annonces et KPIs (rédemptions DEVLOG, revenus, DAU) pilotables depuis n'importe où — téléphone compris.",
+    why:"Critère de déclenchement écrit : quand l'ops devient hebdomadaire récurrente (calendrier M24 actif, live-ops du lancement V3). À ce rythme, ouvrir un HTML local avec la clé service_role ne tient plus — et le VPS héberge au passage les schedulers qui dépassent le pg_cron de Supabase, plus Postiz pour la publication devlog.",
+    how:"Petite app (Next.js ou équivalent) en Docker derrière un reverse proxy sur le VPS. Auth Supabase + rôle admin + RPCs security definer — la service_role ne part JAMAIS dans un navigateur public ; IP allowlist/VPN tant qu'on est seul opérateur."}]},
 
  {tag:"V4",cls:"",focus:"Le monde partagé",sub:"Toutes les orgas coexistent réellement. L'investissement structurant — la simulation perpétuelle — s'architecture pendant la V3 et se construit ici. C'est aussi la version où le modèle économique bascule.",items:[
    {n:16,title:"Simulation perpétuelle",eff:"epic",pr:"crit",src:"Clé de voûte",
