@@ -168,7 +168,7 @@
   <div class="wrap">
     <footer>
       <div class="ft-title">Esport Tycoon — document de pilotage V3+</div>
-      Sources : <code>BRAINSTORM_V3_PLUS.md</code> (gameplay #1-39) · <code>DESIGN_REGIE.md</code> (design D1-D37) · <code>MONETISATION.md</code> (M1-M25) · <code>GROWTH.md</code> (G1-G22) · <code>FTUE.md</code> (audit + R1-R7) · Légende effort : <span style="color:var(--green)">● faible</span> · <span style="color:var(--amber)">● moyen</span> · <span style="color:var(--red)">● élevé</span> · <span style="color:var(--violet)">● chantier pluri-mois</span> · <span style="color:var(--gold)">★ clé de voûte</span>. Fil rouge : <b style="color:var(--text)">«&nbsp;le monde d'Esport Tycoon a maintenant une mémoire&nbsp;»</b>.
+      Sources : <code>BRAINSTORM_V3_PLUS.md</code> (gameplay #1-42) · <code>DESIGN_REGIE.md</code> (design D1-D38) · <code>MONETISATION.md</code> (M1-M25) · <code>GROWTH.md</code> (G1-G22) · <code>FTUE.md</code> (audit + R1-R7) · Légende effort : <span style="color:var(--green)">● faible</span> · <span style="color:var(--amber)">● moyen</span> · <span style="color:var(--red)">● élevé</span> · <span style="color:var(--violet)">● chantier pluri-mois</span> · <span style="color:var(--gold)">★ clé de voûte</span>. Fil rouge : <b style="color:var(--text)">«&nbsp;le monde d'Esport Tycoon a maintenant une mémoire&nbsp;»</b>.
     </footer>
   </div>
 </main>
@@ -202,7 +202,7 @@ const PHASES=[
    {n:"G13",title:"Communauté + bot de contenu",eff:"med",pr:"high",src:"Discord (G13-G15)",
     desc:"Transformer le Discord en métagame : drop de code hebdo à heure fixe, concours de screenshots de pulls, pronostics sur le tournoi hebdo. Plus un bot qui poste automatiquement les résultats du Mondial, les records battus et les pulls Mythiques.",
     why:"La social proof est le facteur de conversion n°1 d'un petit jeu : un serveur qui vit = « il se passe des choses ici ». Le jeu génère déjà ces histoires — personne ne les publie.",
-    how:"Le bot = un cron + les données Supabase déjà en place. Les ~10 superfans deviennent « staff de la chaîne » : TestFlight anticipé, pseudo donné à une orga NPC, consultation sur les features."},
+    how:"Le bot = un cron + les données Supabase déjà en place. Les ~10 superfans deviennent « staff de la chaîne » : TestFlight anticipé, pseudo donné à une orga NPC, consultation sur les features. Évolution : la « Tribune » — pendant les finales hebdo, les réactions du salon (👏/💀) modulent un léger coefficient de hype du match simulé (plafonné, anti-spam) — la version 0 de l'audimat réel (V4)."},
    {n:"M14",title:"Pricing régional + experiments",eff:"low",pr:"med",src:"M13-M14",
     desc:"Adapter les prix au pouvoir d'achat local (LATAM, Asie du Sud-Est) et armer RevenueCat Experiments pour les tests de prix de l'Étape 2.",
     why:"Un joueur brésilien à 30 % du prix US est un revenu qui n'existait pas du tout — et le volume idle de ces régions est énorme.",
@@ -278,13 +278,13 @@ const PHASES=[
     why:"Ça crée de la rareté HISTORIQUE en plus de la rareté statistique : « LE Nova qui a gagné le premier Mondial du serveur » est unique à jamais — et cette valeur s'apprécie avec le temps sans que tu produises rien. Les joueurs fabriquent la valeur en jouant.",
     how:"Trois colonnes Supabase + l'affichage au dos de la carte (le foil D3 et les portraits D1 sont déjà en place). Prend toute sa dimension au marché V4 : on y achètera un palmarès, pas des stats."},
    {n:20,title:"L'Histoire / almanach",eff:"high",pr:"high",src:"Gameplay #20",
-    desc:"Les archives permanentes du monde : hall of fame des champions (de vrais joueurs, gravés à vie), joueurs qui vieillissent puis prennent leur retraite et deviennent coachs, dynasties, époques nommées (« l'ère NovaCorp, 2026-2027 »).",
+    desc:"Les archives permanentes du monde : hall of fame des champions (de vrais joueurs, gravés à vie), joueurs qui vieillissent puis prennent leur retraite et deviennent coachs, dynasties, époques nommées (« l'ère NovaCorp, 2026-2027 »). Avec les records permanents (plus longue série, plus jeune champion, plus gros upset), le Hall of Shame assumé (plus grosse défaite, transfert catastrophique — drôle et partageable) et les maillots retirés à la retraite d'une Légende.",
     why:"La rétention par l'héritage : on ne désinstalle pas un jeu où son nom est écrit dans les livres d'Histoire. C'est le fossé émotionnel qu'aucun des 8 concurrents analysés n'a franchi.",
-    how:"Tables d'archives saisonnières (les données existent déjà côté Supabase) + un écran almanach + le cycle vieillissement → retraite branché sur l'académie existante."},
+    how:"Tables d'archives saisonnières (les données existent déjà côté Supabase) + un écran almanach + le cycle vieillissement → retraite branché sur l'académie existante. Et la filiation (#40) : à chaque retraite de Légende, un héritier apparaît dans le pool de scouting — nom lié, trait du portrait hérité, trait caché positif. La dynastie gagne un visage pour trois champs de données."},
    {n:39,title:"Moments de légende",eff:"med",pr:"high",src:"Gameplay #39",
     desc:"Un détecteur automatique d'événements rares sur les logs de match — comeback improbable, victoire contre 30 % plus fort, rookie MVP en finale, défaite historique — qui génère une carte souvenir non-jouable (« Finale impossible — Saison 4 ») : entrée d'almanach, décoration de profil, partage Discord/TikTok.",
     why:"La forme la plus concrète et la moins coûteuse de la « mémoire » : le jeu fabrique des souvenirs personnalisés tout seul. Chaque carte souvenir est un post Discord/TikTok prêt à partager — la mécanique nourrit le growth sans effort.",
-    how:"Quelques règles de détection sur les logs de match existants + le template carte (foil D3 et portraits D1 déjà en place). Synthèse de D21 (clip) + D25 (archives) + #14 (biographie) — et le futur clip vidéo V4 (D21) s'y branchera."},
+    how:"Quelques règles de détection sur les logs de match existants + le template carte (foil D3 et portraits D1 déjà en place). Synthèse de D21 (clip) + D25 (archives) + #14 (biographie) — et le futur clip vidéo V4 (D21) s'y branchera. Deux extensions : les arcs de saison (#42) — le jeu désigne À L'AVANCE le « match qu'il ne faut pas perdre » et traque les malédictions (« toujours éliminé en demi ») dont la brisure génère un grand moment — et la syndication (#39) : les moments à haut score historique se louent à des networks NPC étrangers, la mémoire devient un revenu passif."},
    {n:1,title:"Multi-discipline",eff:"high",pr:"high",src:"Archi validée",
     desc:"Une 2ᵉ équipe dans une 2ᵉ discipline (course), budget partagé avec l'organisation : chaque système existant — gacha, ligues, académie, sponsors, streaming — se décline par discipline.",
     why:"Le multiplicateur de contenu le moins risqué : on ne réinvente rien, on décline. Et chaque discipline future (V3.1, V3.2…) devient une extension naturelle, annonçable, attendue.",
@@ -326,7 +326,7 @@ const PHASES=[
    {n:12,title:"Marché des transferts + taxe",eff:"epic",pr:"crit",src:"#12 + M17",
     desc:"Les cartes s'achètent et se vendent entre vrais joueurs (enchères, prix qui fluctuent avec l'offre et la demande), chaque transaction taxée 5-10 % en gems.",
     why:"Le modèle FUT : la demande de gems devient endogène et sans fin (acheter aux autres ne s'épuise jamais, contrairement au désir de gacha). Tu ne vends plus de puissance — tu prélèves le péage pendant que les joueurs s'échangent la leur. Croisé aux biographies : on achète un palmarès. Le modèle économique le plus solide du dossier.",
-    how:"Enchères Supabase Realtime + autorité serveur (l'anti-triche v1.1 sert de fondation). ⚠️ La régulation (multi-comptes, RMT) devient un poste permanent — assumé dans les risques."},
+    how:"Enchères Supabase Realtime + autorité serveur (l'anti-triche v1.1 sert de fondation). ⚠️ La régulation (multi-comptes, RMT) devient un poste permanent — assumé dans les risques. Deux couches par-dessus : la météo du marché — les patchs de méta (#4) indexent la valeur des archétypes (« Sniper +30 % cette semaine ») → spéculation → volume → taxe — et la table des négociations (#41) : contrats à clauses, promesses de recrutement (trahies = drama + fuite vers un rival) et agents NPC à personnalités."},
    {n:6,title:"Clans / écuries + gifting",eff:"high",pr:"high",src:"#6 + M25 + #7",
     desc:"Les écuries : fédérations d'orgas avec classement de clans, events coopératifs (objectif commun → récompense pour tous), défis entre amis en asynchrone, et le gifting (offrir un pack à un coéquipier).",
     why:"Le levier de rétention n°1 des idle matures : on reste pour ne pas lâcher son équipe. Et la dépense « généreuse » du gifting est la seule dont les joueurs ne se lassent jamais.",
@@ -334,7 +334,7 @@ const PHASES=[
    {n:37,title:"Scouting avec brouillard",eff:"med",pr:"med",src:"Gameplay #37",
     desc:"Le scouting de l'Académie ne révèle plus tout : potentiel estimé, mental inconnu, risque caché, plafond supposé — « ce joueur semble exceptionnel, mais son comportement en équipe reste à découvrir ». Investir dans le scouting réduit l'incertitude.",
     why:"Les bonnes et mauvaises surprises qui manquent à une pure loterie de stats : le pari sur un rookie devient une histoire (et nourrit les biographies #14). Du Football Manager pur, jamais vu dans le genre idle.",
-    how:"Attributs masqués + niveaux de révélation sur l'académie existante. ⚠️ Réservé à l'Académie : le gacha garde ses stats visibles (carte tirée = valeur connue, à ne pas casser)."},
+    how:"Attributs masqués + niveaux de révélation sur l'académie existante. ⚠️ Réservé à l'Académie : le gacha garde ses stats visibles (carte tirée = valeur connue, à ne pas casser). Avec les traits cachés : ex. « One-Trick » — stats mythiques mais -40 % si la même tactique est répétée → force la rotation tactique et tue le recrutement au stat-stick."},
    {n:11,title:"Territorial = droits de diffusion",eff:"high",pr:"med",src:"#11 + D36",
     desc:"Chaque orga déclare une ville réelle : classements par ville, derbies (Lyon–Marseille), ligues nationales. Et les clans se disputent les « droits de diffusion » des régions du monde — audience régionale et sponsors locaux à la clé.",
     why:"La fierté du clocher est le mécanisme d'identité le plus puissant du jeu mobile (les clan wars nationales en vivent depuis 10 ans) — et le contenu est gratuit : les villes existent déjà.",
@@ -342,7 +342,7 @@ const PHASES=[
    {n:"D13",title:"Audimat-ressource + hype",eff:"high",pr:"high",src:"Régie gameplay",
     desc:"Le public devient la 3ᵉ ressource (cash, gems, audience) : les matchs produisent du spectacle mesuré, la tactique « Spectaculaire » sacrifie du win-rate contre de la hype, et l'audience nourrit streaming et sponsors. Et quand de vrais joueurs regardent tes matchs, ils comptent dans ton audimat.",
     why:"Un dilemme stratégique que personne n'a dans le genre — jouer pour gagner ou pour briller — et la fusion fiction/réalité du chiffre d'audience. Le moment où la Régie cesse d'être une DA pour devenir du gameplay.",
-    how:"Une ressource + ses sources/puits branchés sur les systèmes existants. Avec la pression médiatique en courbe anti-snowball : plus l'orga domine, plus une défaite coûte cher en hype — la domination d'endgame cesse d'être plate. ⚠️ À équilibrer comme une vraie monnaie, pas comme un compteur cosmétique."},
+    how:"Une ressource + ses sources/puits branchés sur les systèmes existants. Avec la pression médiatique en courbe anti-snowball : plus l'orga domine, plus une défaite coûte cher en hype — la domination d'endgame cesse d'être plate. Et le « Réalisateur en direct » (D38) en couche active bonus-only : pendant un match regardé, 3 boutons caméra sur le Pupitre (zoom caster = hype, focus star = moral, plan public = audimat) — optionnel, jamais punitif. ⚠️ À équilibrer comme une vraie monnaie, pas comme un compteur cosmétique."},
    {n:"M22",title:"Enchères d'attention",eff:"high",pr:"med",src:"Puits whale",
     desc:"Des enchères hebdomadaires en gems sur des espaces de prestige : le naming du tournoi hebdo (« l'Arène TEAM-KEVIN »), l'espace pub sur la chaîne du #1 mondial, le segment sponsor de la cérémonie des awards.",
     why:"Le puits parfait : le prix est fixé par la rivalité entre gros joueurs (pas par toi), il absorbe l'excès de gems automatiquement (contrôle d'inflation intégré), et il vend du statut — zéro pay-to-win. Il résout le problème « le whale n'a plus rien à acheter ».",
@@ -376,7 +376,7 @@ const PHASES=[
    {n:17,title:"Feed narratif + talk-show",eff:"high",pr:"high",src:"#17 + D17",
     desc:"La scène esport fictive gagne une vie médiatique : rumeurs de transferts, clashs entre orgas, interviews de TES joueurs après une finale — nourris par les vrais événements de la partie. Et le talk-show : des pundits récurrents qui débattent de tes résultats en plateau.",
     why:"La dimension qu'aucun concurrent ne peut copier facilement : l'attachement narratif. Les idle concurrents sont des tableurs habillés — ici, tes systèmes (moral, rivalités, transferts) deviennent des histoires.",
-    how:"90 % templaté (gratuit, hors-ligne), LLM réservé aux moments forts — le coût par utilisateur reste maîtrisé. Le ticker de l'Étape 2 est déjà l'emplacement d'affichage."},
+    how:"90 % templaté (gratuit, hors-ligne), LLM réservé aux moments forts — le coût par utilisateur reste maîtrisé. Le ticker de l'Étape 2 est déjà l'emplacement d'affichage. Version 0 livrable bien avant : le « courrier des fans » — micro-décisions templatées dans le courrier existant (v1.2) : « un fan club veut imprimer votre logo » → accepter (hype ↑) ou monétiser (cash ↑, image ↓). Et les rumeurs sont semi-fiables : le doute fait partie du jeu."},
    {n:22,title:"Les Ères = rebrands du network",eff:"epic",pr:"high",src:"#22 + D32",
     desc:"Le monde traverse des époques : ère LAN (chaîne câblée années 2000, 4:3, chyrons pixelisés) → ère streaming (le néon actuel) → ère stade (4K corporate). Règles, revenus, disciplines ET habillage de la chaîne changent à chaque ère — et les archives gardent le format de leur époque (grain VHS sur tes vieilles finales).",
     why:"L'arc qui structure des années de contenu : chaque ère est une extension attendue et annonçable. Le prestige cesse d'être « recommencer » pour devenir « traverser le temps ».",
@@ -396,7 +396,7 @@ const PHASES=[
    {n:"D34",title:"Cérémonie des awards",eff:"high",pr:"med",src:"Design × #20",
     desc:"Une fois par saison, la soirée des trophées du monde entier, diffusée à l'antenne : orga de l'année, comeback, carte MVP de l'année — de vrais joueurs gagnent les catégories, et l'événement s'auto-génère depuis les données du serveur.",
     why:"L'almanach + le spectacle + le monde partagé fusionnés en un rendez-vous regardable. Le segment sponsor de la cérémonie est un emplacement d'enchères (M22), et le générique porte les « Producteurs exécutifs » (M19).",
-    how:"Agrégats de saison + cérémonie templatée + habillage broadcast. À ce stade, quasi tout existe déjà — c'est un assemblage."},
+    how:"Agrégats de saison + cérémonie templatée + habillage broadcast. À ce stade, quasi tout existe déjà — c'est un assemblage. Avec les « awards de l'ombre » : Caster de l'année, plus gros scandale médiatique — badge à l'antenne + boost permanent des passives du caster récompensé, qui augmente sa valeur au mercato."},
    {n:13,title:"Bourse des orgas",eff:"high",pr:"med",src:"Fournée 3",
     desc:"Investir dans les orgas des autres joueurs : acheter des parts du top 10, toucher des dividendes sur leurs victoires, revendre avant la chute.",
     why:"Le classement cesse d'être un tableau qu'on regarde : il devient un marché qu'on trade. Les petits joueurs gagnent un intérêt direct au destin des gros — du spectateur engagé.",
