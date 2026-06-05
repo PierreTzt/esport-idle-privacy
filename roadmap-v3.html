@@ -137,7 +137,7 @@
     </p>
     <div class="statusbar reveal" style="animation-delay:.28s">
       <span class="pill live"><span class="dot"></span>v2.1.0 live — Android en test fermé</span>
-      <span class="pill"><span class="dot" style="background:var(--gold)"></span>36 gameplay · 37 design · 25 monétisation · 22 growth</span>
+      <span class="pill"><span class="dot" style="background:var(--gold)"></span>42 gameplay · 39 design · 25 monétisation · 22 growth</span>
       <span class="pill"><span class="dot" style="background:var(--cyan)"></span>Identité retenue : La Régie 📺</span>
       <span class="pill"><span class="dot" style="background:var(--violet)"></span>Ordre d'exécution : Étape 0 → V6+</span>
     </div>
@@ -221,6 +221,10 @@ const PHASES=[
     desc:"Cinq corrections : arène en mode « préparation » tant que 0 victoire (fini le « CHANCE 3% » en boucle), plancher de moral à 50 sous 5 victoires, permission notifs demandée après le daily, nom d'orga déplacé au 1er accès classement, notif « tournoi prêt » plutôt que « matchday » tant que la win chance est faible.",
     why:"La simulation a révélé une spirale mathématique : défaite → -7 moral → -6,5 % de puissance → encore plus de défaites (moral 65 → 23 en 3 jours). Et la seule notification compétition de la semaine 1 convoque le joueur… à venir perdre.",
     how:"Cinq petites conditions dans du code existant — l'ensemble tient en une journée de dev."},
+   {n:"RC",title:"Remote config — la fondation live-ops",eff:"med",pr:"crit",src:"REMOTE_CONFIG.md",
+    desc:"Trois tables Supabase — bannières gacha, offres, saisons de pass — lues par l'app après le démarrage, avec cache local et repli sur les valeurs embarquées. admin.html gagne 3 onglets pour les piloter.",
+    why:"Aujourd'hui une bannière événementielle ou une saison de pass = un build + 3-7 jours de review Apple. Sans cette brique, le starter pack (M3), le téléachat (M8) et le calendrier d'offres (M24) sont inopérables à la cadence d'un live-ops. C'est le découplage release/contenu — le contenu part en base, le code reste dans le bundle.",
+    how:"Pattern PostgREST déjà en prod (live_events) : lecture anonyme sous RLS, min_app_version par ligne, validation avant application — et jamais dans le chemin critique du boot (leçon du rejet 2.1a). RC1 bannières ~1 j, RC2 offres ~2 j, RC3 saisons ~0,5 j. Design complet : REMOTE_CONFIG.md."},
    {n:"M3",title:"Starter pack",eff:"low",pr:"crit",src:"Conversion",
     desc:"Offre unique à 2,99 € : 300 gems + 1 pack Légende + 24 h de boost (valeur faciale ~10 €), proposée pendant 48 h après la première promotion de ligue.",
     why:"Le premier achat est LA bataille du F2P : un joueur qui a payé une fois repaiera. Ce SKU est le plus convertisseur du genre, et il manque totalement au catalogue actuel.",
@@ -254,7 +258,7 @@ const PHASES=[
    {n:"M8",title:"Téléachat + calendrier d'offres",eff:"med",pr:"high",src:"M8 + M24",
     desc:"Des offres déclenchées par le contexte — promotion, prestige, pity à 44/50, retour après 7 jours d'absence — habillées en « émissions spéciales » avec countdown. Plus un rythme hebdo piloté par les live_events Supabase : lundi = offre de rentrée d'antenne, week-end = pack tournoi.",
     why:"Les offres contextuelles convertissent 5 à 10× mieux qu'une vitrine statique — c'est le levier n°1 absent de la boutique actuelle. Et le revenu F2P est un rythme, pas un catalogue.",
-    how:"Un moteur de triggers (événement de jeu → offre + durée) + l'habillage broadcast. Le calendrier est de la config serveur : du live-ops de studio entier, en autopilote solo dev."},
+    how:"Un moteur de triggers (événement de jeu → offre + durée) + l'habillage broadcast, sur la table live_offers posée par le remote config (RC, Étape 1) : du live-ops de studio entier, en autopilote solo dev."},
    {n:"M9",title:"Cagnotte d'antenne + pity shop",eff:"med",pr:"med",src:"M9 + M12",
     desc:"Une cagnotte de gems qui se remplit avec les victoires — visible mais verrouillée (cap ~150) — et s'ouvre pour 2,99 €. Plus la « carte de la semaine » achetable directement en gems, sans tirage.",
     why:"La cagnotte a le meilleur ressenti du F2P (« c'est MES gems, je les ai gagnés ») et un taux de conversion redoutable. L'achat direct sert le segment anti-gacha ET couvre la pression réglementaire européenne sur les loot boxes (un chemin d'acquisition non aléatoire = dormir tranquille).",
