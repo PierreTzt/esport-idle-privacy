@@ -96,6 +96,12 @@
   .b-eff.high{background:rgba(255,93,108,.12);color:var(--red);border-color:rgba(255,93,108,.28)}
   .b-eff.epic{background:rgba(176,124,255,.12);color:var(--violet);border-color:rgba(176,124,255,.28)}
   .b-eff .swd{width:7px;height:7px;border-radius:2px;background:currentColor;display:inline-block}
+  /* états d'avancement par carte */
+  .b-done{background:rgba(63,217,155,.16);color:var(--green);border:1px solid rgba(63,217,155,.4)}
+  .b-doing{background:rgba(70,224,255,.13);color:var(--cyan);border:1px solid rgba(70,224,255,.35)}
+  .card.is-done{border-color:rgba(63,217,155,.4);box-shadow:inset 3px 0 0 var(--green)}
+  .card.is-done .num{background:rgba(63,217,155,.16);color:var(--green);border-color:rgba(63,217,155,.4)}
+  .card.is-doing{border-color:rgba(70,224,255,.35);box-shadow:inset 3px 0 0 var(--cyan)}
   .b-pr{background:rgba(255,255,255,.05);color:var(--muted);border:1px solid var(--card-bd)}
   .b-pr.crit{background:rgba(255,194,75,.13);color:var(--gold);border-color:rgba(255,194,75,.3)}
   .b-dep{background:rgba(70,224,255,.08);color:var(--cyan);border:1px solid rgba(70,224,255,.25)}
@@ -153,6 +159,7 @@
       <span class="chip" data-f="med"><span class="sw med"></span>Moyen</span>
       <span class="chip" data-f="high"><span class="sw high"></span>Élevé</span>
       <span class="chip" data-f="epic"><span class="sw epic"></span>Chantier</span>
+      <span class="chip" data-f="done">✓ Terminé</span>
     </div>
   </div>
 </div>
@@ -195,12 +202,12 @@ const PHASES=[
     desc:"Optimiser la fiche store en continu : 3 icônes testées en A/B, captures qui vendent le fantasme (« bâtis ton empire esport »), preview vidéo, fiches traduites ES/PT-BR, réponses aux avis, et un événement de fiche à chaque live-op.",
     why:"Le store est le seul canal qui travaille 24h/24. Une icône gagnante = +10-30 % de conversion sur chaque visiteur, pour toujours — et l'icône actuelle n'a jamais été challengée.",
     how:"A/B natif gratuit (Store Listing Experiments sur Play, Product Page Optimization sur iOS), 2 semaines par test. Les événements de fiche se branchent sur le calendrier live-ops existant."},
-   {n:"G6",title:"Devlog « solo dev × IA »",eff:"med",pr:"crit",src:"Contenu (G6-G8)",
+   {n:"G6",title:"Devlog « solo dev × IA »",done:"06/06",eff:"med",pr:"crit",src:"Contenu (G6-G8)",
     desc:"2-3 contenus courts par semaine (Shorts, TikTok) qui racontent le développement : before/after de features, « j'ai demandé à l'IA de faire ça », chiffres de revenus en transparence.",
     why:"Le hook « un solo dev ship un jeu de studio grâce à l'IA » touche 3 audiences à la fois : joueurs idle, curieux de l'IA, et devs. C'est l'audience qui achètera le Founder's Pack au lancement V3 — et elle se construit des mois avant.",
     how:"Captures et montages largement automatisables en session. Relais Reddit (r/incremental_games est accueillant avec les devs honnêtes). Règle d'or : mener avec le jeu chez les joueurs, avec la méthode chez les makers — jamais l'inverse."},
-   {n:"G6+",title:"Postiz sur le VPS — publication programmée",eff:"low",pr:"med",src:"devlog/postiz/README.md",
-    desc:"Self-host de Postiz (open source) sur le VPS : les épisodes devlog se programment (date + texte + vidéo) au lieu d'être uploadés à la main sur TikTok et YouTube. Le script devlog:publish est déjà câblé — il ne manque que l'instance.",
+   {n:"G6+",title:"Postiz sur le VPS — publication programmée",doing:"reste l'audit TikTok",eff:"low",pr:"med",src:"devlog/postiz/README.md",
+    desc:"Self-host de Postiz (open source) sur le VPS : les épisodes devlog se programment (date + texte + vidéo) au lieu d'être uploadés à la main sur TikTok et YouTube. Fait le 06/06 : VPS + Postiz en HTTPS, YouTube branché et testé, batch samedi automatisé (5 ép./sem), notify + analytics Discord. Reste : connexion TikTok + audit (posts publics).",
     why:"La publication manuelle tient pour 3 épisodes, pas pour des mois de cadence hebdo. Et le VPS est dispo. Attention au vrai délai : TikTok force les posts en privé tant que l'app développeur n'a pas passé son audit, YouTube peut verrouiller les uploads d'apps non vérifiées — les audits se demandent tôt, le manuel reste le chemin en attendant.",
     how:"Docker compose officiel + Caddy en HTTPS (~30 min), apps développeur TikTok/YouTube, audits soumis dès J1. Runbook complet : devlog/postiz/README.md. Le rituel humain (label IA TikTok, commentaire épinglé) reste manuel après chaque publication."},
    {n:"G13",title:"Communauté + bot de contenu",eff:"med",pr:"high",src:"Discord (G13-G15)",
@@ -462,6 +469,13 @@ function buildCard(it,i){
   card.append(top);
 
   const badges=el("div","badges");
+  if(it.done){
+    card.classList.add("is-done");
+    badges.append(el("span","badge b-done","✓ Terminé"+(typeof it.done==="string"?" · "+it.done:"")));
+  }else if(it.doing){
+    card.classList.add("is-doing");
+    badges.append(el("span","badge b-doing","◌ En cours"+(typeof it.doing==="string"?" · "+it.doing:"")));
+  }
   const be=el("span","badge b-eff "+it.eff);
   be.append(el("span","swd"),document.createTextNode(effLabel[it.eff]));
   badges.append(be);
@@ -503,7 +517,8 @@ filters.addEventListener("click",e=>{
   [...filters.children].forEach(c=>c.classList.toggle("active",c===chip));
   const f=chip.dataset.f;
   document.querySelectorAll(".card").forEach(c=>{
-    c.classList.toggle("is-hidden",f!=="all" && c.dataset.effort!==f);
+    const show = f==="all" || (f==="done" ? c.classList.contains("is-done") : c.dataset.effort===f);
+    c.classList.toggle("is-hidden",!show);
   });
 });
 </script>
